@@ -12,21 +12,44 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-        'superadministrator' => [
-            'users' => 'c,r,u,d',
-            'payments' => 'c,r,u,d',
-            'profile' => 'r,u'
-        ],
         'administrator' => [
             'users' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'karyawans' => 'c,r,u,d',
+            'rumah_sakits' => 'c,r,u,d',
+            'donasis' => 'c,r,u,d',
+            'penyalurans' => 'c,r,u,d',
+            'program_donasis' => 'c,r,u,d',
+            'zakats' => 'c,r,u,d',
+            'permintaan_ambulans' => 'c,r,u,d',
         ],
-        'user' => [
-            'profile' => 'r,u',
+        'pimpinan' => [
+            'users' => 'r',
+            'karyawans' => 'r',
+            'rumah_sakits' => 'r',
+            'donasis' => 'r',
+            'penyalurans' => 'r',
+            'program_donasis' => 'r',
+            'zakats' => 'r',
+            'permintaan_ambulans' => 'r',
         ],
-        'role_name' => [
-            'module_1_name' => 'c,r,u,d',
-        ]
+        'petugas' => [
+            'users' => 'u',
+            'program_donasis' => 'u',
+            'zakats' => 'u',
+            'donasis' => 'u',
+            'permintaan_ambulans' => 'u',
+        ],
+        'driver' => [
+            'users' => 'r,u',
+            'permintaan_ambulans' => 'r,u',
+        ],
+        'customer' => [
+            'users' => 'c,r,u',
+            'donasis' => 'c,r,u,d',
+            'program_donasis' => 'c,r,u,d',
+            'zakats' => 'c,r,u,d',
+            'permintaan_ambulans' => 'c,r,u,d',
+        ],
     ],
 
     'permissions_map' => [
