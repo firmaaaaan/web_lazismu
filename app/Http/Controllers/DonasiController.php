@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use PDF;
 use App\Models\User;
 use App\Models\Donasi;
 use Illuminate\Http\Request;
+use App\Exports\ExportDonasi;
 use App\Models\ProgramDonasi;
-use PDF;
-use DB;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DonasiController extends Controller
 {
@@ -180,6 +182,9 @@ class DonasiController extends Controller
         $pdf = PDF::loadView('components.pdf.donasi-pertanggal',[ 'cetakPertanggalDonasi'=>$cetakPertanggalDonasi]);
         return $pdf->stream('donasi-pertanggal.pdf');
         // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
+    }
+    public function exportExcel(){
+        return Excel::download(new ExportDonasi,'donasi.xlsx');
     }
 
 }

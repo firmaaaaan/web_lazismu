@@ -74,6 +74,8 @@ Route::get('/donasi/destroy{id}', [DonasiController::class, 'destroy'])->name('d
 Route::get('/export-donasi-pdf',[DonasiController::class,'exportPdf'])->name('exportPdf');
 // Cetak Pertanggal
 Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
+// Export Excel
+Route::get('/export-donasi-excel',[DonasiController::class,'exportExcel'])->name('exportDonasi');
 
 //Zakat
 Route::get('/zakat', [ZakatController::class, 'index'])->name('drop.zakat.index');
