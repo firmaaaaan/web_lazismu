@@ -20,7 +20,7 @@
         <div class="card mb-3">
             <div class="table-responsive">
                 <a href="{{ route('donasi.create') }}" type="button" class="btn btn-primary my-2 btn-sm mr-2" style="float: right"><i class="bi bi-plus-square"></i>Tambah donasi</a>
-                <a href="" type="button" class="btn btn-success my-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
+                <a href="{{ route('exportdonasiexcel') }}" class="btn btn-success my-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
                 <a href="{{ route('exportPdf') }} " type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
                 <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
                 <table class="table">

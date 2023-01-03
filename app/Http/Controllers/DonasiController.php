@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DonasiExport;
 use DB;
 use PDF;
 use App\Models\User;
@@ -184,7 +185,7 @@ class DonasiController extends Controller
         // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
     }
     public function exportExcel(){
-        return Excel::download(new ExportDonasi,'donasi.xlsx');
+        return Excel::download(new DonasiExport,'donasi.xlsx');
     }
 
 }
