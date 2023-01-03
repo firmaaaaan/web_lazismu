@@ -89,6 +89,8 @@ Route::get('/destroy-zakat/{id}', [ZakatController::class, 'destroy'])->name('za
 Route::get('/export-zakat-pdf',[ZakatController::class,'exportZakatPdf'])->name('exportZakatPdf');
 // Cetak Pertanggal
 Route::get('/cetak-zakat-pertanggal/{tglAwal}/{tglAkhir}',[ZakatController::class,'cetakPertanggalZakat'])->name('cetakPertanggalZakat.pdf');
+// Export Excel
+Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->name('exportzakatexcel');
 
 
 

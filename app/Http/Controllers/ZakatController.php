@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\User;
 use App\Models\Zakat;
+use App\Exports\ZakatExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ZakatController extends Controller
 {
@@ -160,5 +163,9 @@ class ZakatController extends Controller
         $pdf = PDF::loadView('components.pdf.zakat-pertanggal',[ 'cetakPertanggalZakat'=>$cetakPertanggalZakat]);
         return $pdf->stream('zakat-pertanggal.pdf');
         // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
+    }
+
+    public function exportExcelZakat(){
+        return Excel::download(new ZakatExport,'zakat.xlsx');
     }
 }
