@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DonasiController;
-use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\PenyaluranController;
-use App\Http\Controllers\PermintaanAmbulanController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProgramDonasiController;
-use App\Http\Controllers\RumahSakitController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ValidasiController;
-use App\Http\Controllers\ZakatController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ZakatController;
+use App\Http\Controllers\DonasiController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\ValidasiController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PenyaluranController;
+use App\Http\Controllers\RumahSakitController;
+use App\Http\Controllers\ProgramDonasiController;
+use App\Http\Controllers\PermintaanAmbulanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,12 @@ Route::get('/export-donasi-pdf',[DonasiController::class,'exportPdf'])->name('ex
 Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
 // Export Excel
 Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->name('exportdonasiexcel');
+
+
+// Export menggunakan datatables
+Route::get('/export-donasi',[ExportController::class,'exportDonasi'])->name('dropd.exportDonasi');
+Route::get('/export-zakat',[ExportController::class,'exportZakat'])->name('exportZakat');
+Route::get('/export-permintaan-Ambulan',[ExportController::class,'exportPermintaanAmbulan'])->name('exportPermintaanAmbulan');
 
 
 //Zakat

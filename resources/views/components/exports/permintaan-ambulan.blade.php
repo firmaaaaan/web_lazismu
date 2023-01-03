@@ -9,7 +9,7 @@
             Overview
             </div>
             <h2 class="page-title">
-            Data Permintaan Ambulan
+            Export Data Permintaan Ambulan
             </h2>
         </div>
         </div>
@@ -19,9 +19,8 @@
     <div class="container-xl">
         <div class="card mb-3">
             <div class="table-responsive">
-                <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 mx-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
-                <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 mx-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
-                <table class="table">
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mx-2 my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                <table class="table" id="table-datatables">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -33,8 +32,6 @@
                             <th>Infaq</th>
                             <th>Status Permintaan</th>
                             <th>Status Perjalanan</th>
-                            <th>Feedback</th>
-                            <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,22 +59,6 @@
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status_perjalanan }}</div>
                             @endif
                             </td>
-                            <td>
-                                @if ($item->status_id==4)
-                                    <a href="{{ route('validasi.ambulan', $item->id) }}" class="btn btn-danger btn-sm" title="Ditolak"><i class="bi bi-exclamation-circle"></i></a>
-                                @else
-                                    <a href="{{ route('validasi.ambulan', $item->id) }}" class="btn btn-success btn-sm" title="Diterima"><i class="bi bi-check2-square"></i></a>
-                                @endif
-                                <form method="POST" action="{{ route('perjalanan.updateStatus', $item->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" name="status_perjalanan" class="btn btn-primary btn-sm" value="Selesai" title="Selesai"><i class="bi bi-check2-all"></i></button>
-                                </form>
-                            </td>
-                            <td>
-                                <a href="{{ route('permintaan.ambulan.edit', $item->id)}}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('permintaan.ambulan.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -87,4 +68,28 @@
         {{ $permintaanAmbulan->links() }}
     </div>
 </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cetak Permintaan Ambulan Pertanggal</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post">
+                <label for="">Tanggal Awal</label>
+                <input type="date" name="tglAwal" id="tglAwal" class="form-control">
+                <label for="">Tanggal Akhir</label>
+                <input type="date" name="tglAkhir" id="tglAkhir" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+            <a href="" type="submit" onclick="this.href='/cetak-pertanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
+        </div>
+        </div>
+    </div>
+    </div>
 @endsection
