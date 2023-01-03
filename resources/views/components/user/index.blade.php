@@ -22,7 +22,7 @@
                 <a href="{{ route('user.create') }}" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i>Tambah user</a>
                 <a href="" type="button" class="btn btn-success my-2 mx-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
                 <a href="" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
-                <table class="table">
+                <table class="table" id="table-datatables">
                     <thead>
                         <tr>
                             <th>Nama </th>

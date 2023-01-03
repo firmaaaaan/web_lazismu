@@ -23,7 +23,7 @@
                 <a href="{{ route('exportdonasiexcel') }}" class="btn btn-success my-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
                 <a href="{{ route('exportPdf') }} " type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
                 <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
-                <table class="table">
+                <table class="table" id="table-datatables">
                     <thead>
                         <tr>
                             <th>Nama Customer</th>
