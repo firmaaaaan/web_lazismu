@@ -18,10 +18,11 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card mb-3">
+            <div class="card-body">
             <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary btn-sm my-2 mx-2" style="float: right"><i class="bi bi-plus-square"></i> Tambah Rumah Sakit</button>
-                <a href="" type="button" class="btn btn-success btn-sm mt-2 ml-2"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
-                <a href="" type="button" class="btn btn-danger btn-sm mt-2"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary btn-sm my-2" style="float: right"><i class="bi bi-plus-square"></i> Tambah Rumah Sakit</button>
+                {{-- <a href="" type="button" class="btn btn-success btn-sm mt-2 ml-2"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
+                <a href="" type="button" class="btn btn-danger btn-sm mt-2"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
@@ -43,6 +44,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
         {{ $rumahSakit->links() }}

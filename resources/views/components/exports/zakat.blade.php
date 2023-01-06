@@ -18,38 +18,40 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card mb-3">
-            <div class="table-responsive my-2">
-                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mx-2 my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
-                <table class="table" id="table-datatables">
-                    <thead>
-                        <tr>
-                            <th>Nama Lengkap</th>
-                            <th>Jumlah (Rp)</th>
-                            <th>Jumlah (Kg)</th>
-                            <th>Jenis Zakat</th>
-                            <th>Keterangan</th>
-                            <th>Status Penyaluran</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($zakat as $item)
-                        <tr>
-                            <td>{{ $item->user->name }}</td>
-                            <td>{{ $item->nominal }}</td>
-                            <td>{{ $item->nominal_beras }}</td>
-                            <td>{{ $item->jenis_zakat }}</td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>
-                                @if ($item->status_penyaluran =='Belum Tersalurkan')
-                                    <div class="btn btn-outline-danger btn-sm">{{ $item->status_penyaluran }}</div>
-                                @else
-                                    <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="card-body">
+                <div class="table-responsive my-2">
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                    <table class="table" id="table-datatables">
+                        <thead>
+                            <tr>
+                                <th>Nama Lengkap</th>
+                                <th>Jumlah (Rp)</th>
+                                <th>Jumlah (Kg)</th>
+                                <th>Jenis Zakat</th>
+                                <th>Keterangan</th>
+                                <th>Status Penyaluran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($zakat as $item)
+                            <tr>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->nominal }}</td>
+                                <td>{{ $item->nominal_beras }}</td>
+                                <td>{{ $item->jenis_zakat }}</td>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>
+                                    @if ($item->status_penyaluran =='Belum Tersalurkan')
+                                        <div class="btn btn-outline-danger btn-sm">{{ $item->status_penyaluran }}</div>
+                                    @else
+                                        <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         {{ $zakat->links() }}

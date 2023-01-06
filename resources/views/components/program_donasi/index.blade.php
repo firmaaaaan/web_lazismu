@@ -18,10 +18,11 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card mb-3">
+            <div class="card-body">
             <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 mx-2 btn-sm"" style="float: right"><i class="bi bi-plus-square"></i> Tambah Program</button>
-                <a href="" type="button" class="btn btn-success mt-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
-                <a href="" type="button" class="btn btn-danger mt-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Program</button>
+                {{-- <a href="" type="button" class="btn btn-success mt-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
+                <a href="" type="button" class="btn btn-danger mt-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
@@ -47,6 +48,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
         {{ $programDonasi->links() }}

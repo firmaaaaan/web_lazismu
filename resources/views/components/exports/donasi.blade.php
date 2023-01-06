@@ -19,8 +19,9 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card mb-3">
-            <div class="table-responsive my-2">
-                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mx-2 my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+            <div class="card-body">
+            <div class="table-responsive">
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
@@ -49,6 +50,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
         {{ $donasi->links()}}

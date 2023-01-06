@@ -18,10 +18,11 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card mb-3">
+            <div class="card-body">
             <div class="table-responsive">
-                <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 mx-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
-                <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 mx-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
-                <table class="table">
+                <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
+                <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+                <table class="table" id="datatables">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -82,6 +83,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
         {{ $permintaanAmbulan->links() }}

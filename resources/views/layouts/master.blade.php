@@ -87,6 +87,12 @@
                     buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
                 });
             });
-</script>
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#datatables').DataTable({
+                });
+            });
+        </script>
     </body>
 </html>

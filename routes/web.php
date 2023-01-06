@@ -128,4 +128,9 @@ Route::post('/user/create', [UserController::class, 'store'])->name('user.store'
 Route::get('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
+//Reset Password OTP
+Route::get('password/reset', 'PasswordResetController@showForm');
+Route::post('password/reset', 'PasswordResetController@sendOTP')->name('password.email');
+Route::post('password/reset/verify', 'PasswordResetController@verifyOTP')->name('password.reset');
+
 require __DIR__.'/auth.php';

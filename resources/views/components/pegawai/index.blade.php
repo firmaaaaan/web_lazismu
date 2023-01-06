@@ -18,10 +18,11 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card">
-            <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 mx-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Karyawan</button>
-                <a href="" type="button" class="btn btn-success mt-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
-                <a href="" type="button" class="btn btn-danger mt-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+            <div class="card-body">
+                <div class="table-responsive">
+                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Karyawan</button>
+                {{-- <a href="" type="button" class="btn btn-success mt-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
+                <a href="" type="button" class="btn btn-danger mt-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
@@ -51,6 +52,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>
