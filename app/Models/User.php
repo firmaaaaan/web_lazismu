@@ -56,4 +56,7 @@ class User extends Authenticatable
     public function permintaanAmbulan(){
         return $this->belongsTo(permintaanAmbulan::class);
     }
+    public function driver(){
+        return $this->hasOne(Driver::class);
+    }
 }

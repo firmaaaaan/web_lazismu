@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZakatController;
 use App\Http\Controllers\DonasiController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
@@ -122,10 +123,17 @@ Route::post('/rumah-sakit/update/{id}',[RumahSakitController::class,'update'])->
 Route::get('/rumah-sakit/destroy/{id}', [RumahSakitController::class,'destroy'])->name('rumahsakit.destroy');
 
 // User
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user', [UserController::class, 'index'])->name('dropdo.user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
 Route::get('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+//Driver
+Route::get('/driver',[DriverController::class,'index'])->name('driver.index');
+Route::post('/driver/store',[DriverController::class,'store'])->name('driver.store');
+Route::post('/driver/update/{id}',[DriverController::class,'update'])->name('driver.update');
+Route::get('/driver/destroy/{id}',[DriverController::class,'destroy'])->name('driver.destroy');
+
 });
 
 //Reset Password OTP
