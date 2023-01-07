@@ -18,19 +18,21 @@
 <div class="page-body">
     <div class="container-xl">
         @foreach ($zakat as $item)
-            <div class="card">
+            <div class="card mb-2">
             <div class="card-body">
                 <p>Terima kasih telah membayar zakat di Lazismu Banguntapan Selatan. Informasi Penyaluran akan terupdate dihalaman ini. </p>
-                <p class="mt-0">Jumlah zakat: <b>{{ $item->nominal }}</b></p>
+                <p class="mt-0">Jumlah zakat: <b>Rp. {{ number_format( $item->nominal , 0, ",", ".") }}</b></p>
                 @if ($item->status_id ==1)
-                    <p>Status zakat: <b style="color: red">{{ $item->status->nama_status }}</b></p>
+                    <p>Status zakat: <b style="color: red">{{ $item->status->nama_status }}</b></p> <small>Mohon untuk konfirmasi ke admin jika dalam 1x24 jam belum tervalidasi</small>
                 @else
                     <p>Status zakat: <b style="color: green">{{ $item->status->nama_status }}</b></p>
                 @endif
+
                 @if ($item->status_penyaluran =='Belum Tersalurkan')
                     <p>Status Penyaluran: <b style="color: red">{{ $item->status_penyaluran }}</b></p>
                 @else
-                    <p>Status Penyaluran: <b style="color: red">{{ $item->status_penyaluran }}</b></p>
+                    <p>Status Penyaluran: <b style="color: green">{{ $item->status_penyaluran }}</b></p>
+                    <small>Tersalurkan :  </small>
                 @endif
             </div>
         </div>

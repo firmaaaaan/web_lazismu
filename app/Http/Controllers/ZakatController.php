@@ -168,11 +168,13 @@ class ZakatController extends Controller
     public function exportExcelZakat(){
         return Excel::download(new ZakatExport,'zakat.xlsx');
     }
-        public function aktivitas( $id){
+        public function aktivitas( Request $request, $id){
         $zakat=Zakat::find($id);
         $zakat=Zakat::all();
         $user=User::find($id);
         $zakat= Zakat::where('user_id', $id)->get();
+        // $tersalurkan = $request->input('zakat_tersalurkan');
+        // $zakat->jumlah_tersisa -= $tersalurkan ;
         return view('components.user.aktivitas', compact('user','zakat'));
     }
 }
