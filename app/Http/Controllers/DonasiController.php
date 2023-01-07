@@ -188,5 +188,14 @@ class DonasiController extends Controller
     public function exportExcel(){
         return Excel::download(new DonasiExport,'donasi.xlsx');
     }
+    public function programIndex($id){
 
+
+        $donasi=Donasi::find($id);
+        $programDonasi=ProgramDonasi::find($id);
+        $donasi=Donasi::all();
+        $donasi=Donasi::where('programdonasi_id', $id)->get();
+        $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
+        return view('components.shodaqoh.program-index', compact('donasi','programDonasi','totalDonationForProgram'));
+    }
 }

@@ -9,7 +9,7 @@
             Overview
             </div>
             <h2 class="page-title">
-            Data Donasi
+            Data {{ $programDonasi->nama_program }}
             </h2>
         </div>
         </div>
@@ -20,20 +20,18 @@
         <div class="card mb-3">
             <div class="card-body">
             <div class="table-responsive">
-                <a href="{{ route('donasi.create') }}" type="button" class="btn btn-primary btn-sm mr-2" style="float: right"><i class="bi bi-plus-square"></i>Tambah donasi</a>
-                <a href="{{ route('exportPdf') }} " type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+                <a href="" class="btn btn-primary btn-sm mb-2" title="Salurkan"><i class="bi bi-box2-heart-fill"></i>Salurkan Donasi</a>
+                {{-- <a href="{{ route('donasi.create') }}" type="button" class="btn btn-primary btn-sm mr-2" style="float: right"><i class="bi bi-plus-square"></i>Tambah donasi</a>
+                <a href="{{ route('exportPdf') }} " type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="datatables">
                     <thead>
                         <tr>
                             <th>Nama Customer</th>
                             <th>No. Rekening</th>
                             <th>Jumlah Donasi</th>
-                            <th>Program Dipilih</th>
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
                             <th>Status Penyaluran</th>
-                            <th>Feedback</th>
-                            <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +40,6 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->jml_donasi }}</td>
-                            <td> <a href="{{ route('program.index', $item->id) }}">{{ $item->programDonasi->nama_program }}</a></td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
                             @if ($item->status_id ==1)
@@ -58,18 +55,6 @@
                                     <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
                                 @endif
                             </td>
-                            <td>
-                                @if ($item->status_id==1)
-                                    <a href="{{ route('validasi.donasi', $item->id) }}" class="btn btn-success btn-sm">Validasi</a>
-                                @else
-                                    <a href="{{ route('validasi.donasi', $item->id) }}" class="btn btn-danger btn-sm">Diproses</a>
-                                @endif
-                                <a href="{{ route('donasi.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Salurkan"><i class="bi bi-box2-heart-fill"></i></a>
-                            </td>
-                            <td>
-                                <a href="{{ route('donasi.edit', $item->id) }} " class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('donasi.destroy',$item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -77,7 +62,7 @@
             </div>
             </div>
         </div>
-        {{ $donasi->links()}}
+        <strong> TOTAL DONASI : Rp.{{ number_format($totalDonationForProgram, 0, ',', '.') }}</strong>
     </div>
 </div>
 @endsection
