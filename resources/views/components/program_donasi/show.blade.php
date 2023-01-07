@@ -31,6 +31,12 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="user_id">Program yang dipilih</label>
+                            <select name="programdonasi_id" id="" class="form-control">
+                                <option value="{{ $programDonasi->id }}">{{ $programDonasi->nama_program }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="user_id">No. Rekening</label>
                             <input type="text" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
                         </div>

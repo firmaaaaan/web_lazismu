@@ -28,6 +28,7 @@
                             <th>Nama Customer</th>
                             <th>No. Rekening</th>
                             <th>Jumlah Donasi</th>
+                            <th>Program Dipilih</th>
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
                             <th>Status Penyaluran</th>
@@ -41,6 +42,7 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->jml_donasi }}</td>
+                            <td>{{ $item->programDonasi->nama_program }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
                             @if ($item->status_id ==1)

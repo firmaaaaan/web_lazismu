@@ -16,4 +16,7 @@ class ProgramDonasi extends Model
         public function user(){
         return $this->hasMany(User::class, 'user_id');
     }
+    public function donasi(){
+        return $this->hasMany(Donasi::class);
+    }
 }

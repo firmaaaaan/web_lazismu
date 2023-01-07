@@ -28,4 +28,8 @@ class Donasi extends Model
     public function statusPenyaluran(){
         return $this->belongsTo(StatusPenyaluran::class);
     }
+
+    public function programDonasi(){
+        return $this->belongsTo(ProgramDonasi::class,'programdonasi_id');
+    }
 }

@@ -24,8 +24,9 @@ class DonasiController extends Controller
         $donasi=Donasi::all();
         $donasi=Donasi::simplePaginate(15);
         $user=User::all();
+        $programDonasi=ProgramDonasi::all();
         $total_donasi = Donasi::sum('jml_donasi');
-        return view('components.shodaqoh.index', compact('donasi','user','total_donasi'));
+        return view('components.shodaqoh.index', compact('donasi','user','total_donasi','programDonasi'));
     }
 
     /**
@@ -60,7 +61,8 @@ class DonasiController extends Controller
             'no_rek'=>$request->no_rek,
             'keterangan'=>$request->keterangan,
             'status_id'=>'1',
-            'user_id'=>$request->user_id
+            'user_id'=>$request->user_id,
+            'programdonasi_id'=>$request->programdonasi_id
         ]);
         return redirect()->route('drop.donasi.index');
     }
@@ -85,7 +87,7 @@ class DonasiController extends Controller
     public function edit(Donasi $donasi, $id)
     {
         $donasi=Donasi::find($id);
-        $programDonasi=programDonasi::all();
+        $programDonasi=ProgramDonasi::all();
         $user=User::all();
         return view('components.shodaqoh.edit', compact('donasi','user','programDonasi'));
     }

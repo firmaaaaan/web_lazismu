@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('donasis', function (Blueprint $table) {
             $table->id();
+            $table->integer('programdonasi_id');
             $table->integer('jml_donasi');
             $table->integer('jumlah_tersisa')->nullable();
             $table->integer('donasi_tersalurkan')->nullable();
