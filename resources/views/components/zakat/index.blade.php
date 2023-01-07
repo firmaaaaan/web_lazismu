@@ -39,7 +39,7 @@
                     <tbody>
                         @foreach ($zakat as $item)
                         <tr>
-                            <td>{{ $item->user->name }}</td>
+                            <td><a href="{{ route('aktivitas', $item->id) }}">{{ $item->user->name }}</a></td>
                             <td>{{ $item->nominal }}</td>
                             <td>{{ $item->nominal_beras }}</td>
                             <td>{{ $item->jenis_zakat }}</td>

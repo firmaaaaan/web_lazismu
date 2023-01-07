@@ -127,6 +127,7 @@ Route::get('/user', [UserController::class, 'index'])->name('dropdo.user.index')
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
 Route::get('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/aktivitas/{id}', [ZakatController::class, 'aktivitas'])->name('aktivitas');
 
 //Driver
 Route::get('/driver',[DriverController::class,'index'])->name('driver.index');
@@ -136,9 +137,6 @@ Route::get('/driver/destroy/{id}',[DriverController::class,'destroy'])->name('dr
 
 });
 
-//Reset Password OTP
-Route::get('password/reset', 'PasswordResetController@showForm');
-Route::post('password/reset', 'PasswordResetController@sendOTP')->name('password.email');
-Route::post('password/reset/verify', 'PasswordResetController@verifyOTP')->name('password.reset');
+
 
 require __DIR__.'/auth.php';
