@@ -81,6 +81,7 @@ Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->nam
 Route::get('/donasi/program-donasi/{id}',[DonasiController::class,'programIndex'])->name('program.index');
 
 
+
 // Export menggunakan datatables
 Route::get('/export-donasi',[ExportController::class,'exportDonasi'])->name('dropd.exportDonasi');
 Route::get('/export-zakat',[ExportController::class,'exportZakat'])->name('exportZakat');
@@ -106,6 +107,8 @@ Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->
 // Route penyaluran donasi
     Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
     Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
+    Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
+    Route::get('/donasi/program/{id}/salurkan', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
 
 //Penyaluran Zakat
     Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');

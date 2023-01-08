@@ -38,7 +38,7 @@ class DonasiController extends Controller
     {
         $programDonasi=ProgramDonasi::all();
         $donasi=Donasi::all();
-        return view('components.shodaqoh.create', compact('programDonasi'));
+        return view('components.shodaqoh.create', compact('programDonasi', 'donasi'));
     }
 
     /**
@@ -64,6 +64,10 @@ class DonasiController extends Controller
             'user_id'=>$request->user_id,
             'programdonasi_id'=>$request->programdonasi_id
         ]);
+        $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
+        $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
+        $programDonasi->save();
+
         return redirect()->route('drop.donasi.index');
     }
 
@@ -189,13 +193,37 @@ class DonasiController extends Controller
         return Excel::download(new DonasiExport,'donasi.xlsx');
     }
     public function programIndex($id){
-
-
+        $programDonasi=ProgramDonasi::all();
         $donasi=Donasi::find($id);
         $programDonasi=ProgramDonasi::find($id);
         $donasi=Donasi::all();
         $donasi=Donasi::where('programdonasi_id', $id)->get();
         $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
         return view('components.shodaqoh.program-index', compact('donasi','programDonasi','totalDonationForProgram'));
+    }
+
+    public function salurkanProgram($id){
+        $programDonasi=ProgramDonasi::find($id);
+        $programDonasi=ProgramDonasi::all();
+        $donasi=Donasi::find($id);
+        $donasi=Donasi::where('programdonasi_id', $id)->first();
+        return view('components.shodaqoh.salurkan-program', compact('programDonasi','donasi'));
+    }
+    public function storeSalurkanProgram(Request $request, $id)
+    {
+        $programDonasi = ProgramDonasi::find($id);
+        $distribution_amount = $request->input('distribution_amount');
+
+
+        // Pastikan jumlah donasi yang tersedia cukup untuk disalurkan
+        if ($programDonasi->jumlah_donasi_program < $request->input('distribution_amount')) {
+            return redirect()->route('program.index', $id)->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
+        }
+
+        // Proses penyaluran donasi
+        $programDonasi->jumlah_donasi_program -= $distribution_amount;
+        $programDonasi->save();
+
+        return redirect()->route('program.index', $id)->with('success', 'Donasi berhasil disalurkan!');
     }
 }

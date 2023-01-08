@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('donasis', function (Blueprint $table) {
             $table->id();
-            $table->integer('programdonasi_id');
-            $table->integer('jml_donasi');
+            $table->integer('programdonasi_id')->nullable();
+            $table->integer('jml_donasi')->nullable();
             $table->integer('jumlah_tersisa')->nullable();
             $table->integer('donasi_tersalurkan')->nullable();
-            $table->string('no_rek');
+            $table->integer('donasi_tersalurkan_program')->nullable();
+            $table->string('no_rek')->nullable();
             $table->text('keterangan');
             $table->string('status_penyaluran')->nullable();
             $table->integer('status_id')->nullable();

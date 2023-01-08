@@ -12,6 +12,7 @@ class ProgramDonasi extends Model
 
     protected $table ='program_donasis';
     protected $guarded =['id'];
+    // protected $with = ['donasis'];
 
         public function user(){
         return $this->hasMany(User::class, 'user_id');

@@ -33,6 +33,15 @@
                             <label for="user_id">No. Rekening</label>
                             <input type="text" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
                         </div>
+                        <div class="form-group">
+                            <label for="user_id">Program yang dipilih</label>
+                            <select name="user_id" id="" class="form-control">
+                                <option value="">--Pilih Jenis Program--</option>
+                                @foreach ($donasi as $item)
+                                <option value="{{ $donasi->programDonasi->id }}">{{ $donasi->programDonasi->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <label for="">Keterangan</label>
                         <textarea class="form-control" name="keterangan" id="" cols="30" rows="10"></textarea>
                     </div>
