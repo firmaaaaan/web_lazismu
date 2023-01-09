@@ -29,14 +29,15 @@ class DashboardController extends Controller
         $total_donasi = Donasi::sum('jml_donasi');
 
         // Menghitung jumlah donasi yang tersalurkan
-        $total_tersalurkan = Donasi::sum('jumlah_tersisa');
+        // $total_tersalurkan = Donasi::sum('jumlah_tersisa');
 
         // Menghitung jumlah donasi yang masih tersisa
-        $total_tersisa = $total_donasi + $total_tersalurkan;
+        // $total_tersisa = $total_donasi + $total_tersalurkan;
+
         $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
         // $total_tersisa = Donasi::where('status_id', '1')->sum('jumlah_tersisa');
         $programDonasi=ProgramDonasi::all();
-        return view('dashboard', compact('programDonasi','total_donasi', 'total_tersalurkan', 'total_tersisa','total_zakat','zakat_tersalurkan','total_zakat_tersisa'));
+        return view('dashboard', compact('programDonasi','total_donasi','total_zakat','zakat_tersalurkan','total_zakat_tersisa'));
     }
 
 }

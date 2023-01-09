@@ -17,9 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('programdonasi_id')->nullable();
             $table->integer('jml_donasi')->nullable();
-            $table->integer('jumlah_tersisa')->nullable();
-            $table->integer('donasi_tersalurkan')->nullable();
-            $table->integer('donasi_tersalurkan_program')->nullable();
+            // $table->integer('jumlah_tersisa')->nullable();
+            // $table->integer('donasi_tersalurkan')->nullable();
             $table->string('no_rek')->nullable();
             $table->text('keterangan');
             $table->string('status_penyaluran')->nullable();

@@ -64,7 +64,7 @@
                                 @else
                                     <a href="{{ route('validasi.donasi', $item->id) }}" class="btn btn-danger btn-sm">Diproses</a>
                                 @endif
-                                <a href="{{ route('donasi.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Salurkan"><i class="bi bi-box2-heart-fill"></i></a>
+                                {{-- <a href="{{ route('donasi.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Salurkan"><i class="bi bi-box2-heart-fill"></i></a> --}}
                             </td>
                             <td>
                                 <a href="{{ route('donasi.edit', $item->id) }} " class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>

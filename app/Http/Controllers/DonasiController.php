@@ -220,17 +220,24 @@ class DonasiController extends Controller
             return redirect()->route('program.index', $id)->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
         }
 
+        // Cek apakah ada donasi yang belum tervalidasi
+        $berlumTervalidasi = Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
+            ->where('status_id', 1)
+            ->get();
+
+        if ($berlumTervalidasi->sum('jml_donasi') >= $request->input('tersalurkan')) {
+            return redirect()->route('program.index', $id)->with('belum', 'Terdapat donasi yang belum tervalidasi yang tidak bisa disalurkan!');
+        }
+
+        Donasi::where('programdonasi_id', $id)->update(['status_penyaluran' => 'Tersalurkan']);
+
         // Proses penyaluran donasi
         $programDonasi->jumlah_donasi_program -= $tersalurkan;
         $programDonasi->save();
 
-        // Ubah status penyaluran pada tabel donasi
-        Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
-            ->update(['status_penyaluran' => 'tersalurkan']);
-
-            // Ubah jumlah donasi tersisa pada tabel donasis
-        Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
-            ->decrement('jumlah_tersisa', $request->input('tersalurkan'));
+        // // Ubah jumlah donasi tersisa pada tabel donasis
+        // Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
+        //     ->decrement('jml_donasi', $request->input('tersalurkan'));
 
         return redirect()->route('program.index', $id)->with('success', 'Donasi berhasil disalurkan!');
     }

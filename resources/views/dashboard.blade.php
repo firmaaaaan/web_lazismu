@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3">
+            {{-- <div class="col-sm-6 col-lg-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row row-deck row-cards mt-2">
             <div class="col-sm-6 col-lg-3">
