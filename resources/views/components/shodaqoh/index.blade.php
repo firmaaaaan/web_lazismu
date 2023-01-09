@@ -25,7 +25,7 @@
                 <table class="table" id="datatables">
                     <thead>
                         <tr>
-                            <th>Nama Customer</th>
+                            <th>Nama Donatur</th>
                             <th>No. Rekening</th>
                             <th>Jumlah Donasi</th>
                             <th>Program Dipilih</th>

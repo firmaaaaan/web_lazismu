@@ -38,7 +38,7 @@
             <thead class="bordered">
                 <tr>
                     <th>No.</th>
-                    <th>Nama Customer</th>
+                    <th>Nama Donatur</th>
                     <th>No. Rekening</th>
                     <th>Jumlah Donasi</th>
                     <th>Status Penyaluran</th>

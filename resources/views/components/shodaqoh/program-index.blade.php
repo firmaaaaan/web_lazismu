@@ -58,7 +58,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
-                            <th>Nama Customer</th>
+                            <th>Nama Donatur</th>
                             <th>No. Rekening</th>
                             <th>Jumlah Donasi</th>
                             <th>Keterangan</th>

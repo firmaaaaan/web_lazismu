@@ -25,7 +25,7 @@
                 <table class="table" id="datatables">
                     <thead>
                         <tr>
-                            <th>Nama Lengkap</th>
+                            <th>Nama Donatur</th>
                             <th>Jumlah (Rp)</th>
                             <th>Jumlah (Kg)</th>
                             <th>Jenis Zakat</th>
