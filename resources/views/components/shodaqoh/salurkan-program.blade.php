@@ -18,11 +18,6 @@
             <form action="{{ route('donasi.storeSalurkanProgram', $donasi->programDonasi->id) }}" method="POST">
                 @csrf
                 <div class="card mt-3">
-                    @if (Session('error'))
-                        <div class="alert alert-danger alert-block">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                    @endif
                     <div class="card-body">
                             <input type="hidden" name="id" class="form-control" id="id" value="{{ $donasi->id }}">
                             <label for="">Program yang dipilih</label>
@@ -31,7 +26,7 @@
                             </select>
                         <div class="bg-light rounded d-flex align items center p-3">
                             <h1 class="font-weight-bold w-25">Rp.</h1>
-                            <input type="number" class="form-control" name="distribution_amount" id="id">
+                            <input type="number" class="form-control" name="tersalurkan" id="id">
                         </div>
                     </div>
                 </div>

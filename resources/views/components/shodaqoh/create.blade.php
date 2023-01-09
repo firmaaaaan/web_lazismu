@@ -35,10 +35,10 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
-                            <select name="user_id" id="" class="form-control">
+                            <select name="programdonasi_id" id="" class="form-control">
                                 <option value="">--Pilih Jenis Program--</option>
-                                @foreach ($donasi as $item)
-                                <option value="{{ $donasi->programDonasi->id }}">{{ $donasi->programDonasi->name }}</option>
+                                @foreach ($programDonasi as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
                         </div>

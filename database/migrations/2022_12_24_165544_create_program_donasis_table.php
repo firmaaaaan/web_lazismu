@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama_program');
             $table->string('no_rek');
             $table->unsignedBigInteger('jumlah_donasi_program')->default(0);
-            $table->integer('distribution_amount')->default(0);
+            $table->unsignedBigInteger('tersalurkan')->default(0);
             $table->text('deskripsi');
             $table->timestamps();
         });

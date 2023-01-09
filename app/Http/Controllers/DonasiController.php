@@ -212,17 +212,25 @@ class DonasiController extends Controller
     public function storeSalurkanProgram(Request $request, $id)
     {
         $programDonasi = ProgramDonasi::find($id);
-        $distribution_amount = $request->input('distribution_amount');
+        $tersalurkan = $request->input('tersalurkan');
 
 
         // Pastikan jumlah donasi yang tersedia cukup untuk disalurkan
-        if ($programDonasi->jumlah_donasi_program < $request->input('distribution_amount')) {
+        if ($programDonasi->jumlah_donasi_program < $request->input('tersalurkan')) {
             return redirect()->route('program.index', $id)->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
         }
 
         // Proses penyaluran donasi
-        $programDonasi->jumlah_donasi_program -= $distribution_amount;
+        $programDonasi->jumlah_donasi_program -= $tersalurkan;
         $programDonasi->save();
+
+        // Ubah status penyaluran pada tabel donasi
+        Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
+            ->update(['status_penyaluran' => 'tersalurkan']);
+
+            // Ubah jumlah donasi tersisa pada tabel donasis
+        Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
+            ->decrement('jumlah_tersisa', $request->input('tersalurkan'));
 
         return redirect()->route('program.index', $id)->with('success', 'Donasi berhasil disalurkan!');
     }

@@ -42,7 +42,7 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->jml_donasi }}</td>
-                            <td> <a href="{{ route('program.index', $item->id) }}">{{ $item->programDonasi->nama_program }}</a></td>
+                            <td> <a href="{{ route('program.index', $item->programDonasi->id) }}">{{ $item->programDonasi->nama_program }}</a></td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
                             @if ($item->status_id ==1)
