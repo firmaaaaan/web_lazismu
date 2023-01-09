@@ -117,7 +117,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-            <a href="" type="submit" onclick="this.href='/cetak-donasi-pertanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
+            <a href="" type="submit" onclick="this.href='/cetak-donasi-program/{{ $programDonasi->id }}/pertanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
         </div>
         </div>
     </div>

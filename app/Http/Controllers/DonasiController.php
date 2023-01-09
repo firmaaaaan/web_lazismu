@@ -241,4 +241,14 @@ class DonasiController extends Controller
 
         return redirect()->route('program.index', $id)->with('success', 'Donasi berhasil disalurkan!');
     }
+
+    public function cetakProgramPertanggal($id,$tglAwal, $tglAkhir){
+
+        $programDonasi=ProgramDonasi::find($id);
+        $cetakProgramPertanggal = Donasi::where('programdonasi_id', $id)
+                        ->whereBetween('created_at',[$tglAwal, $tglAkhir])
+                        ->get();
+        $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi]);
+        return $pdf->stream('donasi-program-pertanggal.pdf');
+    }
 }

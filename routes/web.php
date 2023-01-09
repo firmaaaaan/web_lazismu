@@ -79,6 +79,8 @@ Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::cl
 // Export Excel
 Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->name('exportdonasiexcel');
 Route::get('/donasi/program-donasi/{id}',[DonasiController::class,'programIndex'])->name('program.index');
+//Export Perprogram donasi pertanggal
+Route::get('/cetak-donasi-program/{id}/pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakProgramPertanggal'])->name('cetakProgramPertanggal.pdf');
 
 
 
