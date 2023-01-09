@@ -42,7 +42,7 @@ class RumahSakitController extends Controller
             'alamat'
         ]);
         RumahSakit::create($request->all());
-        return back();
+        return back()->with('Success','Data rumah sakit berhasil ditambahkan');
     }
 
     /**
@@ -82,7 +82,7 @@ class RumahSakitController extends Controller
         ]);
         $rumahSakit=RumahSakit::find($id);
         $rumahSakit->update($request->all());
-        return back();
+        return back()->with('Update','Data rumah sakit berhasil diupdate');
     }
 
     /**

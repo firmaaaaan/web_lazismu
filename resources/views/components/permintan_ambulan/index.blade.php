@@ -19,6 +19,16 @@
     <div class="container-xl">
         <div class="card mb-3">
             <div class="card-body">
+                @if ($message = Session::get('Success'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+                @if ($message = Session::get('Update'))
+                    <div class="alert alert-primary alert-block mb-2">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
             <div class="table-responsive">
                 <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
                 <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>

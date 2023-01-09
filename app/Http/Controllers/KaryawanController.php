@@ -45,7 +45,7 @@ class KaryawanController extends Controller
             'alamat'=>'required'
         ]);
         Karyawan::create($request->all());
-        return redirect()->route('dropdown.pegawai.index');
+        return back()->with('Success','Data pegawai berhasil ditambahkan');
     }
 
     /**
@@ -88,7 +88,7 @@ class KaryawanController extends Controller
         ]);
         $karyawans=Karyawan::find($id);
         $karyawans->update($request->all());
-        return redirect()->route('dropdown.pegawai.index');
+        return back()->with('Update','Data pegawai berhasil diupdate');
     }
 
     /**

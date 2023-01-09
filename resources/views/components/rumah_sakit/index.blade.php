@@ -19,6 +19,16 @@
     <div class="container-xl">
         <div class="card mb-3">
             <div class="card-body">
+                @if ($message = Session::get('Success'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+                @if ($message = Session::get('Update'))
+                    <div class="alert alert-primary alert-block mb-2">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
             <div class="table-responsive">
                 <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary btn-sm my-2" style="float: right"><i class="bi bi-plus-square"></i> Tambah Rumah Sakit</button>
                 {{-- <a href="" type="button" class="btn btn-success btn-sm mt-2 ml-2"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
@@ -103,7 +113,7 @@
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                     </div>
                 </form>
             </div>

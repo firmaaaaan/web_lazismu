@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success" style="float:right">Simpan</button>
+                            <button type="submit" class="btn btn-primary btn-sm" style="float:right">Buat</button>
                         </div>
                 </form>
             </div>

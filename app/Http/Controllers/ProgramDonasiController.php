@@ -53,7 +53,7 @@ class ProgramDonasiController extends Controller
             $input['foto']="$programImage";
         }
         ProgramDonasi::create($input);
-        return back();
+        return back()->with('Success','Program donasi berhasil dibuat');
     }
 
     /**
@@ -105,7 +105,7 @@ class ProgramDonasiController extends Controller
             unset($input['foto']);
         }
         $programDonasi->update($input);
-        return back();
+        return back()->with('Update','Program donasi berhasil diupdate');
     }
 
     /**

@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success" style="float:right">Simpan</button>
+                            <button type="submit" class="btn btn-success btn-sm" style="float:right">Simpan</button>
                         </div>
                 </form>
             </div>

@@ -59,7 +59,7 @@ class PermintaanAmbulanController extends Controller
             'keterangan'=>$request->keterangan,
             'status_id'=>'3',
         ]);
-        return redirect()->route('permintaan.ambulan.index');
+        return redirect()->route('permintaan.ambulan.index')->with('Success','Permintaan ambulan berhasil dibuat');
     }
 
     /**
@@ -104,7 +104,7 @@ class PermintaanAmbulanController extends Controller
         ]);
         $permintaanAmbulan=permintaanAmbulan::find($id);
         $permintaanAmbulan->update($request->all());
-        return redirect()->route('permintaan.ambulan.index');
+        return redirect()->route('permintaan.ambulan.index')->with('Update','Permintaan ambulan berhasil diupdate');
     }
 
     /**
