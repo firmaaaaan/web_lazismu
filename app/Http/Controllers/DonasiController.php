@@ -234,6 +234,8 @@ class DonasiController extends Controller
         // Proses penyaluran donasi
         $programDonasi->jumlah_donasi_program -= $tersalurkan;
         $programDonasi->save();
+        ProgramDonasi::where('id', $id)
+            ->update(['tersalurkan' => DB::raw('tersalurkan + '.$tersalurkan)]);
 
         // // Ubah jumlah donasi tersisa pada tabel donasis
         // Donasi::where('programdonasi_id', $request->input('programdonasi_id'))

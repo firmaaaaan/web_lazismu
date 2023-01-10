@@ -18,14 +18,21 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="row mb-2">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <strong> DONASI TERKUMPUL : Rp.{{ number_format($totalDonationForProgram, 0, ',', '.') }}</strong>
                     </div>
                 </div>
             </div>
-                <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <strong> DONASI TERSALURKAN : Rp.{{ number_format($programDonasi->tersalurkan, 0, ',', '.') }}</strong>
+                    </div>
+                </div>
+            </div>
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <strong>SISA DONASI : Rp.{{ number_format($programDonasi->jumlah_donasi_program , 0, ',', '.') }}</strong>
