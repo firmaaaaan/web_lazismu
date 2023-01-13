@@ -54,7 +54,7 @@ class LogTransaksiController extends Controller
 
         //validasi jumlah_donasi_program program donasi asal cukup atau tidak
         if($programdonasi_asal->jumlah_donasi_program < $request->nominal) {
-            return redirect()->route('index.transaction')->with('error','Jumlah saldo program donasi asal tidak cukup');
+            return back()->with('error','Jumlah saldo program donasi asal tidak cukup');
         }
 
         //validasi user yang melakukan transfer
@@ -76,9 +76,10 @@ class LogTransaksiController extends Controller
         // $log->jenis_transaksi = 'transfer_jumlah_donasi_program';
         $log->nominal = $request->nominal;
         $log->id_programdonasi_tujuan = $programdonasi_tujuan->id;
+        $log->keterangan=$request->keterangan;
         $log->save();
 
-        return redirect()->route('index.transaction')->with('success', 'Jumlah saldo program berhasil dipindahkan');
+        return back()->with('success', 'Jumlah saldo program berhasil dipindahkan');
     }
 
     /**

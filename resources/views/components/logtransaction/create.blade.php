@@ -19,6 +19,16 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block mb-2">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block mb-2">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
                 <form action="{{ route('store.transaction') }}" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
@@ -41,9 +51,11 @@
                         </select>
                     </div>
                     <div class="bg-light rounded d-flex align items center p-3">
-                            <h1 class="font-weight-bold w-25">Rp.</h1>
-                            <input type="number" class="form-control" name="nominal" placeholder="Masukan nominal donasi" value="0">
+                        <h1 class="font-weight-bold w-25">Rp.</h1>
+                        <input type="number" class="form-control" name="nominal" placeholder="Masukan nominal donasi" value="0">
                     </div>
+                    <label for="">Kerangan</label>
+                    <textarea name="keterangan" id="" class="form-control"></textarea>
                     <button type="submit" class="btn btn-primary btn-sm mt-2">Transfer</button>
                 </form>
             </div>
