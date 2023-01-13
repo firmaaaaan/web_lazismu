@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZakatController;
 use App\Http\Controllers\DonasiController;
@@ -107,14 +108,14 @@ Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->
 
 
 // Route penyaluran donasi
-    Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
-    Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
-    Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
-    Route::get('/donasi/program/{id}/salurkan', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
+Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
+Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
+Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
+Route::get('/donasi/program/{id}/salurkan', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
 
 //Penyaluran Zakat
-    Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');
-    Route::post('zakat/salurkan/{id}', [ZakatController::class,'storeSalurkan'])->name('zakat.storeSalurkan');
+Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');
+Route::post('zakat/salurkan/{id}', [ZakatController::class,'storeSalurkan'])->name('zakat.storeSalurkan');
 
 
 Route::get('/validasi/donasi/{id}', [DonasiController::class, 'validasiDonasi'])->name('validasi.donasi');
@@ -140,6 +141,12 @@ Route::get('/driver',[DriverController::class,'index'])->name('driver.index');
 Route::post('/driver/store',[DriverController::class,'store'])->name('driver.store');
 Route::post('/driver/update/{id}',[DriverController::class,'update'])->name('driver.update');
 Route::get('/driver/destroy/{id}',[DriverController::class,'destroy'])->name('driver.destroy');
+
+// Akun
+Route::get('/akun',[AkunController::class, 'index'])->name('akun.index');
+Route::get('/akun/delete/{id}',[AkunController::class, 'destroy'])->name('akun.delete');
+Route::post('/akun',[AkunController::class, 'store'])->name('akun.store');
+Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.update');
 
 });
 

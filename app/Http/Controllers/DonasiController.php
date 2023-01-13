@@ -197,8 +197,10 @@ class DonasiController extends Controller
         $donasi=Donasi::find($id);
         $programDonasi=ProgramDonasi::find($id);
         $donasi=Donasi::all();
-        $donasi=Donasi::where('programdonasi_id', $id)->get();
-        $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
+        $donasi_validated = Donasi::where('programdonasi_id', $id)->where('status_id', 2)->get();
+        $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
+        // $donasi=Donasi::where('programdonasi_id', $id)->get();
+        // $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
         return view('components.shodaqoh.program-index', compact('donasi','programDonasi','totalDonationForProgram'));
     }
 
@@ -211,6 +213,8 @@ class DonasiController extends Controller
     }
     public function storeSalurkanProgram(Request $request, $id)
     {
+
+
         $programDonasi = ProgramDonasi::find($id);
         $tersalurkan = $request->input('tersalurkan');
 

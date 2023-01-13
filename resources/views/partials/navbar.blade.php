@@ -25,11 +25,8 @@
                     <div class="dropdown-menu">
                         <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="{{ route('dropdown.pegawai.index') }}">
-                                Data Karyawan
-                            </a>
-                            <a class="dropdown-item" href="{{ route('dropdown.rumahsakit.index') }}">
-                                Data Rumah Sakit
+                            <a class="dropdown-item" href="{{ route('akun.index') }}">
+                                Data Akun
                             </a>
                             <a class="dropdown-item" href="{{ route('dropdown.program.donasi.index') }}">
                                 Data Program
@@ -40,6 +37,12 @@
                             </a>
                             <a class="dropdown-item" href="{{ route('permintaan.ambulan.index') }}">
                                 Permintan Ambulan
+                            </a>
+                            <a class="dropdown-item" href="{{ route('dropdown.pegawai.index') }}">
+                                Data Karyawan
+                            </a>
+                            <a class="dropdown-item" href="{{ route('dropdown.rumahsakit.index') }}">
+                                Data Rumah Sakit
                             </a>
                         </div>
                         </div>

@@ -20,6 +20,7 @@ return new class extends Migration
             // $table->integer('jumlah_tersisa')->nullable();
             // $table->integer('donasi_tersalurkan')->nullable();
             $table->string('no_rek')->nullable();
+            $table->bigInteger('hak_amil');
             $table->text('keterangan');
             $table->string('status_penyaluran')->nullable();
             $table->integer('status_id')->nullable();
