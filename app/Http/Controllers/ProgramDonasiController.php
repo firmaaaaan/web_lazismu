@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
@@ -16,9 +17,10 @@ class ProgramDonasiController extends Controller
      */
     public function index()
     {
+        $akun=Akun::all();
         $programDonasi=ProgramDonasi::all();
         $programDonasi=ProgramDonasi::simplePaginate(15);
-        return view('components.program_donasi.index', compact('programDonasi'));
+        return view('components.program_donasi.index', compact('programDonasi','akun'));
     }
 
     /**

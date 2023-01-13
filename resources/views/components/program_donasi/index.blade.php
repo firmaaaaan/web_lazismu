@@ -80,6 +80,15 @@
                         <input type="file" name="foto" class="form-control">
                     </div>
                     <div>
+                        <label for="">Nama Akun</label>
+                        <select name="id_akun" id="" class="form-control">
+                            <option value="">--Pilih Akun--</option>
+                            @foreach ($akun as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_akun }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
                         <label class="form-label">Nama Program Donasi</label>
                         <input type="text" name="nama_program" class="form-control">
                     </div>

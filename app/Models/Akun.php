@@ -11,4 +11,8 @@ class Akun extends Model
 
     protected $table="akuns";
     protected $guarded=['id'];
+
+    public function programDonasi(){
+        return $this->belongsTo(ProgramDonasi::class);
+    }
 }

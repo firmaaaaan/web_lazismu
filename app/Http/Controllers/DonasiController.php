@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\DonasiExport;
 use DB;
 use PDF;
+use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
 use Illuminate\Http\Request;
+use App\Exports\DonasiExport;
 use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -36,9 +37,10 @@ class DonasiController extends Controller
      */
     public function create()
     {
+        $akun=Akun::all();
         $programDonasi=ProgramDonasi::all();
         $donasi=Donasi::all();
-        return view('components.shodaqoh.create', compact('programDonasi', 'donasi'));
+        return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun'));
     }
 
     /**
@@ -56,13 +58,30 @@ class DonasiController extends Controller
             'keterangan'=>'required',
             'user_id'=>'required'
         ]);
+
+        // Mencari akun yang sesuai dengan id_akun yang diterima dari form
+        $akun = Akun::find($request->id_akun);
+
+        // Mendapatkan nilai persen_hak_amil dari akun yang ditemukan
+        $persen_hak_amil = $akun->persen_hak_amil;
+
+
+
+        // Menghitung nilai hak_amil
+        $hak_amil = $request->jml_donasi * $persen_hak_amil / 100;
+
+        // Mencari donasi yang baru saja ditambahkan ke database
+        Donasi::where('programdonasi_id', $request->programdonasi_id)
+            ->orderBy('created_at', 'desc')
+            ->first();
         Donasi::create([
             'jml_donasi'=>$request->jml_donasi,
             'no_rek'=>$request->no_rek,
             'keterangan'=>$request->keterangan,
             'status_id'=>'1',
             'user_id'=>$request->user_id,
-            'programdonasi_id'=>$request->programdonasi_id
+            'programdonasi_id'=>$request->programdonasi_id,
+            'hak_amil'=>$hak_amil
         ]);
         $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');

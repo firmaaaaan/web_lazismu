@@ -148,6 +148,10 @@ Route::get('/akun/delete/{id}',[AkunController::class, 'destroy'])->name('akun.d
 Route::post('/akun',[AkunController::class, 'store'])->name('akun.store');
 Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.update');
 
+//Request Ajax
+// Route::get('/program-donasi/{id_akun}', [DonasiController::class, 'create']);
+
+
 });
 
 
