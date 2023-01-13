@@ -155,6 +155,7 @@ Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.u
 
 // Transaction
 Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
+Route::get('/transaction', [LogTransaksiController::class,'index'])->name('index.transaction');
 Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo'])->name('store.transaction');
 
 

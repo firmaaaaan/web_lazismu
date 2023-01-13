@@ -23,4 +23,7 @@ class ProgramDonasi extends Model
     public function akun(){
         return $this->hasMany(Akun::class);
     }
+    public function logTransaksi(){
+        return $this->hasMany(LogTransaksi::class);
+    }
 }

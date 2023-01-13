@@ -19,22 +19,13 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
-            @if ($message = Session::get('error'))
-                <div class="alert alert-danger alert-block mb-2">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block mb-2">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
                 <form action="{{ route('store.transaction') }}" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                     <div class="form-group">
                         <label for="id_programdonasi_asal">Program Donasi Asal</label>
                         <select name="id_programdonasi_asal" id="id_programdonasi_asal" class="form-control">
+                            <option value="">--Pilih Program Donasi Awal--</option>
                             @foreach($programDonasi as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
                             @endforeach
@@ -43,6 +34,7 @@
                     <div class="form-group">
                         <label for="id_programdonasi_tujuan">Program Donasi Tujuan</label>
                         <select name="id_programdonasi_tujuan" id="id_programdonasi_tujuan" class="form-control">
+                            <option value="">--Pilih Program Donasi Awal--</option>
                             @foreach($programDonasi as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
                             @endforeach

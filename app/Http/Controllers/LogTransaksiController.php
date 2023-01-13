@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akun;
 use App\Models\LogTransaksi;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
@@ -17,7 +18,9 @@ class LogTransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $programDonasi=ProgramDonasi::all();
+        $logs=LogTransaksi::all();
+        return view('components.logtransaction.index', compact('logs','programDonasi'));
     }
 
     /**
@@ -51,7 +54,7 @@ class LogTransaksiController extends Controller
 
         //validasi jumlah_donasi_program program donasi asal cukup atau tidak
         if($programdonasi_asal->jumlah_donasi_program < $request->nominal) {
-            return redirect()->back()->with('error','Jumlah donasi program program donasi asal tidak cukup');
+            return redirect()->route('index.transaction')->with('error','Jumlah saldo program donasi asal tidak cukup');
         }
 
         //validasi user yang melakukan transfer
@@ -75,7 +78,7 @@ class LogTransaksiController extends Controller
         $log->id_programdonasi_tujuan = $programdonasi_tujuan->id;
         $log->save();
 
-        return back()->with('success', 'Jumlah donasi program berhasil dipindahkan');
+        return redirect()->route('index.transaction')->with('success', 'Jumlah saldo program berhasil dipindahkan');
     }
 
     /**
