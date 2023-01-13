@@ -219,7 +219,8 @@ class DonasiController extends Controller
         $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
         $donasi=Donasi::where('programdonasi_id', $id)->get();
         // $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
-        return view('components.shodaqoh.program-index', compact('donasi','programDonasi','totalDonationForProgram'));
+        $total_hak_amil = Donasi::where('programdonasi_id', $id)->sum('hak_amil');
+        return view('components.shodaqoh.program-index', compact('donasi','total_hak_amil','programDonasi','totalDonationForProgram'));
     }
 
     public function salurkanProgram($id){
@@ -273,6 +274,7 @@ class DonasiController extends Controller
                         ->whereBetween('created_at',[$tglAwal, $tglAkhir])
                         ->get();
         $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi]);
-        return $pdf->stream('donasi-program-pertanggal.pdf');
+
+       return $pdf->stream('donasi-program-pertanggal.pdf');
     }
 }
