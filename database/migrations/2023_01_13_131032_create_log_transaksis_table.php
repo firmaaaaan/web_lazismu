@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('log_transaksis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('id_programdonasi_asal')->nullable();
+            $table->unsignedBigInteger('id_programdonasi_tujuan')->nullable();
+            $table->double('nominal')->nullable();
+            $table->dateTime('tanggal')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->foreign('id_programdonasi_asal')->references('id')->on('program_donasis');
+            $table->foreign('id_programdonasi_tujuan')->references('id')->on('program_donasis');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

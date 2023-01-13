@@ -12,9 +12,14 @@
             Dashboard
             </h2>
         </div>
+        <div>
+
+            <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm ml-3"> Transfer</a>
+        </div>
         </div>
     </div>
 </div>
+
 <!-- Page body -->
 <div class="page-body">
     <div class="container-xl">

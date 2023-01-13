@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LogTransaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\UserController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenyaluranController;
 use App\Http\Controllers\RumahSakitController;
+use App\Http\Controllers\LogTransaksiController;
 use App\Http\Controllers\ProgramDonasiController;
 use App\Http\Controllers\PermintaanAmbulanController;
 
@@ -150,6 +152,11 @@ Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.u
 
 //Request Ajax
 // Route::get('/program-donasi/{id_akun}', [DonasiController::class, 'create']);
+
+// Transaction
+Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
+Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo'])->name('store.transaction');
+
 
 
 });
