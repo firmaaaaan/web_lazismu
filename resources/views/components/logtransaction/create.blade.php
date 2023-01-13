@@ -19,6 +19,16 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block mb-2">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block mb-2">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
                 <form action="{{ route('store.transaction') }}" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">

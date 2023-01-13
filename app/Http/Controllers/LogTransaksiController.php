@@ -51,7 +51,7 @@ class LogTransaksiController extends Controller
 
         //validasi jumlah_donasi_program program donasi asal cukup atau tidak
         if($programdonasi_asal->jumlah_donasi_program < $request->nominal) {
-            return redirect()->back()->withErrors(['Jumlah donasi program program donasi asal tidak cukup']);
+            return redirect()->back()->with('error','Jumlah donasi program program donasi asal tidak cukup');
         }
 
         //validasi user yang melakukan transfer

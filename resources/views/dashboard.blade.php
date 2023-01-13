@@ -14,7 +14,7 @@
         </div>
         <div>
 
-            <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm ml-3"> Transfer</a>
+            <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm ml-3"> <i class="bi bi-wallet-fill"></i> Transfer</a>
         </div>
         </div>
     </div>
@@ -30,86 +30,9 @@
                         <h2>Total Donasi Diterima:</h2>
                         <div class="h1 mb-3" style="color: green">Rp.{{ number_format($total_donasi, 0, ',', '.') }}</div>
                     </div>
-                    {{-- <div class="row">
-                        @foreach ($programDonasi as $item)
-                        <div class="col-md-3">
-                            <div class="card-body">
-                                <p>{{ $item->nama_program }}</p>
-                                <p>Terkumpul : Rp.{{ number_format($totalDonationForProgram, 0, ',', '.') }}</p>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div> --}}
                 </div>
             </div>
-            {{-- <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <div class="subheader">Account</div>
-                        </div>
-                        <div class="h2 mb-3">Rp.{{ number_format($total_tersalurkan, 0, ',', '.') }} </div>
-                        <div class="d-flex mb-2">
-                        <div>Donasi Tersalurkan</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <div class="subheader">Account</div>
-                        </div>
-                        <div class="h2 mb-3">Rp.{{ number_format($total_tersisa, 0, ',', '.') }}</div>
-                        <div class="d-flex mb-2">
-                        <div>Donasi Tersisa</div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
-        {{-- <div class="row row-deck row-cards mt-2">
-            <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <div class="subheader">Account</div>
-                        </div>
-                        <div class="h2 mb-3">Rp.{{ number_format($total_zakat, 0, ',', '.') }}</div>
-                        <div class="d-flex mb-2">
-                        <div>Total Zakat</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <div class="subheader">Account</div>
-                        </div>
-                        <div class="h2 mb-3">Rp.{{ number_format($zakat_tersalurkan, 0, ',', '.') }}</div>
-                        <div class="d-flex mb-2">
-                        <div>Zakat Tersalurkan</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <div class="subheader">Account</div>
-                        </div>
-                        <div class="h2 mb-3">Rp.{{ number_format($total_zakat_tersisa, 0, ',', '.') }}</div>
-                        <div class="d-flex mb-2">
-                        <div>Zakat Tersisa</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <hr class="my-3">
         <h2 style="text-align: center">Program Lazismu Banguntapan selatan</h2>
         <div class="row">
