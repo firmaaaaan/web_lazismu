@@ -80,9 +80,14 @@ class DonasiController extends Controller
             'keterangan'=>$request->keterangan,
             'status_id'=>'1',
             'user_id'=>$request->user_id,
+            'id_akun'=>$request->id_akun,
             'programdonasi_id'=>$request->programdonasi_id,
             'hak_amil'=>$hak_amil
         ]);
+        $total_saldo_awal = ProgramDonasi::where('id_akun', $akun->id)->sum('jumlah_donasi_program');
+        $akun = Akun::find($request->input('id_akun'));
+        $akun->saldo_awal = $total_saldo_awal;
+        $akun->save();
         $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
         $programDonasi->save();

@@ -27,7 +27,7 @@
                             <th>Kode </th>
                             <th>Nama Akun</th>
                             <th>Persen Hak Amil</th>
-                            <th>Saldo Awal</th>
+                            <th>Total Saldo</th>
                             <th>Dipindahkan</th>
                             <th>Opsi</th>
                         </tr>
@@ -36,9 +36,9 @@
                         @foreach ($akun as $item)
                         <tr>
                             <td>{{ $item->kode }}</td>
-                            <td>{{ $item->nama_akun }}</td>
+                            <td><a href="{{ route('akun.programDonasi',$item->id) }}">{{ $item->nama_akun }}</a></td>
                             <td>{{ $item->persen_hak_amil }}</td>
-                            <td>{{ $item->saldo_awal }}</td>
+                            <td>Rp.{{ number_format($item->saldo_awal, 0, ',', '.') }}</td>
                             <td>{{ $item->dipindahkan }}</td>
                             <td>
                                 <button data-bs-toggle="modal" data-bs-target="#example{{ $item->id }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>

@@ -43,10 +43,13 @@
                             <th>Opsi</th>
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach ($programDonasi as $item)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->nama_program }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->deskripsi }}</td>

@@ -27,13 +27,13 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h2>Total Donasi Diterima:</h2>
+                        <h2>Total Saldo:</h2>
                         <div class="h1 mb-3" style="color: green">Rp.{{ number_format($total_donasi, 0, ',', '.') }}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr class="my-3">
+        {{-- <hr class="my-3">
         <h2 style="text-align: center">Program Lazismu Banguntapan selatan</h2>
         <div class="row">
         @foreach ($programDonasi as $item)
@@ -49,7 +49,7 @@
             </a>
         </div>
         @endforeach
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

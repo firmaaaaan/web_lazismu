@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Akun;
 use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
+use App\Http\Controllers\Controller;
 
 class AkunController extends Controller
 {
@@ -88,5 +90,11 @@ class AkunController extends Controller
         $akun=Akun::find($id);
         $akun->delete();
         return back();
+    }
+    public function programDonasi($id_akun)
+    {
+        $akun=Akun::all();
+        $programdonasis = ProgramDonasi::where('id_akun', $id_akun)->get();
+        return view('components.akun.akun-program', compact('programdonasis','akun'));
     }
 }
