@@ -10,7 +10,7 @@
             Overview
             </div>
             <h2 class="page-title">
-            {{-- Data {{ $akun->nama_akun }} --}}
+            {{-- Data {{ $programdonasis->akun->nama_akun }} --}}
             </h2>
         </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
             <div class="table-responsive">
-                <table class="table" id="tdatatables">
+                <table class="table" id="table-datatables">
                     <thead>
                         <tr>
                             <th>No</th>

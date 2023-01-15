@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akun;
+use App\Models\Donasi;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class AkunController extends Controller
@@ -76,6 +78,8 @@ class AkunController extends Controller
     {
         $akun=Akun::find($id);
         $akun->update($request->all());
+        $persen_hak_amil = $request->input('persen_hak_amil');
+        Donasi::where('id_akun', $id)->update(['hak_amil' => DB::raw("jml_donasi * $persen_hak_amil/100")]);
         return back();
     }
 
@@ -93,6 +97,7 @@ class AkunController extends Controller
     }
     public function programDonasi($id_akun)
     {
+        // $programDonasi=ProgramDonasi::all();
         $akun=Akun::all();
         $programdonasis = ProgramDonasi::where('id_akun', $id_akun)->get();
         return view('components.akun.akun-program', compact('programdonasis','akun'));
