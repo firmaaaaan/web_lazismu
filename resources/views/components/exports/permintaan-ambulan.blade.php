@@ -30,7 +30,7 @@
                             <th>Titik Jemput</th>
                             <th>Tujuan</th>
                             <th>Keterangan</th>
-                            <th>Infaq</th>
+                            <th>Infaq (Rp)</th>
                             <th>Status Permintaan</th>
                             <th>Status Perjalanan</th>
                         </tr>
@@ -45,7 +45,7 @@
                             <td>{{ $item->titik_jemput }}</td>
                             <td>{{ $item->rumahsakit->nama_rs }} </td>
                             <td>{{ $item->keterangan }}</td>
-                            <td>{{ $item->infaq }}</td>
+                            <td>{{ number_format($$item->infaq , 0, ',', '.') }}</td>
                             <td>
                                 @if ($item->status_id ==3)
                                     <div class="btn btn-outline-primary btn-sm">{{ $item->status->nama_status }} </div>

@@ -5,35 +5,34 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Laporan PDF</title>
         <style>
-        /* Tulis style CSS Anda di sini */
-            body {
-                font-family: Arial, sans-serif;
+            #transaksi {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
             }
-            table {
-                border-color: black;
-                width: 100%;
+
+            #transaksi td, #transaksi th {
+            border: 1px solid #ddd;
+            padding: 8px;
             }
-            th, td {
-                text-align: left;
-                padding: 8px;
-            }
-            /* tr:nth-child(even){background-color: #f2f2f2} */
-            /* th {
-                background-color: #4CAF50;
-                color: white;
-            } */
-            h2{
-                text-align: center;
-            }
-            thead{
-                border: 1px
+
+            #transaksi tr:nth-child(even){background-color: #f2f2f2;}
+
+            #transaksi tr:hover {background-color: #ddd;}
+
+            #transaksi th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
             }
         </style>
     </head>
     <body>
         <!-- Tulis konten HTML Anda di sini -->
         <h3 style="text-align: center">LAPORAN PERMINTAAN AMBULAN</h3>
-        <table class="">
+        <table class="" id="transaksi">
             <thead class="bordered">
                 <tr>
                     <th>No.</th>

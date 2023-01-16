@@ -10,7 +10,7 @@
             Overview
             </div>
             <h2 class="page-title">
-            {{-- Data {{ $programdonasis->akun->nama_akun }} --}}
+            Data Akun{{-- Data {{ $akun->nama_akun }} --}}
             </h2>
         </div>
         </div>

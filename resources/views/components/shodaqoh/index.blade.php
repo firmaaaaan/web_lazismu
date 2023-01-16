@@ -27,7 +27,7 @@
                         <tr>
                             <th>Nama Donatur</th>
                             <th>No. Rekening</th>
-                            <th>Jumlah Donasi</th>
+                            <th>Jumlah Donasi (Rp)</th>
                             <th>Program Dipilih</th>
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
@@ -41,7 +41,7 @@
                         <tr>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->no_rek }}</td>
-                            <td>{{ $item->jml_donasi }}</td>
+                            <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
                             <td> <a href="{{ route('program.index', $item->programDonasi->id) }}">{{ $item->programDonasi->nama_program }}</a></td>
                             <td>{{ $item->keterangan }}</td>
                             <td>

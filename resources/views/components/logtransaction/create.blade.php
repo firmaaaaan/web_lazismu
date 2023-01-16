@@ -9,7 +9,7 @@
             Overview
             </div>
             <h2 class="page-title">
-            Input Permintaan Ambulan
+            Input Perpindahan Saldo
             </h2>
         </div>
         </div>
@@ -54,9 +54,9 @@
                         <h1 class="font-weight-bold w-25">Rp.</h1>
                         <input type="number" class="form-control" name="nominal" placeholder="Masukan nominal donasi" value="0">
                     </div>
-                    <label for="">Kerangan</label>
+                    <label for="">Keterangan</label>
                     <textarea name="keterangan" id="" class="form-control"></textarea>
-                    <button type="submit" class="btn btn-primary btn-sm mt-2">Transfer</button>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2"> <i class="bi bi-wallet-fill"></i> Transfer</button>
                 </form>
             </div>
         </div>

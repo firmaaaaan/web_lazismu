@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akun;
+use PDF;
 use App\Models\LogTransaksi;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
@@ -125,5 +126,13 @@ class LogTransaksiController extends Controller
     public function destroy(LogTransaksi $logTransaksi)
     {
         //
+    }
+    public function cetakPertanggalTransaksi($tglAwal, $tglAkhir){
+        // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
+        $programDonasi=ProgramDonasi::all();
+        $cetakPertanggalTransaksi=LogTransaksi::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
+        $pdf = PDF::loadView('components.pdf.transaksi-pertanggal',[ 'cetakPertanggalTransaksi'=>$cetakPertanggalTransaksi,'programDonasi'=>$programDonasi]);
+        return $pdf->stream('transaksi-pertanggal.pdf');
+        // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
     }
 }

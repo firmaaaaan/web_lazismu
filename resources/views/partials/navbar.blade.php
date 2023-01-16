@@ -85,9 +85,9 @@
                             <a class="dropdown-item" href="{{ route('dropd.exportDonasi') }}">
                             Report Data Donasi
                             </a>
-                            <a class="dropdown-item" href="{{ route('exportZakat') }}">
+                            {{-- <a class="dropdown-item" href="{{ route('exportZakat') }}">
                             Report Data Zakat
-                            </a>
+                            </a> --}}
                             <a class="dropdown-item" href="{{ route('exportPermintaanAmbulan') }}">
                             Report Data Permintaan Ambulan
                             </a>

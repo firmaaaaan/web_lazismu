@@ -41,7 +41,7 @@ class AkunController extends Controller
     public function store(Request $request)
     {
         $akun=Akun::all();
-        (Akun::create($request->all()));
+        Akun::create($request->all());
         return back();
     }
 
@@ -97,9 +97,9 @@ class AkunController extends Controller
     }
     public function programDonasi($id_akun)
     {
-        // $programDonasi=ProgramDonasi::all();
+        $programDonasi=ProgramDonasi::all();
         $akun=Akun::all();
         $programdonasis = ProgramDonasi::where('id_akun', $id_akun)->get();
-        return view('components.akun.akun-program', compact('programdonasis','akun'));
+        return view('components.akun.akun-program', compact('programdonasis','akun','programDonasi'));
     }
 }

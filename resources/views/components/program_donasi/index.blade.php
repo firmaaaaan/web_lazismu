@@ -37,6 +37,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            {{-- <th>Akun</th> --}}
                             <th>Nama Program</th>
                             <th>No. Rekening</th>
                             <th>Deskripsi Program</th>
@@ -50,6 +51,7 @@
                         @foreach ($programDonasi as $item)
                         <tr>
                             <td>{{ $no++ }}</td>
+                            {{-- <td>{{ $item->id_akun }}</td> --}}
                             <td>{{ $item->nama_program }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->deskripsi }}</td>
@@ -64,7 +66,6 @@
             </div>
             </div>
         </div>
-        {{ $programDonasi->links() }}
     </div>
 </div>
 

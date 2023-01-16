@@ -27,7 +27,8 @@
                         <tr>
                             <th>Nama Customer</th>
                             <th>No. Rekening</th>
-                            <th>Jumlah Donasi</th>
+                            <th>Program Donasi</th>
+                            <th>Jumlah Donasi (Rp)</th>
                             <th>Keterangan</th>
                             <th>Status Penyaluran</th>
                         </tr>
@@ -37,7 +38,8 @@
                         <tr>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->no_rek }}</td>
-                            <td>{{ $item->jml_donasi }}</td>
+                            <td>{{ $item->programDonasi->nama_program }}</td>
+                            <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
                                 @if ($item->status_penyaluran=='Belum Tersalurkan')

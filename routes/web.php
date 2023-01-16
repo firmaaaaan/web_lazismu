@@ -158,7 +158,8 @@ Route::get('/program-donasi/akun/{id_akun}',[AkunController::class,'programDonas
 Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
 Route::get('/transaction', [LogTransaksiController::class,'index'])->name('index.transaction');
 Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo'])->name('store.transaction');
-
+//Export Perprogram donasi pertanggal
+Route::get('/cetak-transaksi/pertanggal/{tglAwal}/{tglAkhir}',[LogTransaksiController::class,'cetakPertanggalTransaksi'])->name('cetakPertanggalTransaksi.pdf');
 
 
 });
