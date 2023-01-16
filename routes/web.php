@@ -14,6 +14,7 @@ use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenyaluranController;
 use App\Http\Controllers\RumahSakitController;
+use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\LogTransaksiController;
 use App\Http\Controllers\ProgramDonasiController;
 use App\Http\Controllers\PermintaanAmbulanController;
@@ -161,6 +162,8 @@ Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo
 //Export Perprogram donasi pertanggal
 Route::get('/cetak-transaksi/pertanggal/{tglAwal}/{tglAkhir}',[LogTransaksiController::class,'cetakPertanggalTransaksi'])->name('cetakPertanggalTransaksi.pdf');
 
+// Dokumentasi
+Route::get('/dokumentasi', [DokumentasiController::class, 'create'])->name('dokumentasi.create');
 
 });
 

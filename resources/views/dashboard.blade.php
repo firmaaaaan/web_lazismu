@@ -15,6 +15,7 @@
         <div>
 
             <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm ml-3"> <i class="bi bi-wallet-fill"></i> Transfer</a>
+            <a href="{{ route('dokumentasi.create') }}" class="btn btn-primary btn-sm ml-3"> <i class="bi bi-pencil"></i> Buat Dokumentasi</a>
         </div>
         </div>
     </div>
