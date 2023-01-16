@@ -163,8 +163,18 @@ Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo
 Route::get('/cetak-transaksi/pertanggal/{tglAwal}/{tglAkhir}',[LogTransaksiController::class,'cetakPertanggalTransaksi'])->name('cetakPertanggalTransaksi.pdf');
 
 // Dokumentasi
-Route::get('/dokumentasi', [DokumentasiController::class, 'create'])->name('dokumentasi.create');
+Route::get('/dokumentasi/index', [DokumentasiController::class, 'index'])->name('dokumentasi.index');
+Route::get('/dokumentasi/create', [DokumentasiController::class, 'create'])->name('dokumentasi.create');
+Route::post('/dokumentasi/post', [DokumentasiController::class, 'store'])->name('dokumentasi.store');
+Route::get('/dokumentasi/show/{id}', [DokumentasiController::class, 'show'])->name('dokumentasi.show');
+Route::get('/dokumentasi/edit/{id}', [DokumentasiController::class, 'edit'])->name('dokumentasi.edit');
+Route::post('/dokumentasi/update/{id}', [DokumentasiController::class, 'update'])->name('dokumentasi.update');
+Route::get('/dokumentasi/destroy/{id}', [DokumentasiController::class, 'destroy'])->name('dokumentasi.destroy');
 
+//Image
+Route::post('/dokumentasi/image', [ImageController::class, 'store'])->name('dokumentasi.image.store');
+
+//
 });
 
 

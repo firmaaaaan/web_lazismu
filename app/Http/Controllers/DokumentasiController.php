@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dokumentasi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DokumentasiController extends Controller
 {
@@ -14,7 +15,8 @@ class DokumentasiController extends Controller
      */
     public function index()
     {
-        
+        $doks=Dokumentasi::all();
+        return view('components.dokumentasi.index', compact('doks'));
     }
 
     /**
@@ -35,7 +37,16 @@ class DokumentasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        if($image=$request->file('foto_unggulan')){
+            $destinationPath='images/';
+            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
+            $image->move($destinationPath, $programImage);
+            $input['foto_unggulan']="$programImage";
+        }
+        Dokumentasi::create($input);
+        // return back();
+        return redirect('/dokumentasi');
     }
 
     /**
@@ -44,9 +55,10 @@ class DokumentasiController extends Controller
      * @param  \App\Models\Dokumentasi  $dokumentasi
      * @return \Illuminate\Http\Response
      */
-    public function show(Dokumentasi $dokumentasi)
+    public function show(Dokumentasi $dokumentasi, $id)
     {
-        //
+        $doks=Dokumentasi::find($id);
+        return view('components.dokumentasi.show', compact('doks'));
     }
 
     /**
@@ -55,9 +67,10 @@ class DokumentasiController extends Controller
      * @param  \App\Models\Dokumentasi  $dokumentasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dokumentasi $dokumentasi)
+    public function edit(Dokumentasi $dokumentasi, $id)
     {
-        //
+        $doks=Dokumentasi::find($id);
+        return view('components.dokumentasi.edit', compact('doks'));
     }
 
     /**
@@ -67,9 +80,11 @@ class DokumentasiController extends Controller
      * @param  \App\Models\Dokumentasi  $dokumentasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dokumentasi $dokumentasi)
+    public function update(Request $request, Dokumentasi $dokumentasi, $id)
     {
-        //
+        $doks=Dokumentasi::find($id);
+        $doks->update($request->all());
+        return redirect()->route('dokumentasi.index');
     }
 
     /**
@@ -78,8 +93,10 @@ class DokumentasiController extends Controller
      * @param  \App\Models\Dokumentasi  $dokumentasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dokumentasi $dokumentasi)
+    public function destroy(Dokumentasi $dokumentasi, $id)
     {
-        //
+        $doks=Dokumentasi::find($id);
+        $doks->delete();
+        return redirect()->route('dokumentasi.index');
     }
 }

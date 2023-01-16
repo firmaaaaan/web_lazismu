@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('dokumentasis', function (Blueprint $table) {
             $table->id();
+            $table->string('judul');
+            $table->string('foto_unggulan')->nullable();
+            $table->text('text');
             $table->timestamps();
         });
     }

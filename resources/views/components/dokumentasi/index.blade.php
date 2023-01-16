@@ -27,17 +27,22 @@
                     <thead>
                         <tr>
                             <th>Judul</th>
-                            <th>Foto utama</th>
                             <th>Text</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>                        
+                    <tbody>
+                        @foreach ($doks as $item)
+                        <tr>
+                            <td>{{ $item->judul }}</td>
+                            <td>{!! $item->text !!} </td>
+                            <td>
+                                <a href="{{ route('dokumentasi.show', $item->id) }}" class="btn btn-info btn-sm" title="Tampil"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('dokumentasi.edit', $item->id) }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ route('dokumentasi.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
