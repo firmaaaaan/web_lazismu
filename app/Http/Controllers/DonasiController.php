@@ -70,6 +70,10 @@ class DonasiController extends Controller
         // Menghitung nilai hak_amil
         $hak_amil = $request->jml_donasi * $persen_hak_amil / 100;
 
+        $donasis = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
+        $jumlah_donasi = $donasis->sum('jml_donasi');
+        ProgramDonasi::where('id_akun', $request->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
+
         // Mencari donasi yang baru saja ditambahkan ke database
         Donasi::where('programdonasi_id', $request->programdonasi_id)
             ->orderBy('created_at', 'desc')
@@ -84,10 +88,12 @@ class DonasiController extends Controller
             'programdonasi_id'=>$request->programdonasi_id,
             'hak_amil'=>$hak_amil
         ]);
-        $total_saldo_awal = ProgramDonasi::where('id_akun', $akun->id)->sum('jumlah_donasi_program');
-        $akun = Akun::find($request->input('id_akun'));
-        $akun->saldo_awal = $total_saldo_awal;
-        $akun->save();
+
+        // // //update saldo akun
+        // $programs = ProgramDonasi::where('id_akun', $request->id_akun)->get();
+        // $saldo_awal = $programs->sum('jumlah_program_donasi');
+        // Akun::where('id', $request->id_akun)->update(['saldo_awal' => $saldo_awal]);
+
         $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
         $programDonasi->save();
@@ -115,9 +121,11 @@ class DonasiController extends Controller
     public function edit(Donasi $donasi, $id)
     {
         $donasi=Donasi::find($id);
+        $akun=Akun::all();
         $programDonasi=ProgramDonasi::all();
         $user=User::all();
-        return view('components.shodaqoh.edit', compact('donasi','user','programDonasi'));
+        return view('components.shodaqoh.edit', compact('programDonasi', 'donasi','akun','user'));
+
     }
 
     /**
@@ -135,9 +143,26 @@ class DonasiController extends Controller
             'keterangan'=>'required',
             'user_id'=>'required'
         ]);
-        $donasi=Donasi::find($id);
+
+        $donasi = Donasi::find($id);
+        $programdonasi_id = $request->input('programdonasi_id');
+        // $programdonasi = ProgramDonasi::find($programdonasi_id);
+        $akun = Akun::find($id);
+        $persen_hak_amil = $akun->persen_hak_amil;
+
         $donasi->update($request->all());
+
+        // update hak_amil
+        $donasi->hak_amil = ($request->jml_donasi * $persen_hak_amil)/100;
+        $donasi->save();
+
+        //update jumlah program donasi
+        $jumlah_donasi = Donasi::where('programdonasi_id', $programdonasi_id)->sum('jml_donasi');
+        ProgramDonasi::where('id', $programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
+
+
         return redirect()->route('drop.donasi.index');
+
     }
 
     /**
@@ -148,8 +173,14 @@ class DonasiController extends Controller
      */
     public function destroy(Donasi $donasi, $id)
     {
-        $donasi=Donasi::find($id);
+        $donasi = Donasi::find($id);
+        $programdonasi_id = $donasi->programdonasi_id;
+
         $donasi->delete();
+
+        //update jumlah program donasi
+        $jumlah_donasi = Donasi::where('programdonasi_id', $programdonasi_id)->sum('jml_donasi');
+        ProgramDonasi::where('id', $programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
         return redirect()->route('drop.donasi.index');
     }
 
@@ -274,11 +305,12 @@ class DonasiController extends Controller
 
     public function cetakProgramPertanggal($id,$tglAwal, $tglAkhir){
 
+        $donasi=Donasi::all();
         $programDonasi=ProgramDonasi::find($id);
         $cetakProgramPertanggal = Donasi::where('programdonasi_id', $id)
                         ->whereBetween('created_at',[$tglAwal, $tglAkhir])
                         ->get();
-        $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi]);
+        $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi, 'donasi'=>$donasi]);
 
        return $pdf->stream('donasi-program-pertanggal.pdf');
     }
