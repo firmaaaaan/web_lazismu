@@ -150,7 +150,7 @@ Route::get('/akun',[AkunController::class, 'index'])->name('akun.index');
 Route::get('/akun/delete/{id}',[AkunController::class, 'destroy'])->name('akun.delete');
 Route::post('/akun',[AkunController::class, 'store'])->name('akun.store');
 Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.update');
-Route::get('/program-donasi/akun/{id_akun}',[AkunController::class,'programDonasi'])->name('akun.programDonasi');
+Route::get('/detile-akun/{id_akun}/program-donasi',[AkunController::class,'programDonasi'])->name('akun.programDonasi');
 
 //Request Ajax
 // Route::get('/program-donasi/{id_akun}', [DonasiController::class, 'create']);

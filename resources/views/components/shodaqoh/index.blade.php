@@ -42,7 +42,7 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
-                            <td> <a href="{{ route('program.index', $item->programDonasi->id) }}">{{ $item->programDonasi->nama_program }}</a></td>
+                            <td>{{ $item->programDonasi->nama_program }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
                             @if ($item->status_id ==1)
@@ -67,6 +67,7 @@
                                 {{-- <a href="{{ route('donasi.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Salurkan"><i class="bi bi-box2-heart-fill"></i></a> --}}
                             </td>
                             <td>
+                                <a href="{{ route('program.index', $item->programDonasi->id) }} " class="btn btn-info btn-sm" title="Detile"><i class="bi bi-eye"></i></a>
                                 <a href="{{ route('donasi.edit', $item->id) }} " class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
                                 <a href="{{ route('donasi.destroy',$item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
                             </td>

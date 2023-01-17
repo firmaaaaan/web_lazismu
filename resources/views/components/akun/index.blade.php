@@ -36,11 +36,12 @@
                         @foreach ($akun as $item)
                         <tr>
                             <td>{{ $item->kode }}</td>
-                            <td><a href="{{ route('akun.programDonasi',$item->id) }}">{{ $item->nama_akun }}</a></td>
+                            <td>{{ $item->nama_akun }}</td>
                             <td>{{ $item->persen_hak_amil }}</td>
                             <td>{{ number_format($item->saldo_awal, 0, ',', '.') }}</td>
                             <td>{{ $item->dipindahkan }}</td>
                             <td>
+                                <a href="{{ route('akun.programDonasi',$item->id) }}" class="btn btn-info btn-sm" title="Detile"><i class="bi bi-eye"></i></a>
                                 <button data-bs-toggle="modal" data-bs-target="#example{{ $item->id }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
                                 <a href="{{ route('akun.delete',$item->id) }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                             </td>

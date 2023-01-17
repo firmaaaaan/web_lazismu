@@ -19,7 +19,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="4" width="6" height="5" rx="2" /><rect x="4" y="13" width="6" height="7" rx="2" /><rect x="14" y="4" width="6" height="7" rx="2" /><rect x="14" y="15" width="6" height="5" rx="2" /></svg>
                         </span>
                         <span class="nav-link-title">
-                        General
+                        Master Data
                         </span>
                     </a>
                     <div class="dropdown-menu">
@@ -31,18 +31,21 @@
                             <a class="dropdown-item" href="{{ route('dropdown.program.donasi.index') }}">
                                 Data Program
                             </a>
-                            <a class="dropdown-item" href="./logs.html">
-                                Penggajian
-                                <span class="badge badge-sm bg-red-lt text-uppercase ms-auto">On Going</span>
-                            </a>
-                            <a class="dropdown-item" href="{{ route('permintaan.ambulan.index') }}">
-                                Permintan Ambulan
-                            </a>
                             <a class="dropdown-item" href="{{ route('dropdown.pegawai.index') }}">
                                 Data Karyawan
                             </a>
                             <a class="dropdown-item" href="{{ route('dropdown.rumahsakit.index') }}">
                                 Data Rumah Sakit
+                            </a>
+                            <a class="dropdown-item" href="{{ route('permintaan.ambulan.index') }}">
+                                Data Permintan Ambulan
+                            </a>
+                            <a class="dropdown-item" href="{{ route('dokumentasi.index') }}">
+                                Data Postingan
+                            </a>
+                            <a class="dropdown-item" href="./logs.html">
+                                Penggajian
+                                <span class="badge badge-sm bg-red-lt text-uppercase ms-auto">On Going</span>
                             </a>
                         </div>
                         </div>

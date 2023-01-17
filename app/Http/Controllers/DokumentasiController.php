@@ -46,7 +46,7 @@ class DokumentasiController extends Controller
         }
         Dokumentasi::create($input);
         // return back();
-        return redirect('/dokumentasi');
+        return redirect('/dokumentasi/index');
     }
 
     /**

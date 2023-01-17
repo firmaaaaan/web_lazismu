@@ -30,6 +30,24 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="user_id">Akun yang dipilih</label>
+                            <select name="id_akun" id="id_akun" class="form-control">
+                                <option value="">--Pilih Akun--</option>
+                                @foreach ($akun as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_akun }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_id">Program yang dipilih</label>
+                            <select name="programdonasi_id" id="programdonasi_id" class="form-control">
+                                <option value="">--Pilih Jenis Program--</option>
+                                @foreach ($programDonasi as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="user_id">No. Rekening</label>
                             <input type="text" value="{{ $donasi->no_rek }}" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
                         </div>
