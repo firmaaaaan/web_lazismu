@@ -102,7 +102,7 @@
                     </div>
                     <div>
                         <label class="form-label">Deskripsi</label>
-                        <textarea type="date" name="deskripsi" class="form-control"></textarea>
+                        <textarea type="date" id="editor" name="deskripsi" class="form-control"></textarea>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
@@ -139,7 +139,7 @@
                     </div>
                     <div>
                         <label class="form-label">Deskripsi</label>
-                        <textarea type="date" name="deskripsi" class="form-control">{{ $item->deskripsi }}</textarea>
+                        <textarea type="date" id="editor" name="deskripsi" class="form-control">{{ $item->deskripsi }}</textarea>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
