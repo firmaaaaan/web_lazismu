@@ -52,7 +52,7 @@
                             <input type="text" value="{{ $donasi->no_rek }}" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
                         </div>
                         <label for="">Keterangan</label>
-                        <textarea class="form-control" name="keterangan" id="" cols="30" rows="10">{{ $donasi->keterangan }}</textarea>
+                        <textarea class="form-control" id="editor" name="keterangan" id="" cols="30" rows="10">{{ $donasi->keterangan }}</textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-3 btn-sm">Lanjutkan pembayaran</button>

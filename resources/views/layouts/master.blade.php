@@ -68,6 +68,12 @@
                 });
             });
         </script>
-        @yield('script')
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ))
+                .catch( error => {
+                    console.log( error );
+                } );
+        </script>
     </body>
 </html>

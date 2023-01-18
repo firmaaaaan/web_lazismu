@@ -62,7 +62,7 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label">Keterangan</label>
-                                <textarea type="text" name="keterangan" class="form-control"></textarea>
+                                <textarea type="text" id="editor" name="keterangan" class="form-control"></textarea>
                             </div>
                         </div>
                         <div>

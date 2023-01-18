@@ -29,14 +29,8 @@
     </div>
 </div>
 @endsection
-@section('script')
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ))
-        .catch( error => {
-            console.log( error );
-        } );
-</script>
+
+
     {{-- <script>
     class MyUploadAdapter {
             constructor( loader ) {
@@ -154,4 +148,3 @@
 
     </script> --}}
 
-@endsection
