@@ -39,7 +39,7 @@ class UserController extends Controller
         event(new Registered($user));
 
 
-        return redirect()->route('user.index');
+        return redirect()->route('dashboard');
     }
 
     public function destroy($id){

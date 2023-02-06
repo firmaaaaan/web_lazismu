@@ -4,10 +4,12 @@ use App\Models\LogTransaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ZakatController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ValidasiController;
@@ -174,9 +176,12 @@ Route::get('/dokumentasi/destroy/{id}', [DokumentasiController::class, 'destroy'
 //Image
 Route::post('/dokumentasi/image', [ImageController::class, 'store'])->name('dokumentasi.image.store');
 
-//
+//Donatur
+Route::get('/donatur',[DonaturController::class,'index'])->name('donatur.index');
 });
 
 
+Route::get('/register/donatur',[DonaturController::class,'create'])->name('donatur.register');
+Route::post('/donatur/user',[DonaturController::class,'store'])->name('donatur.store');
 
 require __DIR__.'/auth.php';

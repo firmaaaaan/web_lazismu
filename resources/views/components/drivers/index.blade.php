@@ -68,12 +68,15 @@
                     @csrf
                     <div>
                         <label class="form-label">Nama Driver</label>
-                        <select type="text" name="user_id" class="form-control">
-                            <option value="">--Pilih User--</option>
-                            @foreach ($user as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="nama_driver" class="form-control">
+                    </div>
+                    <div>
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div>
+                        <label class="form-label">No. Handphone</label>
+                        <input type="number" name="no_hp" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Status</label>
@@ -108,9 +111,15 @@
                     @csrf
                     <div>
                         <label class="form-label">Nama Driver</label>
-                        <select type="text" name="user_id" class="form-control">
-                            <option value="{{ $item->user->id }}">{{ $item->user->name }}</option>
-                        </select>
+                        <input type="text" name="nama_driver" class="form-control">
+                    </div>
+                    <div>
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div>
+                        <label class="form-label">No. Handphone</label>
+                        <input type="number" name="no_hp" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Status</label>

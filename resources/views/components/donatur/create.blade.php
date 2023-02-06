@@ -34,14 +34,14 @@
 			<div class="text-center mb-4">
 				<a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('dist/img/lazismu.png') }}" width="150" alt=""></a>
 			</div>
-			<form class="card card-md" method="POST" action="{{ route('register') }}">
+			<form class="card card-md" method="POST" action="{{ route('donatur.store') }}">
                 @csrf
 				<div class="card-body">
 					<h2 class="card-title text-center mb-4">Create new account</h2>
                     <div>
                         <label class="form-label">Nama Lengkap</label>
-                        <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="name" :value="old('name')" required autofocus />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="nama_donatur" :value="old('name')" required autofocus />
+                        <x-input-error :messages="$errors->get('name_donatur')" class="mt-2" />
                     </div>
 					<div class="mb-3 my-2">
                         <label class="form-label">Email</label>

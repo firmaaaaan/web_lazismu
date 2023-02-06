@@ -116,6 +116,9 @@
                             <a class="dropdown-item" href="{{ route('driver.index') }}">
                             Driver
                             </a>
+                            <a class="dropdown-item" href="{{ route('donatur.index') }}">
+                            Donatur
+                            </a>
                         </div>
                         </div>
                     </div>

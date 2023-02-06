@@ -68,6 +68,14 @@
                 });
             });
         </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#table-datatables').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                });
+            });
+        </script>
         <script>
             ClassicEditor
                 .create( document.querySelector( '#editor' ))

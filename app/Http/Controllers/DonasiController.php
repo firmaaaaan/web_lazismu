@@ -312,6 +312,6 @@ class DonasiController extends Controller
                         ->get();
         $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi, 'donasi'=>$donasi]);
 
-       return $pdf->stream('donasi-program-pertanggal.pdf');
+        return $pdf->stream('donasi-program-pertanggal.pdf');
     }
 }

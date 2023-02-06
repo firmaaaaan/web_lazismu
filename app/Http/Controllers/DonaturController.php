@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Driver;
 use App\Models\Donatur;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 
-class DriverController extends Controller
+class DonaturController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +18,7 @@ class DriverController extends Controller
      */
     public function index()
     {
-        $user=User::all();
-        $driver=Driver::all();
-        return view('components.drivers.index', compact('user','driver'));
+        return view('components.donatur.index');
     }
 
     /**
@@ -31,7 +28,7 @@ class DriverController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.donatur.create');
     }
 
     /**
@@ -43,35 +40,40 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_driver'=>'required',
+            'nama_donatur'=>'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required'],
         ]);
 
 
         $user= new User;
-        $user->name=$request->nama_driver;
+        $user->name=$request->nama_donatur;
+        // $user->role_id='5';
         $user->email=$request->email;
         $user->email_verified_at=now();
-        $user->password= bcrypt('driver');
+        $user->password= bcrypt($request->password);
+        // $user->remember_token=Str(50);
         $user->save();
 
         $request->request->add(['user_id'=>$user->id]);
-        $driver=Driver::create($request->all());
+        $donatur=Donatur::create($request->all());
 
-        $user->attachRole('driver');
+        $user->attachRole('customer');
         event(new Registered($user));
+
+        // event(new Registered($user));
+
+
         Auth::login($user);
-        return back();
+        return redirect()->route('login');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function show(Driver $driver)
+    public function show(Donatur $donatur)
     {
         //
     }
@@ -79,10 +81,10 @@ class DriverController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function edit(Driver $driver)
+    public function edit(Donatur $donatur)
     {
         //
     }
@@ -91,26 +93,22 @@ class DriverController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Driver $driver, $id)
+    public function update(Request $request, Donatur $donatur)
     {
-        $driver=Driver::find($id);
-        $driver->update($request->all());
-        return back();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Driver $driver, $id)
+    public function destroy(Donatur $donatur)
     {
-        $driver=Driver::find($id);
-        $driver->delete();
-        return back();
+        //
     }
 }

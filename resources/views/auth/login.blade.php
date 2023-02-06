@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -67,7 +65,7 @@
 				</div>
 			</div>
 			<div class="text-center text-muted mt-3">
-				Tidak mempunyai akun? <a href="{{ route('register') }}" tabindex="-1">Daftar</a>
+				Tidak mempunyai akun? <a href="{{ route('donatur.register') }}" tabindex="-1">Daftar</a>
 			</div>
 			</div>
 		</div>

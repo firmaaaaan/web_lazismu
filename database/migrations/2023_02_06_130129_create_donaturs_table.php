@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('donaturs', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('nama_driver');
+            $table->string('nama_donatur');
+            $table->string('tempat_lahir')->nullable();
+            $table->string('tanggal_lahir')->nullable();
             $table->string('email')->unique();
+            $table->string('password')->unique();
             $table->bigInteger('no_hp')->nullable()->unique();
-            $table->string('status_driver')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('donaturs');
     }
 };
