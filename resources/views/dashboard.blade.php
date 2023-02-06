@@ -33,24 +33,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-        {{-- <hr class="my-3">
-        <h2 style="text-align: center">Program Lazismu Banguntapan selatan</h2>
-        <div class="row">
-        @foreach ($programDonasi as $item)
-        <div class="col-sm-6 col-lg-2">
-                <a href="{{ route('program.donasi.show', $item->id) }}" style="text-decoration: none; color:black">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <div> <img src="/images/{{ $item->foto }}" alt="" width="150">
-                            <div class="card-title">{{ $item->nama_program }}</div>
-                        </div>
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
-        @endforeach
-        </div> --}}
     </div>
 </div>
 @endsection

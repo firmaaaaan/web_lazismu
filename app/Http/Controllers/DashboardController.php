@@ -11,6 +11,7 @@ use App\Models\Zakat;
 class DashboardController extends Controller
 {
     public function index(){
+        $donasi=Donasi::all();
 
 
         $total_zakat=Zakat::all();
@@ -37,7 +38,7 @@ class DashboardController extends Controller
         $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
         // $total_tersisa = Donasi::where('status_id', '1')->sum('jumlah_tersisa');
         $programDonasi=ProgramDonasi::all();
-        return view('dashboard', compact('programDonasi','total_donasi','total_zakat','zakat_tersalurkan','total_zakat_tersisa'));
+        return view('dashboard', compact('programDonasi','total_donasi','total_zakat','zakat_tersalurkan','total_zakat_tersisa','donasi'));
     }
 
 }

@@ -18,8 +18,9 @@ class AkunController extends Controller
      */
     public function index()
     {
+        $donasi= Donasi::all();
         $akun=Akun::all();
-        return view('components.akun.index', compact('akun'));
+        return view('components.akun.index', compact('akun','donasi'));
     }
 
     /**

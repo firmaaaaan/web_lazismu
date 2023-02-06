@@ -45,7 +45,6 @@ class DriverController extends Controller
         $request->validate([
             'nama_driver'=>'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required'],
         ]);
 
 

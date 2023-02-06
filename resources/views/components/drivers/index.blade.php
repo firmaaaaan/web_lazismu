@@ -27,6 +27,8 @@
                     <thead>
                         <tr>
                             <th>Nama Driver</th>
+                            <th>Email</th>
+                            <th>No Telepon</th>
                             <th>Status</th>
                             <th>Opsi</th>
                         </tr>
@@ -35,6 +37,8 @@
                         @foreach ($driver as $item)
                             <tr>
                             <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->no_hp}}</td>
                             <td>
                                 @if ($item->status_driver=='Aktif')
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status_driver }}</div>

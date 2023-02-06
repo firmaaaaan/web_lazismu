@@ -33,15 +33,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($donatur as $item)
+
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->tempat_lahir }}</td>
+                            <td>{{ $item->tanggal_lahir }}</td>
+                            <td>{{ $item->no_hp }}</td>
+                            <td>{{ $item->alamat }}</td>
+                            <td>{{ $item->alamat }}</td>
                             <td></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

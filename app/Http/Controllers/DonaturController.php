@@ -18,7 +18,9 @@ class DonaturController extends Controller
      */
     public function index()
     {
-        return view('components.donatur.index');
+        $donatur=Donatur::all();
+        $user=User::all();
+        return view('components.donatur.index', compact('donatur','user'));
     }
 
     /**
