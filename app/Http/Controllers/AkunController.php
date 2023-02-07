@@ -18,9 +18,10 @@ class AkunController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $donasi= Donasi::all();
         $akun=Akun::all();
-        return view('components.akun.index', compact('akun','donasi'));
+        return view('components.akun.index', compact('akun','donasi','programDonasi'));
     }
 
     /**
@@ -41,6 +42,11 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kode'=>'required',
+            'nama_akun' => 'required',
+            'persen_hak_amil'=>'required'
+        ]);
         $akun=Akun::all();
         Akun::create($request->all());
         return back();
@@ -77,6 +83,11 @@ class AkunController extends Controller
      */
     public function update(Request $request, Akun $akun, $id)
     {
+        $request->validate([
+            'kode'=>'required',
+            'nama_akun' => 'required',
+            'persen_hak_amil'=>'required'
+        ]);
         $akun=Akun::find($id);
         $akun->update($request->all());
         $persen_hak_amil = $request->input('persen_hak_amil');

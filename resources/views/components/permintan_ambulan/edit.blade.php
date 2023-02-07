@@ -32,6 +32,12 @@
                         </div>
                         <div class="col-sm-6 col-md-3">
                             <div class="mb-3">
+                                <label class="form-label">Nama Pasien</label>
+                                <input type="text" value="{{ $permintaanAmbulan->nama_pasien }}" class="form-control" name="nama_pasien">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="mb-3">
                                 <label class="form-label">Tanggal</label>
                                 <input type="date" value="{{ $permintaanAmbulan->tanggal }}" class="form-control" name="tanggal">
                             </div>
@@ -42,7 +48,7 @@
                                 <input type="text" class="form-control" value="{{ $permintaanAmbulan->titik_jemput }}" name="titik_jemput">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-6 col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Tujuan</label>
                                 <select type="text" name="rumahsakit_id" class="form-control" placeholder="Company" value="Chet">
@@ -50,7 +56,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6 com-md-6">
+                        <div class="col-sm-6 com-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Infaq</label>
                                 <input type="number" value="{{ $permintaanAmbulan->infaq }}" class="form-control" name="infaq" value="0">

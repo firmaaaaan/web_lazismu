@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\permintaanAmbulan;
-use App\Models\RumahSakit;
-use App\Models\User;
-use Illuminate\Http\Request;
 use PDF;
+use App\Models\User;
+use App\Models\RumahSakit;
+use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
+use App\Models\permintaanAmbulan;
+use App\Http\Controllers\Controller;
 
 class PermintaanAmbulanController extends Controller
 {
@@ -17,11 +19,12 @@ class PermintaanAmbulanController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $user=User::all();
         $rumahsakit=RumahSakit::all();
         // $permintaanAmbulan=permintaanAmbulan::latest()->get();
         $permintaanAmbulan=permintaanAmbulan::latest()->simplePaginate(15);
-        return view('components.permintan_ambulan.index', compact('user','rumahsakit','permintaanAmbulan'))->with('i');
+        return view('components.permintan_ambulan.index', compact('user','rumahsakit','permintaanAmbulan','programDonasi'))->with('i');
     }
 
     /**
@@ -31,9 +34,10 @@ class PermintaanAmbulanController extends Controller
      */
     public function create()
     {
+        $programDonasi=ProgramDonasi::all();
         $user=User::all();
         $rumahsakit=RumahSakit::all();
-        return view('components.permintan_ambulan.create', compact('rumahsakit','user'));
+        return view('components.permintan_ambulan.create', compact('rumahsakit','user','programDonasi'));
     }
 
     /**

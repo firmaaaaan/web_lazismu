@@ -43,11 +43,12 @@ class ProgramDonasiController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nama_program'=>'required',
-        //     'no.rek'=>'required',
-        //     'deskripsi'=>'required'
-        // ]);
+        $request->validate([
+            'nama_program'=>'required',
+            'id_akun'=>'required',
+            'no_rek'=>'required',
+            'deskripsi'=>'required'
+        ]);
 
         $input = $request->all();
         if($image=$request->file('foto')){
@@ -95,7 +96,7 @@ class ProgramDonasiController extends Controller
     {
         $request->validate([
             'nama_program'=>'required',
-            'no.rek'=>'required',
+            'no_rek'=>'required',
             'deskripsi'=>'required'
         ]);
         $programDonasi=ProgramDonasi::find($id);

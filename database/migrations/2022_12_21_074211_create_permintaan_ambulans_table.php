@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('permintaan_ambulans', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('nama_pasien');
             $table->string('tanggal');
             $table->text('titik_jemput');
             $table->integer('rumahsakit_id');

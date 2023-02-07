@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Driver;
 use App\Models\Donatur;
 use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -19,9 +20,10 @@ class DriverController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $user=User::all();
         $driver=Driver::all();
-        return view('components.drivers.index', compact('user','driver'));
+        return view('components.drivers.index', compact('user','driver','programDonasi'));
     }
 
     /**

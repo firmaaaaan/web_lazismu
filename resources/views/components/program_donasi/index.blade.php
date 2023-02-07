@@ -54,7 +54,7 @@
                             {{-- <td>{{ $item->id_akun }}</td> --}}
                             <td>{{ $item->nama_program }}</td>
                             <td>{{ $item->no_rek }}</td>
-                            <td>{{ $item->deskripsi }}</td>
+                            <td>{!! $item->deskripsi !!}</td>
                             <td>
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm"" title="Edit"><i class="bi bi-pencil-square"></i></button>
                                 <a href="{{ route('program.donasi.destroy', $item->id) }}" class="btn btn-danger btn-sm"" title="Hapus"><i class="bi bi-trash"></i></a>
@@ -85,24 +85,40 @@
                     </div>
                     <div>
                         <label for="">Nama Akun</label>
-                        <select name="id_akun" id="" class="form-control">
+                        <select name="id_akun" id="" class="form-control @error('id_akun') is-invalid
+                        @enderror">
                             <option value="">--Pilih Akun--</option>
                             @foreach ($akun as $item)
                             <option value="{{ $item->id }}">{{ $item->nama_akun }}</option>
                             @endforeach
                         </select>
+                        @error('id_akun')
+                            <div class="invalid-feedback">{{ $message}}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Nama Program Donasi</label>
-                        <input type="text" name="nama_program" class="form-control">
+                        <input type="text" name="nama_program" class="form-control @error('nama_program') is-invalid
+                        @enderror" value="{{ old('nama_program') }}">
+                        @error('nama_program')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">No. Rekening</label>
-                        <input type="text" name="no_rek" class="form-control" placeholder="contoh: BSI 7135452829 a/n Firmansyah">
+                        <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
+                        @enderror" value="{{ old('no_rek') }}" placeholder="contoh: BSI 7135452829 a/n Firmansyah">
+                    @error('no_rek')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Deskripsi</label>
-                        <textarea type="date" id="editor" name="deskripsi" class="form-control"></textarea>
+                        <textarea type="date" id="editor" name="deskripsi" class="form-control @error('deskripsi') is-invalid
+                        @enderror" value="">{{ old('deskripsi') }}</textarea>
+                    @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
@@ -127,23 +143,35 @@
                     @csrf
                     <div>
                         <label class="form-label">Foto</label>
-                        <input type="file" value="{{ $item->foto }}" name="foto" class="form-control">
+                        <input type="file" name="foto" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Nama Program Donasi</label>
-                        <input type="text" value="{{ $item->nama_program }}" name="nama_program" class="form-control">
+                        <input type="text" name="nama_program" class="form-control @error('nama_program') is-invalid
+                        @enderror" value="{{ $item->nama_program }}">
+                        @error('nama_program')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">No. Rekening</label>
-                        <input type="text" value="{{ $item->no_rek }}" name="no_rek" class="form-control">
+                        <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
+                        @enderror" value="{{ $item->no_rek }}" placeholder="contoh: BSI 7135452829 a/n Firmansyah">
+                    @error('no_rek')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Deskripsi</label>
-                        <textarea type="date" id="editor" name="deskripsi" class="form-control">{{ $item->deskripsi }}</textarea>
+                        <textarea type="date" id="editor" name="deskripsi" class="form-control @error('deskripsi') is-invalid
+                        @enderror" value="">{!! $item->deskripsi !!}</textarea>
+                    @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
                     </div>
                 </form>
             </div>

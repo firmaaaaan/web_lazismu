@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Donatur;
 use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -18,9 +19,10 @@ class DonaturController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $donatur=Donatur::all();
         $user=User::all();
-        return view('components.donatur.index', compact('donatur','user'));
+        return view('components.donatur.index', compact('donatur','user','programDonasi'));
     }
 
     /**

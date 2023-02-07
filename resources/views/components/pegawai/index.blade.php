@@ -80,27 +80,51 @@
                     @csrf
                     <div>
                         <label class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama_karyawan" class="form-control">
+                        <input type="text" name="nama_karyawan" class="form-control @error('nama_karyawan') is-invalid
+                        @enderror" value="{{ old('nama_karyawan') }}">
+                        @error('nama_karyawan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Tempat Lahir</label>
-                        <input type="text" name="tmpt_lahir" class="form-control">
+                        <input type="text" name="tmpt_lahir" class="form-control @error('tmpt_lahir') is-invalid
+                        @enderror" value="{{ old('tmpt_lahir') }}">
+                        @error('tmpt_lahir')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" class="form-control">
+                        <input type="date" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid
+                        @enderror" value="{{ old('tgl_lahir') }}">
+                        @error('tgl_lahir')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">No. Handphone</label>
-                        <input type="number" name="no_hp" class="form-control">
+                        <input type="number" name="no_hp" class="form-control @error('no_hp') is-invalid
+                        @enderror" value="{{ old('no_hp') }}">
+                        @error('no_hp')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Alamat</label>
-                        <textarea name="alamat" class="form-control"></textarea>
+                        <textarea name="alamat" class="form-control @error('alamat') is-invalid
+                        @enderror">{{ old('alamat') }}</textarea>
+                        @error('alamat')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Tanggal Mulai bekerja</label>
-                        <input type="date" name="tgl_kerja" class="form-control">
+                        <input type="date" name="tgl_kerja" class="form-control @error('tgl_kerja') is-invalid
+                        @enderror" value="{{ old('tgl_kerja') }}">
+                        @error('tgl_kerja')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>

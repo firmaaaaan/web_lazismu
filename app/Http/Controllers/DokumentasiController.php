@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dokumentasi;
 use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
 
 class DokumentasiController extends Controller
@@ -15,8 +16,9 @@ class DokumentasiController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $doks=Dokumentasi::all();
-        return view('components.dokumentasi.index', compact('doks'));
+        return view('components.dokumentasi.index', compact('doks','programDonasi'));
     }
 
     /**

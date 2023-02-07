@@ -74,11 +74,19 @@
                     @csrf
                     <div>
                         <label class="form-label">Nama Rumah Sakit</label>
-                        <input type="text"  name="nama_rs" class="form-control">
+                        <input type="text" value="{{ old('nama_rs') }}" name="nama_rs" class="form-control @error('nama_rs') is-invalid
+                        @enderror">
+                        @error('nama_rs')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label">Alamat</label>
-                        <textarea type="date" name="alamat" class="form-control"></textarea>
+                        <textarea type="date" name="alamat" class="form-control @error('alamat') is-invalid
+                        @enderror">{{ old('alamat') }}</textarea>
+                        @error('alamat')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>

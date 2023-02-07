@@ -32,17 +32,23 @@
                         </div>
                         <div class="col-sm-6 col-md-3">
                             <div class="mb-3">
+                                <label class="form-label">Nama Pasien</label>
+                                <input type="text" class="form-control" name="nama_pasien">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="mb-3">
                                 <label class="form-label">Tanggal</label>
                                 <input type="date" class="form-control" name="tanggal">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-md-5">
                             <div class="mb-3">
                                 <label class="form-label">Titik Jemput</label>
                                 <input type="text" class="form-control" name="titik_jemput">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-6 col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Tujuan</label>
                                 <select type="text" name="rumahsakit_id" class="form-control" placeholder="Company" value="Chet">
@@ -53,16 +59,18 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6 com-md-6">
+                        <div class="col-sm-6 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Infaq</label>
                                 <input type="number" class="form-control" name="infaq" value="0">
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label">Keterangan</label>
-                                <textarea type="text" id="editor" name="keterangan" class="form-control"></textarea>
+                        <div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Keterangan</label>
+                                    <textarea type="text" id="editor" name="keterangan" class="form-control"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div>

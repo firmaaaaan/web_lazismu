@@ -70,15 +70,27 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Kode</label>
-                            <input type="text" class="form-control" name="kode">
+                            <input type="text" class="form-control @error('kode') is-invalid
+                            @enderror" value="{{ old('kode') }}" name="kode">
+                            @error('kode')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Nama Akun</label>
-                            <input type="text" class="form-control" name="nama_akun">
+                            <input type="text" class="form-control @error('nama_akun') is-invalid
+                            @enderror" value="{{ old('nama_akun') }}" name="nama_akun">
+                            @error('nama_akun')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Pesen hak amil</label>
-                            <input type="text" name="persen_hak_amil" class="form-control">
+                            <input type="text" name="persen_hak_amil" class="form-control @error('persen_hak_amil') is-invalid
+                            @enderror" value="{{ old('persen_hak_amil') }}">
+                            @error('persen_hak_amil')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -107,15 +119,27 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Kode</label>
-                            <input type="text" value="{{ $item->kode }}" class="form-control" name="kode">
+                            <input type="text" value="{{ $item->kode }}" class="form-control @error('kode') is-invalid
+                            @enderror" value="{{ old('kode') }}" name="kode">
+                            @error('kode')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Nama Akun</label>
-                            <input type="text" value="{{ $item->nama_akun }}" class="form-control" name="nama_akun">
+                            <input type="text" value="{{ $item->nama_akun }}" class="form-control @error('nama_akun') is-invalid
+                            @enderror" value="{{ old('nama_akun') }}" name="nama_akun">
+                        @error('nama_akun')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Pesen hak amil</label>
-                            <input type="text" value="{{ $item->persen_hak_amil }}" name="persen_hak_amil" class="form-control">
+                            <input type="text" value="{{ $item->persen_hak_amil }}" name="persen_hak_amil" class="form-control @error('persen_hak_amil') is-invalid
+                            @enderror" value="{{ old('persen_hak_amil') }}">
+                        @error('persen_hak_amil')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

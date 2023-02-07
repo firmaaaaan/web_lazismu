@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
+use App\Http\Controllers\Controller;
 
 class KaryawanController extends Controller
 {
@@ -14,8 +16,9 @@ class KaryawanController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $karyawans=Karyawan::all();
-        return view('components.pegawai.index', compact('karyawans'));
+        return view('components.pegawai.index', compact('karyawans','programDonasi'));
     }
 
     /**

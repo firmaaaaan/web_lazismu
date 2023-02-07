@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RumahSakit;
 use Illuminate\Http\Request;
+use App\Models\ProgramDonasi;
+use App\Http\Controllers\Controller;
 
 class RumahSakitController extends Controller
 {
@@ -14,9 +16,10 @@ class RumahSakitController extends Controller
      */
     public function index()
     {
+        $programDonasi=ProgramDonasi::all();
         $rumahSakit=RumahSakit::all();
         $rumahSakit=RumahSakit::simplePaginate(15);
-        return view('components.rumah_sakit.index', compact('rumahSakit'));
+        return view('components.rumah_sakit.index', compact('rumahSakit','programDonasi'));
     }
 
     /**
@@ -38,8 +41,8 @@ class RumahSakitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_rs',
-            'alamat'
+            'nama_rs'=>'required',
+            'alamat'=>'required'
         ]);
         RumahSakit::create($request->all());
         return back()->with('Success','Data rumah sakit berhasil ditambahkan');
