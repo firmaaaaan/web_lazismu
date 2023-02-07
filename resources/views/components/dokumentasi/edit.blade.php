@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="user_id">Judul</label>
-                            <input type="text" value="" name="judul" value="{{ $doks->judul }}" class="form-control">
+                            <input type="text" name="judul" value="{{ $doks->judul }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="user_id">Foto Unggulan</label>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 btn-sm">Buat</button>
+                <button type="submit" class="btn btn-success mt-3 btn-sm">Simpan Dokumentasi</button>
             </form>
             </div>
         </div>

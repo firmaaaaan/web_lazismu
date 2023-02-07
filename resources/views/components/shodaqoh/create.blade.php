@@ -21,7 +21,11 @@
                     <div class="card-body">
                         <div class="bg-light rounded d-flex align items center p-3">
                             <h1 class="font-weight-bold w-25">Rp.</h1>
-                            <input type="number" class="form-control" name="jml_donasi" placeholder="Masukan nominal donasi" value="0">
+                            <input type="number" class="form-control @error('jml_donasi') is-invalid
+                            @enderror" value="{{ old('jml_donasi') }}" name="jml_donasi" placeholder="Masukan nominal donasi" value="0">
+                        @error('jml_donasi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
@@ -31,27 +35,39 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">No. Rekening</label>
-                            <input type="text" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
+                            <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
+                            @enderror" value="{{ old('no_rek') }}" placeholder="Contoh: BSI 1745351819">
+                        @error('no_rek')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Akun yang dipilih</label>
-                            <select name="id_akun" id="id_akun" class="form-control">
+                            <select name="id_akun" id="id_akun" class="form-control @error('id_akun') is-invalid
+                            @enderror" value="{{ old('id_akun') }}">
                                 <option value="">--Pilih Akun--</option>
                                 @foreach ($akun as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama_akun }}</option>
                                 @endforeach
                             </select>
+                        @error('id_akun')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
-                            <select name="programdonasi_id" id="programdonasi_id" class="form-control">
+                            <select name="programdonasi_id" id="programdonasi_id" class="form-control @error('programdonasi_id') is-invalid
+                            @enderror" value="{{ old('programdonasi_id') }}">
                                 <option value="">--Pilih Jenis Program--</option>
                                 @foreach ($programDonasi as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
+                        @error('programdonasi_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         </div>
-                        <label for="">Keterangan</label>
+                        <label for="">Keterangan <small style="color: red">*opsional</small></label>
                         <textarea class="form-control" id="editor" name="keterangan" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>

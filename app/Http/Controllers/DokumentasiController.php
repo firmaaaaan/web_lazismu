@@ -28,7 +28,8 @@ class DokumentasiController extends Controller
      */
     public function create()
     {
-        return view('components.dokumentasi.create');
+        $programDonasi=ProgramDonasi::all();
+        return view('components.dokumentasi.create', compact('programDonasi'));
     }
 
     /**
@@ -39,6 +40,11 @@ class DokumentasiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'judul'=>'required',
+            'foto_unggulan'=>'image|required',
+            'text'=>'required'
+        ]);
         $input = $request->all();
         if($image=$request->file('foto_unggulan')){
             $destinationPath='images/';
@@ -59,8 +65,9 @@ class DokumentasiController extends Controller
      */
     public function show(Dokumentasi $dokumentasi, $id)
     {
+        $programDonasi=ProgramDonasi::all();
         $doks=Dokumentasi::find($id);
-        return view('components.dokumentasi.show', compact('doks'));
+        return view('components.dokumentasi.show', compact('doks','programDonasi'));
     }
 
     /**
@@ -71,8 +78,9 @@ class DokumentasiController extends Controller
      */
     public function edit(Dokumentasi $dokumentasi, $id)
     {
+        $programDonasi=ProgramDonasi::all();
         $doks=Dokumentasi::find($id);
-        return view('components.dokumentasi.edit', compact('doks'));
+        return view('components.dokumentasi.edit', compact('doks','programDonasi'));
     }
 
     /**
@@ -84,6 +92,7 @@ class DokumentasiController extends Controller
      */
     public function update(Request $request, Dokumentasi $dokumentasi, $id)
     {
+
         $doks=Dokumentasi::find($id);
         $doks->update($request->all());
         return redirect()->route('dokumentasi.index');

@@ -7,19 +7,22 @@ use App\Models\User;
 use App\Models\Zakat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ProgramDonasi;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
     public function index(){
+        $programDonasi=ProgramDonasi::all();
         $user=User::all();
         $role=Role::all();
-        return view('components.user.index', compact('user','role'));
+        return view('components.user.index', compact('user','role','programDonasi'));
     }
 
     public function create(){
-        return view('components.user.create');
+        $programDonasi=ProgramDonasi::all();
+        return view('components.user.create', compact('programDonasi'));
     }
 
     public function store(Request $request ){

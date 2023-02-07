@@ -10,19 +10,31 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="user_id">Judul</label>
-                            <input type="text" value="" name="judul" class="form-control">
+                            <input type="text" value="{{ old('judul') }}" name="judul" class="form-control @error('judul') is-invalid
+                            @enderror">
+                            @error('judul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Foto Unggulan</label>
-                            <input type="file" name="foto_unggulan" class="form-control" value="">
+                            <input type="file" name="foto_unggulan" class="form-control @error('foto_unggulan') is-invalid
+                            @enderror" value="{{ old('foto_unggulan') }}">
+                            @error('foto_unggulan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Text</label>
-                            <textarea type="text" value="" name="text" id="editor" class="form-control"></textarea>
+                            <textarea type="text" name="text" id="editor" class="form-control @error('text') is-invalid
+                            @enderror">{{ old('text') }}</textarea>
+                            @error('text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 btn-sm">Buat</button>
+                <button type="submit" class="btn btn-primary mt-3 btn-sm">Buat Dokumentasi</button>
             </form>
             </div>
         </div>

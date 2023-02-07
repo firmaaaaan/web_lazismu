@@ -37,6 +37,7 @@ class DonasiController extends Controller
      */
     public function create()
     {
+
         $akun=Akun::all();
         $programDonasi=ProgramDonasi::all();
         $donasi=Donasi::all();
@@ -55,8 +56,9 @@ class DonasiController extends Controller
         $request->validate([
             'jml_donasi'=>'required',
             'no_rek'=>'required',
-            'keterangan'=>'required',
-            'user_id'=>'required'
+            'user_id'=>'required',
+            'id_akun'=>'required',
+            'programdonasi_id'=>'required'
         ]);
 
         // Mencari akun yang sesuai dengan id_akun yang diterima dari form

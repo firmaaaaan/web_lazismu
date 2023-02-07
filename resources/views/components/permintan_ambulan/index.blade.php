@@ -49,7 +49,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($permintaanAmbulan as $item)
                         <tr>
                             <td>{{ ++$i }}</td>
@@ -57,8 +56,8 @@
                             <td>{{ $item->tanggal }}</td>
                             <td>{{ $item->titik_jemput }}</td>
                             <td>{{ $item->rumahsakit->nama_rs }} </td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>{{ number_format($$item->infaq , 0, ',', '.') }}</td>
+                            <td>{!! $item->keterangan !!}</td>
+                            <td>{{ number_format($item->infaq , 0, ',', '.') }}</td>
                             <td>
                                 @if ($item->status_id ==3)
                                     <div class="btn btn-outline-primary btn-sm">{{ $item->status->nama_status }} </div>
