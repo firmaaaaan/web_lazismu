@@ -43,4 +43,56 @@
         </div>
     </div>
 </div>
+
+@section('chart')
+            <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: [
+                    @if($programDonasi)
+                    @foreach($programDonasi as $donationProgram)
+                        '{{ $donationProgram->nama_program }}',
+                    @endforeach
+                    @endif
+                ],
+                datasets: [{
+                    label: 'Jumlah Donasi',
+                    data: [
+                    @if($programDonasi)
+                        @foreach($programDonasi as $donationProgram)
+                        {{ $donationProgram->jumlah_donasi_program }},
+                        @endforeach
+                    @endif
+                    ],
+                    backgroundColor: [
+                    @if($programDonasi)
+                        @foreach($programDonasi as $donationProgram)
+                        'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 0.2)',
+                        @endforeach
+                    @endif
+                    ],
+                    borderColor: [
+                    @if($programDonasi)
+                        @foreach($programDonasi as $donationProgram)
+                        'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 1)',
+                        @endforeach
+                    @endif
+                    ],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                    }]
+                }
+                }
+            });
+        </script>
+@endsection
 @endsection

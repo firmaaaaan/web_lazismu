@@ -52,7 +52,7 @@ class DonasiController extends Controller
      */
     public function store(Request $request)
     {
-        // Donasi::create($request->all());
+
         $request->validate([
             'jml_donasi'=>'required',
             'no_rek'=>'required',
@@ -80,7 +80,7 @@ class DonasiController extends Controller
         Donasi::where('programdonasi_id', $request->programdonasi_id)
             ->orderBy('created_at', 'desc')
             ->first();
-        Donasi::create([
+        $donasi=Donasi::create([
             'jml_donasi'=>$request->jml_donasi,
             'no_rek'=>$request->no_rek,
             'keterangan'=>$request->keterangan,
@@ -91,13 +91,11 @@ class DonasiController extends Controller
             'hak_amil'=>$hak_amil
         ]);
 
-        // // //update saldo akun
-        // $programs = ProgramDonasi::where('id_akun', $request->id_akun)->get();
-        // $saldo_awal = $programs->sum('jumlah_program_donasi');
-        // Akun::where('id', $request->id_akun)->update(['saldo_awal' => $saldo_awal]);
+
 
         $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
+        $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
         $programDonasi->save();
 
         return redirect()->route('drop.donasi.index');

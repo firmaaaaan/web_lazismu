@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Akun;
 use PDF;
+use App\Models\Akun;
+use App\Models\Donasi;
 use App\Models\LogTransaksi;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
@@ -58,11 +59,17 @@ class LogTransaksiController extends Controller
             return back()->with('error','Jumlah saldo program donasi asal tidak cukup');
         }
 
-        //validasi user yang melakukan transfer
-        // $user = Auth::user();
-        // if(!$user->can('transfer-jumlah_donasi_program')){
-        //     return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk melakukan transfer jumlah donasi program']);
-        // }
+        //validasi apakah donasi sudah tervalidasi
+        $donasi = Donasi::where('programdonasi_id', $programdonasi_asal->id)->first();
+        if (!$donasi || $donasi->status_id == 1) {
+            return back()->with('error', 'Program donasi asal belum tervalidasi, tidak bisa melakukan transfer saldo');
+        }
+
+        $donasi = Donasi::where('programdonasi_id', $programdonasi_tujuan->id)->first();
+        if (!$donasi || $donasi->status_id == 1) {
+            return back()->with('error', 'Program donasi tujuan belum tervalidasi, tidak bisa melakukan transfer saldo');
+        }
+
 
         //transfer jumlah_donasi_program
         $programdonasi_tujuan->jumlah_donasi_program += $request->nominal;
@@ -74,7 +81,6 @@ class LogTransaksiController extends Controller
         $log = new LogTransaksi();
         $log ->user_id = $request->user_id;
         $log->id_programdonasi_asal = $programdonasi_asal->id;
-        // $log->jenis_transaksi = 'transfer_jumlah_donasi_program';
         $log->nominal = $request->nominal;
         $log->id_programdonasi_tujuan = $programdonasi_tujuan->id;
         $log->keterangan=$request->keterangan;
