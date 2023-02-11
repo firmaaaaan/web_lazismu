@@ -84,7 +84,7 @@ class AkunController extends Controller
     public function update(Request $request, Akun $akun, $id)
     {
         $request->validate([
-            'kode'=>'required',
+            'kode'=>'required|unique:akuns',
             'nama_akun' => 'required',
             'persen_hak_amil'=>'required'
         ]);

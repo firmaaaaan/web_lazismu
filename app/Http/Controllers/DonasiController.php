@@ -90,9 +90,6 @@ class DonasiController extends Controller
             'programdonasi_id'=>$request->programdonasi_id,
             'hak_amil'=>$hak_amil
         ]);
-
-
-
         $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
         $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
