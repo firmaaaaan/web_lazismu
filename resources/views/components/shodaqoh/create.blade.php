@@ -11,7 +11,7 @@
                         </div>
                         <div class="body ml-3">
                             <h2>Donasi</h2>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit maxime quibusdam quis voluptas perferendis voluptates repellat eius voluptate ipsum sunt earum quia, aliquid ipsa consectetur sapiente assumenda doloribus? Voluptatum, alias.</p>
+                            <p>"Dan belanjakanlah (harta bendamu) di jalan Allah, dan janganlah kamu menjatuhkan dirimu sendiri ke dalam kebinasaan, dan berbuat baiklah, karena sesungguhnya Allah menyukai orang-orang yang berbuat baik." <i>(QS. Al-Baqarah:195)</i></p>
                         </div>
                     </div>
                 </div>

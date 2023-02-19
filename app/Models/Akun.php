@@ -15,4 +15,8 @@ class Akun extends Model
     public function programDonasi(){
         return $this->belongsTo(ProgramDonasi::class);
     }
+    public function donasis()
+    {
+        return $this->hasMany(Donasi::class, 'id_akun', 'id');
+    }
 }

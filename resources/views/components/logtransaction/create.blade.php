@@ -21,17 +21,17 @@
             <div class="card-body">
             @if ($message = Session::get('error'))
                 <div class="alert alert-danger alert-block mb-2">
-                    <p>{{ $message }}</p>
+                    <p><i class="bi bi-backspace-reverse-fill"></i>{{ $message }}</p>
                 </div>
             @endif
             @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block mb-2">
-                    <p>{{ $message }}</p>
+                    <p><i class="bi bi-check-circle-fill">{{ $message }}</p>
                 </div>
             @endif
             @if ($message = Session::get('gagal'))
                     <div class="alert alert-error alert-block mb-2">
-                        <p>{{ $message }}</p>
+                        <p><i class="bi bi-backspace-reverse-fill"></i>{{ $message }}</p>
                     </div>
             @endif
                 <form action="{{ route('store.transaction') }}" method="POST">

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('nama_driver');
             $table->string('email')->unique();
+            $table->string('no_seri')->unique();
             $table->bigInteger('no_hp')->nullable()->unique();
             $table->string('status_driver')->nullable();
             $table->timestamps();

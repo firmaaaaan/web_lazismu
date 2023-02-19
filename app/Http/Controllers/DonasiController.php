@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use PDF;
+use Carbon\Carbon;
 use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
@@ -244,7 +245,7 @@ class DonasiController extends Controller
     public function exportExcel(){
         return Excel::download(new DonasiExport,'donasi.xlsx');
     }
-    public function programIndex($id){
+    public function programIndex($id, $akun_id){
         // $donasi=Donasi::find($id);
         $programDonasi=ProgramDonasi::find($id);
         $donasi=Donasi::all();
@@ -253,22 +254,25 @@ class DonasiController extends Controller
         $donasi=Donasi::where('programdonasi_id', $id)->get();
         // $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
         $total_hak_amil = Donasi::where('programdonasi_id', $id)->sum('hak_amil');
-        return view('components.shodaqoh.program-index', compact('donasi','total_hak_amil','programDonasi','totalDonationForProgram'));
+        $akun = Akun::find($akun_id);
+        return view('components.shodaqoh.program-index', compact('donasi','akun','total_hak_amil','programDonasi','totalDonationForProgram'));
     }
 
     public function salurkanProgram($id){
-        $programDonasi=ProgramDonasi::find($id);
-        $programDonasi=ProgramDonasi::all();
-        $donasi=Donasi::find($id);
-        $donasi=Donasi::where('programdonasi_id', $id)->first();
-        return view('components.shodaqoh.salurkan-program', compact('programDonasi','donasi'));
+        $programDonasi = ProgramDonasi::find($id);
+        $donasi = Donasi::where('programdonasi_id', $id)->first();
+        $akun = Akun::all();
+        return view('components.shodaqoh.salurkan-program', compact('programDonasi', 'donasi', 'akun'));
     }
     public function storeSalurkanProgram(Request $request, $id)
     {
 
+        $donasi=Donasi::find($id);
+        $donasi->update($request->all());
 
         $programDonasi = ProgramDonasi::find($id);
         $tersalurkan = $request->input('tersalurkan');
+        // $tersalurkan = $request->input('desk_penyaluran');
 
 
         // Pastikan jumlah donasi yang tersedia cukup untuk disalurkan
@@ -300,15 +304,33 @@ class DonasiController extends Controller
         return redirect()->route('program.index', $id)->with('success', 'Donasi berhasil disalurkan!');
     }
 
-    public function cetakProgramPertanggal($id,$tglAwal, $tglAkhir){
+        public function cetakProgramDanAkunPertanggal( Request $request, $programId, $akunId, $tglAwal, $tglAkhir) {
 
-        $donasi=Donasi::all();
-        $programDonasi=ProgramDonasi::find($id);
-        $cetakProgramPertanggal = Donasi::where('programdonasi_id', $id)
-                        ->whereBetween('created_at',[$tglAwal, $tglAkhir])
-                        ->get();
-        $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi, 'donasi'=>$donasi]);
-
-        return $pdf->stream('donasi-program-pertanggal.pdf');
+            $programDonasi = ProgramDonasi::findOrFail($programId);
+            $akun = Akun::findOrFail($akunId);
+            $cetakProgramDanAkunPertanggal = Donasi::where('programdonasi_id', $programDonasi->id)
+                ->where('id_akun', $akun->id)
+                ->whereBetween('created_at', [$tglAwal, $tglAkhir])
+                ->get();
+            $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[
+                'cetakProgramDanAkunPertanggal' => $cetakProgramDanAkunPertanggal,
+                'programDonasi' => $programDonasi,
+                'akun' => $akun,
+                'tglAwal'=> $tglAwal,
+                'tglAkhir'=>$tglAkhir
+            ]);
+            return $pdf->stream('donasi-program-akun-pertanggal.pdf');
     }
+
+    // public function cetakProgramPertanggal($id,$tglAwal, $tglAkhir){
+
+    //     $donasi=Donasi::all();
+    //     $programDonasi=ProgramDonasi::find($id);
+    //     $cetakProgramPertanggal = Donasi::where('programdonasi_id', $id)
+    //                     ->whereBetween('created_at',[$tglAwal, $tglAkhir])
+    //                     ->get();
+    //     $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi, 'donasi'=>$donasi]);
+
+    //     return $pdf->stream('donasi-program-pertanggal.pdf');
+    // }
 }

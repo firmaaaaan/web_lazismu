@@ -37,18 +37,19 @@
             <thead class="bordered">
                 <tr>
                     <th>No.</th>
-                    <th>Nama Customer</th>
+                    <th>Nama Donatur</th>
                     <th>Progam Donasi</th>
                     <th>No. Rekening</th>
                     <th>Jumlah Donasi</th>
                     <th>Status Penyaluran</th>
+                    <th>Tanggal Donasi</th>
                 </tr>
             </thead>
             @php
                 $no=1;
             @endphp
             <tbody>
-            @foreach ($donasi as $item)
+            @foreach ($cetakProgramDanAkunPertanggal as $item)
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $item->user->name }}</td>
@@ -56,11 +57,11 @@
                     <td>{{ $item->no_rek }}</td>
                     <td>{{ $item->jml_donasi }}</td>
                         @if ($item->status_penyaluran=='Belum Tersalurkan')
-                            <div>{{ $item->status_penyaluran }}</div>
+                            <td>{{ $item->status_penyaluran }}</td>
                         @else
-                            <div>{{ $item->status_penyaluran }}</div>
+                            <td>{{ $item->status_penyaluran }}</td>
                         @endif
-                    </td>
+                    <td>{{ $item->created_at }}</td>
                 </tr>
             @endforeach
             </tbody>

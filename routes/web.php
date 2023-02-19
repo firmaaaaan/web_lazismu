@@ -84,10 +84,10 @@ Route::get('/export-donasi-pdf',[DonasiController::class,'exportPdf'])->name('ex
 Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
 // Export Excel
 Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->name('exportdonasiexcel');
-Route::get('/donasi/program-donasi/{id}',[DonasiController::class,'programIndex'])->name('program.index');
+Route::get('/program/{id}/akun/{id_akun}',[DonasiController::class,'programIndex'])->name('program.index');
 //Export Perprogram donasi pertanggal
-Route::get('/cetak-donasi-program/{id}/pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakProgramPertanggal'])->name('cetakProgramPertanggal.pdf');
-
+// Route::get('/cetak-donasi-program/{id}/pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakProgramPertanggal'])->name('cetakProgramPertanggal.pdf');
+Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{akunId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
 
 
 // Export menggunakan datatables
@@ -116,7 +116,7 @@ Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->
 Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
 Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
 Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
-Route::get('/donasi/program/{id}/salurkan', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
+Route::get('/salurkan-program/{id}/akun/{akun_id}', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
 
 //Penyaluran Zakat
 Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');

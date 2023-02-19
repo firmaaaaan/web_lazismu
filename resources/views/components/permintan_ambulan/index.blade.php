@@ -21,12 +21,12 @@
             <div class="card-body">
                 @if ($message = Session::get('Success'))
                     <div class="alert alert-success alert-block mb-2">
-                        <p>{{ $message }}</p>
+                        <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
-                        <p>{{ $message }}</p>
+                        <p><i class="bi bi-lightbulb-fill"></i>{{ $message }}</p>
                     </div>
                 @endif
             <div class="table-responsive">

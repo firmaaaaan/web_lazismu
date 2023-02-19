@@ -11,7 +11,7 @@
                         </div>
                         <div class="body ml-3">
                             <h5>Salurkan Donasi</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore tempore quisquam at ratione reprehenderit voluptates voluptate optio consequuntur nesciunt exercitationem.</p>
+                            <p>“ <i>Dari Abu Bakar Ash-Shiddiq ia berkata, Rasulullah SAW bersabda:</i> Wajib atasmu berlaku jujur, karena jujur itu bersama kebaikan, dan keduanya di Surga. Dan jauhkanlah dirimu dari dusta, Karena dusta itu bersama kedurhakaan, dan keduanya di neraka”.</p>
                         </div>
                     </div>
                 </div>
@@ -28,6 +28,8 @@
                             <h1 class="font-weight-bold w-25">Rp.</h1>
                             <input type="number" class="form-control" name="tersalurkan" id="id">
                         </div>
+                        <label for="">Disalurkan ke:</label>
+                        <textarea name="desk_penyaluran" class="form-control" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-3">Salurkan</button>

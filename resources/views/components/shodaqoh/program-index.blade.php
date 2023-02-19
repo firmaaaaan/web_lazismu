@@ -51,24 +51,24 @@
             <div class="card-body">
                 @if ($message = Session::get('belum'))
                         <div class="alert alert-danger alert-block mb-2">
-                            <p>{{ $message }}</p>
+                            <p><i class="bi bi-backspace-reverse-fill"></i>{{ $message }}</p>
                         </div>
                     @endif
                 @if ($message = Session::get('error'))
                         <div class="alert alert-danger alert-block mb-2">
-                            <p>{{ $message }}</p>
+                            <p><i class="bi bi-backspace-reverse-fill"></i>{{ $message }}</p>
                         </div>
                     @endif
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success alert-block mb-2">
-                            <p>{{ $message }}</p>
+                            <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
                         </div>
                     @endif
             <div class="table-responsive">
-                <a href="{{ route('donasi.Programsalurkan', $programDonasi->id) }}" class="btn btn-primary btn-sm mb-2" title="Salurkan"><i class="bi bi-box2-heart-fill"></i>Salurkan Donasi</a>
-                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                <a href="{{ route('donasi.Programsalurkan', ['id' => $programDonasi->id, 'akun_id' => $akun->id]) }}" class="btn btn-primary btn-sm mb-2" title="Salurkan"><i class="bi bi-box2-heart-fill"></i>Salurkan Donasi</a>
                 {{-- <a href="{{ route('donasi.create') }}" type="button" class="btn btn-primary btn-sm mr-2" style="float: right"><i class="bi bi-plus-square"></i>Tambah donasi</a>
                 <a href="{{ route('exportPdf') }} " type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
@@ -78,6 +78,8 @@
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
                             <th>Status Penyaluran</th>
+                            <th>Di Salurkan Kepada</th>
+                            <th>Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,6 +103,8 @@
                                     <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
                                 @endif
                             </td>
+                            <td>{{ $item->desk_penyaluran }}</td>
+                            <td>{{ $item->created_at }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -121,18 +125,37 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="" method="post">
-                <input type="text" class="form-control" name="programdoasi_id" value="{{ $programDonasi->nama_program }}">
-                <label for="">Tanggal Awal</label>
-                <input type="date" name="tglAwal" id="tglAwal" class="form-control">
-                <label for="">Tanggal Akhir</label>
-                <input type="date" name="tglAkhir" id="tglAkhir" class="form-control">
-            </form>
+            <form method="GET" action="">
+                <div class="form-group">
+                    <label for="akunId">Akun:</label>
+                    <select name="id_akun" id="akunId" class="form-control" required>
+                        <option value="{{ $akun->id }}" disabled selected>{{ $akun->nama_akun }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="programId">Program Donasi:</label>
+                    <select name="programdonasi_id" id="programId" class="form-control" required>
+                        <option value="{{ $programDonasi->id }}" disabled selected>{{ $programDonasi->nama_program }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tglAwal">Tanggal Awal:</label>
+                    <input type="date" name="tglAwal" id="tglAwal" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="tglAkhir">Tanggal Akhir:</label>
+                    <input type="date" name="tglAkhir" id="tglAkhir" class="form-control" required>
+                </div>
+                {{-- <button type="submit" class="btn btn-primary btn-sm">Cetak Laporan</button> --}}
+                {{-- <a href="" type="submit" onclick="this.href='/cetak-program-dan-akun-pertanggal/{{ 'programId'=>$programDonasi->id }}/{{ 'akunId'=>$akun->id }}'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a> --}}
+            {{-- <a href="{{ route('cetak.program-akun-pertanggal', ['programId' => $programDonasi->id, 'akunId' => $akun->id, 'tglAwal' => 'tglAwal', 'tglAkhir' => 'tglAkhir']) }}"+ document.getElementById('tglAwal').value +"/"+ document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a> --}}
+            <a href="" type="submit" onclick="this.href='/cetak-program-dan-akun-pertanggal/{{ $programDonasi->id }}/{{ $akun->id }}/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
+        </form>
         </div>
-        <div class="modal-footer">
+        {{-- <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
             <a href="" type="submit" onclick="this.href='/cetak-donasi-program/{{ $programDonasi->id }}/pertanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
-        </div>
+        </div> --}}
         </div>
     </div>
 </div>
