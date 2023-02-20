@@ -7,11 +7,11 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <div class="thumbnail rounden w-25">
-                            <img src="" alt="" width="150">
+                            <img src="{{ asset('dist/img/lazismu.png') }}" alt="" width="150">
                         </div>
                         <div class="body ml-3">
-                            <h5>Edit Donasi</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, in, dolores ducimus animi quia ipsa autem modi magni sapiente, repudiandae delectus? Autem sequi nihil sed nesciunt officiis adipisci quo nobis cumque ipsum, quaerat corporis, deserunt velit ab atque fuga quibusdam cupiditate expedita aperiam quos porro repudiandae modi dicta doloribus esse?</p>
+                            <h2>Edit Donasi</h2>
+                            <p>"Dan belanjakanlah (harta bendamu) di jalan Allah, dan janganlah kamu menjatuhkan dirimu sendiri ke dalam kebinasaan, dan berbuat baiklah, karena sesungguhnya Allah menyukai orang-orang yang berbuat baik." <i>(QS. Al-Baqarah:195)</i></p>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
-                            <select name="user_id" id="" class="form-control">
+                            <select name="user_id" id="" class="form-control select2">
                                 {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
                                 <option value="">--Cari Donatur--</option>
                                 @foreach ($user as $item)
@@ -42,7 +42,8 @@
                             <select name="id_akun" id="id_akun" class="form-control">
                                 <option value="">--Pilih Akun--</option>
                                 @foreach ($akun as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama_akun }}</option>
+                                <option value="{{ $item->id }}" @if ($item->id == $donasi->id_akun) selected
+                                @endif>{{ $item->nama_akun }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -51,7 +52,8 @@
                             <select name="programdonasi_id" id="programdonasi_id" class="form-control">
                                 <option value="">--Pilih Jenis Program--</option>
                                 @foreach ($programDonasi as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
+                                <option value="{{ $item->id }}"@if ($item->id == $donasi->programdonasi_id) selected
+                                @endif>{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -69,4 +71,11 @@
         </div>
     </div>
 </div>
+@section('select')
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $('.select2').select2();
+});
+</script>
+@endsection
 @endsection

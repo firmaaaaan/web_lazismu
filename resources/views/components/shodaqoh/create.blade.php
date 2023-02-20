@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
-                            <select name="user_id" id="" class="form-control">
+                            <select name="user_id" id="" class="form-control select2">
                                 {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
                                 <option value="">--Cari Donatur--</option>
                                 @foreach ($user as $item)
@@ -42,9 +42,9 @@
                             <input type="text" value="" class="form-control" name="nama_donatur">
                         </div>
                         <div class="form-group">
-                            <label for="user_id">No. Rekening</label>
+                            <label for="user_id">No. Rekening</label> <small style="color:red">*Contoh: BSI 12345678 an Firmansyah (opsional)</small>
                             <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
-                            @enderror" value="{{ old('no_rek') }}" placeholder="Contoh: BSI 1745351819">
+                            @enderror" value="{{ old('no_rek') }}">
                         @error('no_rek')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -103,4 +103,11 @@
         </div>
     </div>
 </div>
+@section('select')
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $('.select2').select2();
+});
+</script>
+@endsection
 @endsection

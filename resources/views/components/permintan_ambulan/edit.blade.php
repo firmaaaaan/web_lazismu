@@ -36,13 +36,13 @@
                                 <input type="text" value="{{ $permintaanAmbulan->nama_pasien }}" class="form-control" name="nama_pasien">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Tanggal</label>
                                 <input type="date" value="{{ $permintaanAmbulan->tanggal }}" class="form-control" name="tanggal">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-md-5">
                             <div class="mb-3">
                                 <label class="form-label">Titik Jemput</label>
                                 <input type="text" class="form-control" value="{{ $permintaanAmbulan->titik_jemput }}" name="titik_jemput">
@@ -56,20 +56,22 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6 com-md-3">
+                        <div class="col-sm-6 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Infaq</label>
                                 <input type="number" value="{{ $permintaanAmbulan->infaq }}" class="form-control" name="infaq" value="0">
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label">Keterangan</label>
-                                <textarea type="text" name="keterangan" class="form-control">{{ $permintaanAmbulan->keterangan}}</textarea>
+                        <div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Keterangan</label>
+                                    <textarea type="text" id="editor" name="keterangan" class="form-control"> {!! $permintaanAmbulan->keterangan !!}</textarea>
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success btn-sm" style="float:right">Simpan</button>
+                            <button type="submit" class="btn btn-success btn-sm ml-2" style="float:right">Simpan</button>
                         </div>
                 </form>
             </div>

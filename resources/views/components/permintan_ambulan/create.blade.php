@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary btn-sm" style="float:right">Buat</button>
+                            <button type="submit" class="btn btn-primary btn-sm ml-2" style="float:right">Buat Permintaan</button>
                         </div>
                 </form>
             </div>
