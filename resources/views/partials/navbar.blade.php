@@ -43,10 +43,10 @@
                             <a class="dropdown-item" href="{{ route('dokumentasi.index') }}">
                                 Data Postingan
                             </a>
-                            <a class="dropdown-item" href="./logs.html">
+                            {{-- <a class="dropdown-item" href="./logs.html">
                                 Penggajian
                                 <span class="badge badge-sm bg-red-lt text-uppercase ms-auto">On Going</span>
-                            </a>
+                            </a> --}}
                         </div>
                         </div>
                     </div>

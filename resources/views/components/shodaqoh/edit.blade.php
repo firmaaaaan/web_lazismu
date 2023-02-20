@@ -26,8 +26,16 @@
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
                             <select name="user_id" id="" class="form-control">
-                                <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
+                                {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
+                                <option value="">--Cari Donatur--</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nama Donatur</label> <small style="color: red">*Jika donatur tidak ada (Opsional)</small>
+                            <input type="text" value="{{ $donasi->nama_donatur }}" class="form-control" name="nama_donatur">
                         </div>
                         <div class="form-group">
                             <label for="user_id">Akun yang dipilih</label>

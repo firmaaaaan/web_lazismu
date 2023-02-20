@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('program_donasis', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_akun');
-            $table->bigInteger('kodeunik_tf')->nullable();
+            // $table->bigInteger('kodeunik_tf')->nullable();
             $table->string('foto')->nullable();
             $table->string('nama_program');
             $table->string('no_rek');

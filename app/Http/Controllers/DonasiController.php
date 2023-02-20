@@ -39,10 +39,11 @@ class DonasiController extends Controller
     public function create()
     {
 
+        $user=User::all();
         $akun=Akun::all();
         $programDonasi=ProgramDonasi::all();
         $donasi=Donasi::all();
-        return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun'));
+        return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun','user'));
     }
 
     /**
@@ -56,8 +57,6 @@ class DonasiController extends Controller
 
         $request->validate([
             'jml_donasi'=>'required',
-            'no_rek'=>'required',
-            'user_id'=>'required',
             'id_akun'=>'required',
             'programdonasi_id'=>'required'
         ]);
@@ -89,7 +88,8 @@ class DonasiController extends Controller
             'user_id'=>$request->user_id,
             'id_akun'=>$request->id_akun,
             'programdonasi_id'=>$request->programdonasi_id,
-            'hak_amil'=>$hak_amil
+            'hak_amil'=>$hak_amil,
+            'nama_donatur'=>$request->nama_donatur
         ]);
         $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
@@ -137,9 +137,6 @@ class DonasiController extends Controller
     {
         $request->validate([
             'jml_donasi'=>'required',
-            'no_rek'=>'required',
-            'keterangan'=>'required',
-            'user_id'=>'required'
         ]);
 
         $donasi = Donasi::find($id);

@@ -30,8 +30,16 @@
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
                             <select name="user_id" id="" class="form-control">
-                                <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
+                                {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
+                                <option value="">--Cari Donatur--</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nama Donatur</label> <small style="color: red">*Jika donatur tidak ada (Opsional)</small>
+                            <input type="text" value="" class="form-control" name="nama_donatur">
                         </div>
                         <div class="form-group">
                             <label for="user_id">No. Rekening</label>
@@ -40,6 +48,24 @@
                         @error('no_rek')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        {{-- <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Nama Bank</label>
+                                    <input type="text" class="form-control" name="nama_bank">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="user_id">No. Rekening</label>
+                                    <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
+                                    @enderror" value="{{ old('no_rek') }}" placeholder="Contoh: BSI 1745351819">
+                                @error('no_rek')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for=""> Pemilik Rekening</label>
+                                    <input type="text" class="form-control" name="pemilik_rekening">
+                                </div>
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <label for="user_id">Akun yang dipilih</label>
