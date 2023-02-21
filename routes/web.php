@@ -66,7 +66,7 @@ Route::get('/cetak-pertanggal/{tglAwal}/{tglAkhir}',[PermintaanAmbulanController
 
 //Program Donasi
 Route::get('/program-donasi',[ProgramDonasiController::class, 'index'])->name('dropdown.program.donasi.index');
-Route::get('/program-donasi/show/{id}',[ProgramDonasiController::class, 'show'])->name('program.donasi.show');
+Route::get('/program-donasi/show/{id_akun}/program-donasi/{programdonasi_id}',[ProgramDonasiController::class, 'show'])->name('program.donasi.show');
 Route::post('/program-donasi',[ProgramDonasiController::class, 'store'])->name('program.donasi.store');
 Route::post('/program-donasi/{id}',[ProgramDonasiController::class, 'update'])->name('program.donasi.update');
 Route::get('/program-donasi/destroy/{id}',[ProgramDonasiController::class, 'destroy'])->name('program.donasi.destroy');

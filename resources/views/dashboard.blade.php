@@ -25,16 +25,39 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="row row-deck row-cards">
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 <div class="card">
+                    <div class="card-header">
+                        <h3>Total Saldo:</h3>
+                    </div>
                     <div class="card-body text-center">
-                        <h2>Total Saldo:</h2>
                         <div class="h1 mb-3" style="color: green">Rp.{{ number_format($total_donasi, 0, ',', '.') }}</div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-4">
                 <div class="card">
+                    <div class="card-header">
+                        <h5>Program Donasi</h5>
+                    </div>
+                    <div class="card-body overflow-auto" style="max-height: 200px;">
+                        @foreach ($programDonasi as $item)
+                        <a href="{{ route('program.donasi.show', ['id_akun' => $item->id_akun, 'programdonasi_id' => $item->id]) }}" style="text-decoration: none; color:black">
+                            <div class="card mb-2" >
+                                <div class="card-body">
+                                    <i class="bi bi-box2-heart-fill"></i> {{ $item->nama_program }}
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Grafik Total Donasi Setiap Program</h5>
+                    </div>
                     <div class="card-body">
                         <canvas id="myChart"></canvas>
                     </div>

@@ -68,12 +68,14 @@ class ProgramDonasiController extends Controller
      * @param  \App\Models\ProgramDonasi  $programDonasi
      * @return \Illuminate\Http\Response
      */
-    public function show(ProgramDonasi $programDonasi, $id)
-    {
-        $user=User::all();
-        $programDonasi=ProgramDonasi::find($id);
-        return view('components.program_donasi.show', compact('programDonasi','user'));
-    }
+    public function show(ProgramDonasi $programDonasi, $id_akun, $programdonasi_id)
+        {
+            $user = User::all();
+            $akun=Akun::all();
+            $programDonasi = ProgramDonasi::find($programdonasi_id);
+            $programDonasi = ProgramDonasi::where('id_akun', $id_akun)->where('id_akun', $id_akun)->firstOrFail();
+            return view('components.program_donasi.show', compact('programDonasi', 'user','id_akun','akun'));
+        }
 
     /**
      * Show the form for editing the specified resource.
