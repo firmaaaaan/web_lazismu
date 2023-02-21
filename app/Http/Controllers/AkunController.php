@@ -102,11 +102,27 @@ class AkunController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Akun $akun, $id)
-    {
-        $akun=Akun::find($id);
-        $akun->delete();
-        return back();
-    }
+        {
+            $akun = Akun::find($id);
+            if (!$akun) {
+                return back()->withError('Akun tidak ditemukan');
+            }
+            DB::beginTransaction();
+            try {
+                // hapus semua data yang terkait dengan akun yang dihapus
+                ProgramDonasi::where('id_akun', $akun->id)->delete();
+                Donasi::where('id_akun', $akun->id)->delete();
+
+                // hapus akun
+                $akun->delete();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return back()->withError('Terjadi kesalahan: ' . $e->getMessage());
+            }
+            return back()->withSuccess('Akun berhasil dihapus beserta seluruh data terkait.');
+        }
+
     public function programDonasi($id_akun)
     {
         $programDonasi=ProgramDonasi::all();

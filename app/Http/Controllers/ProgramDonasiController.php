@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Donasi;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ProgramDonasiController extends Controller
@@ -120,10 +121,23 @@ class ProgramDonasiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProgramDonasi $programDonasi, $id)
-    {
-        $programDonasi=ProgramDonasi::find($id);
-        $programDonasi->delete();
-        return back();
-    }
+        {
+            $programDonasi=ProgramDonasi::find($id);
+            if (!$programDonasi) {
+                return back()->withError('Program donasi tidak ditemukan');
+            }
+            DB::beginTransaction();
+            try {
+                // hapus semua data yang terkait dengan akun yang dihapus
+                Donasi::where('programdonasi_id', $programDonasi->id)->delete();
 
+                // hapus akun
+                $programDonasi->delete();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return back()->withError('Terjadi kesalahan: ' . $e->getMessage());
+            }
+            return back()->withSuccess('Program donasi berhasil dihapus beserta seluruh data terkait.');
+        }
 }

@@ -24,6 +24,11 @@
                         <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
                     </div>
                 @endif
+                @if ($message = Session::get('withSuccess'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
+                    </div>
+                @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
                         <p><i class="bi bi-lightbulb-fill"></i>{{ $message }}</p>
@@ -57,7 +62,7 @@
                             <td>{!! $item->deskripsi !!}</td>
                             <td>
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm"" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                <a href="{{ route('program.donasi.destroy', $item->id) }}" class="btn btn-danger btn-sm"" title="Hapus"><i class="bi bi-trash"></i></a>
+                                <button data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -179,4 +184,22 @@
         </div>
     </div>
     @endforeach
+@foreach ($programDonasi as $item)
+    @foreach ($akun as $it)
+    <div class="modal fade" id="deleted{{ $item->id }}" tabindex="-1"  aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-title">Apa anda yakin?</div>
+                <div>Jika Program Donasi dihapus maka donasi yang terkait akan terhapus permanen</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ route('program.donasi.destroy', $item->id) }}"  class="btn btn-danger">Iya, Hapus Program</a>
+            </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+@endforeach
 @endsection

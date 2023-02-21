@@ -39,7 +39,7 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $item->nama_program }}</td>
                             <td>{{ $item->no_rek }}</td>
-                            <td>{{ $item->deskripsi }}</td>
+                            <td>{!! $item->deskripsi !!}</td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -27,8 +27,6 @@
                             <th>Kode </th>
                             <th>Nama Akun</th>
                             <th>Persen Hak Amil</th>
-                            <th>Total Saldo (Rp)</th>
-                            <th>Dipindahkan</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -38,12 +36,10 @@
                             <td>{{ $item->kode }}</td>
                             <td>{{ $item->nama_akun }}</td>
                             <td>{{ $item->persen_hak_amil }}</td>
-                            <td>{{ number_format($item->saldo_awal, 0, ',', '.') }}</td>
-                            <td>{{ $item->dipindahkan }}</td>
                             <td>
                                 <a href="{{ route('akun.programDonasi',$item->id) }}" class="btn btn-info btn-sm" title="Detile"><i class="bi bi-eye"></i></a>
                                 <button data-bs-toggle="modal" data-bs-target="#example{{ $item->id }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-                                <a href="{{ route('akun.delete',$item->id) }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                <button data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -104,7 +100,6 @@
     </div>
 </div>
 @foreach ($akun as $item)
-
 <div class="modal fade" id="example{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -152,5 +147,22 @@
         </div>
     </div>
 </div>
+@endforeach
+
+@foreach ($akun as $it)
+    <div class="modal fade" id="deleted{{ $it->id }}" tabindex="-1"  aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-title">Apa anda yakin?</div>
+                <div>Jika Akun dihapus maka program donasi dan donasi yang terkait akan terhapus permanen</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ route('akun.delete', $item->id) }}"  class="btn btn-danger">Iya, Hapus akun</a>
+            </div>
+            </div>
+        </div>
+    </div>
 @endforeach
 @endsection
