@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Data Program Donasi')
 @section('content')
 <div class="page-header d-print-none">
     <div class="container-xl">
@@ -85,10 +86,6 @@
                 <form action="{{ route('program.donasi.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <label class="form-label">Foto</label>
-                        <input type="file" name="foto" class="form-control">
-                    </div>
-                    <div>
                         <label for="">Nama Akun</label>
                         <select name="id_akun" id="" class="form-control @error('id_akun') is-invalid
                         @enderror">
@@ -106,14 +103,6 @@
                         <input type="text" name="nama_program" class="form-control @error('nama_program') is-invalid
                         @enderror" value="{{ old('nama_program') }}">
                         @error('nama_program')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div>
-                        <label class="form-label">No. Rekening</label>
-                        <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
-                        @enderror" value="{{ old('no_rek') }}" placeholder="contoh: BSI 7135452829 a/n Firmansyah">
-                    @error('no_rek')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -147,22 +136,10 @@
                 <form action="{{ route('program.donasi.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <label class="form-label">Foto</label>
-                        <input type="file" name="foto" class="form-control">
-                    </div>
-                    <div>
                         <label class="form-label">Nama Program Donasi</label>
                         <input type="text" name="nama_program" class="form-control @error('nama_program') is-invalid
                         @enderror" value="{{ $item->nama_program }}">
                         @error('nama_program')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div>
-                        <label class="form-label">No. Rekening</label>
-                        <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
-                        @enderror" value="{{ $item->no_rek }}" placeholder="contoh: BSI 7135452829 a/n Firmansyah">
-                    @error('no_rek')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

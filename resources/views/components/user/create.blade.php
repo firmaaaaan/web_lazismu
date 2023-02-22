@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Judul Buat User')
 @section('content')
 <div class="page-header d-print-none">
     <div class="container-xl">

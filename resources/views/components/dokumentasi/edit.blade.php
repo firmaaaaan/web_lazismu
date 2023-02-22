@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Edit Dokumentasi')
 @section('content')
 <div class="page-body">
     <div class="container-xl">

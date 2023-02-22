@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Edit Donasi')
 @section('content')
 <div class="page-body">
     <div class="container-xl">

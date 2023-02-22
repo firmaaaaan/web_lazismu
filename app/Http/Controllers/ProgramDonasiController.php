@@ -47,17 +47,10 @@ class ProgramDonasiController extends Controller
         $request->validate([
             'nama_program'=>'required',
             'id_akun'=>'required',
-            'no_rek'=>'required',
             'deskripsi'=>'required'
         ]);
 
         $input = $request->all();
-        if($image=$request->file('foto')){
-            $destinationPath='images/';
-            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
-            $image->move($destinationPath, $programImage);
-            $input['foto']="$programImage";
-        }
         ProgramDonasi::create($input);
         return back()->with('Success','Program donasi berhasil dibuat');
     }
@@ -99,19 +92,10 @@ class ProgramDonasiController extends Controller
     {
         $request->validate([
             'nama_program'=>'required',
-            'no_rek'=>'required',
             'deskripsi'=>'required'
         ]);
         $programDonasi=ProgramDonasi::find($id);
         $input = $request->all();
-        if($image=$request->file('foto')){
-            $destinationPath='images/';
-            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
-            $image->move($destinationPath, $programImage);
-            $input['foto']="$programImage";
-        }else{
-            unset($input['foto']);
-        }
         $programDonasi->update($input);
         return back()->with('Update','Program donasi berhasil diupdate');
     }
@@ -130,7 +114,7 @@ class ProgramDonasiController extends Controller
             }
             DB::beginTransaction();
             try {
-                // hapus semua data yang terkait dengan akun yang dihapus
+                // hapus semua data yang terkait dengan program donasi yang dihapus
                 Donasi::where('programdonasi_id', $programDonasi->id)->delete();
 
                 // hapus akun
