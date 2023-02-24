@@ -12,7 +12,7 @@ class permintaanAmbulan extends Model
     protected $guarded =['id'];
 
     public function rumahsakit(){
-        return $this->belongsTo(RumahSakit::class);
+        return $this->belongsTo(RumahSakit::class,'rumahsakit_id');
     }
 
     public function user(){

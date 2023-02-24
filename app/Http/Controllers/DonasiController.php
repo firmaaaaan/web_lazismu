@@ -96,7 +96,7 @@ class DonasiController extends Controller
         $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
         $programDonasi->save();
 
-        return back();
+        return back()->with('sukses', 'Terima kasih telah melakukan donasi');
     }
 
     /**

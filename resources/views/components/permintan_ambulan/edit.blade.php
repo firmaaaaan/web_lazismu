@@ -52,8 +52,11 @@
                         <div class="col-sm-6 col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Tujuan</label>
-                                <select type="text" name="rumahsakit_id" class="form-control" placeholder="Company" value="Chet">
-                                        <option value="{{ $permintaanAmbulan->rumahsakit->id }}">{{ $permintaanAmbulan->rumahsakit->nama_rs }}</option>
+                                <select name="rumahsakit_id" class="form-control" id="">
+                                    @foreach ($rumahsakit as $item)
+                                    <option value="{{ $item->id }}"@if ($item->id == $item->rumahsakit_id) selected
+                                    @endif>{{ $item->nama_rs }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

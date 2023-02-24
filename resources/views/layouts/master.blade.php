@@ -35,17 +35,19 @@
         }
         </style>
     </head>
-    <body  class=" layout-boxed">
+    <body  class="layout-boxed">
         <script src="{{ asset('dist') }}/js/demo-theme.min.js?1668287865"></script>
         <div class="page">
         <!-- Navbar -->
-        @include('partials.header')
-        @include('partials.navbar')
-        <div class="page-wrapper">
-            <!-- Page header -->
-            @yield('content')
-        @include('partials.footer')
+        <div class="sticky-top">
+            @include('partials.header')
+            @include('partials.navbar')
         </div>
+            <div class="page-wrapper">
+                <!-- Page header -->
+            @yield('content')
+            @include('partials.footer')
+            </div>
         </div>
         <!-- Libs JS -->
         <script src="{{ asset('dist/js/jam-digital.js') }}"></script>

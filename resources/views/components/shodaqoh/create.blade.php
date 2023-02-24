@@ -1,10 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Buat Donasi)
+@section('title', 'Buat Donasi')
 @section('content')
 <div class="page-body">
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-lg-10">
+                @if ($message = Session::get('sukses'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p><i class="bi bi-check-circle-fill"></i><strong> Donasi Berhasil! </strong>{{ $message }}</p>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-body d-flex">
                         <div class="thumbnail rounden w-25">

@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title','Dashboard')
 @section('content')
 <div class="page-header d-print-none">
     <div class="container-xl">
@@ -12,15 +13,19 @@
             Dashboard
             </h2>
         </div>
-        <div>
-
-            <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm ml-3"> <i class="bi bi-wallet-fill"></i> Transfer</a>
-            <a href="{{ route('dokumentasi.create') }}" class="btn btn-primary btn-sm ml-3"> <i class="bi bi-pencil"></i> Buat Dokumentasi</a>
-        </div>
+        <!-- Page title actions -->
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <span class="d-none d-sm-inline">
+                            <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm ml-3"> <i class="bi bi-wallet-fill"></i> Transfer</a>
+                        </span>
+                        <a href="{{ route('dokumentasi.create') }}" class="btn btn-primary d-none d-sm-inline-block btn-sm">
+                            <i class="bi bi-pencil"></i> Buat Dokumentasi</a>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
-
 <!-- Page body -->
 <div class="page-body">
     <div class="container-xl">
