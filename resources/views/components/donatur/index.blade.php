@@ -30,7 +30,9 @@
                             <th>No. Telepon</th>
                             <th>Email</th>
                             <th>Alamat</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -41,9 +43,13 @@
                             <td>{{ $item->tempat_lahir }}</td>
                             <td>{{ $item->tanggal_lahir }}</td>
                             <td>{{ $item->no_hp }}</td>
+                            <td>{{ $item->email }}</td>
                             <td>{{ $item->alamat }}</td>
-                            <td>{{ $item->alamat }}</td>
-                            <td></td>
+                            @role('administrator')
+                                <td>
+                                    <a href="{{ route('donatur.edit', $item->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="Edit"></i></a>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>

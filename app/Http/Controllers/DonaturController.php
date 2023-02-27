@@ -7,6 +7,7 @@ use App\Models\Donatur;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
+use App\Models\Donasi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 
@@ -88,9 +89,10 @@ class DonaturController extends Controller
      * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function edit(Donatur $donatur)
+    public function edit(Donatur $donatur, $id)
     {
-        //
+        $donatur=Donatur::find($id);
+        return view('components.donatur.edit', compact('donatur'));
     }
 
     /**
@@ -100,9 +102,11 @@ class DonaturController extends Controller
      * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donatur $donatur)
+    public function update(Request $request, Donatur $donatur, $id)
     {
-        //
+        $donatur=Donatur::find($id);
+        $donatur->update($request->all());
+        return redirect()->route('donatur.index');
     }
 
     /**

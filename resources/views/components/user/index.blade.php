@@ -21,13 +21,17 @@
         <div class="card">
             <div class="card-body">
             <div class="table-responsive">
-                <a href="{{ route('user.create') }}" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i>Tambah user</a>
+                @role('administrator')
+                    <a href="{{ route('user.create') }}" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i>Tambah user</a>
+                @endrole
                 <table class="table" id="tdatatables">
                     <thead>
                         <tr>
                             <th>Nama </th>
                             <th>Email</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -35,9 +39,11 @@
                         <tr>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
-                            <td>
-                                <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
+                            @role('administrator')
+                                <td>
+                                    <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>

@@ -35,153 +35,154 @@ use App\Http\Controllers\PermintaanAmbulanController;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/register/donatur',[DonaturController::class,'create'])->name('donatur.register');
+Route::post('/donatur/user',[DonaturController::class,'store'])->name('donatur.store');
 
-Route::middleware('auth')->group(function () {
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'admin.or.pimpinan'])->name('dashboard');
+
+Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-//Pegawai
-Route::get('/pegawai',[KaryawanController::class,'index'])->name('dropdown.pegawai.index');
-Route::get('/pegawai/create',[KaryawanController::class,'create'])->name('pegawai.create');
-Route::post('/pegawai/store',[KaryawanController::class,'store'])->name('pegawai.store');
-Route::post('/pegawai/update/{id}',[KaryawanController::class,'update'])->name('pegawai.update');
-Route::get('/pegawai/destroy/{id}',[KaryawanController::class,'destroy'])->name('pegawai.destroy');
+    //Pegawai
+    Route::get('/pegawai',[KaryawanController::class,'index'])->name('dropdown.pegawai.index');
+    Route::get('/pegawai/create',[KaryawanController::class,'create'])->name('pegawai.create');
+    Route::post('/pegawai/store',[KaryawanController::class,'store'])->name('pegawai.store');
+    Route::post('/pegawai/update/{id}',[KaryawanController::class,'update'])->name('pegawai.update');
+    Route::get('/pegawai/destroy/{id}',[KaryawanController::class,'destroy'])->name('pegawai.destroy');
 
-//Permintaan Ambulan
-Route::get('/permintaan-ambulan',[PermintaanAmbulanController::class,'index'])->name('permintaan.ambulan.index');
-Route::get('/create/permintaan-ambulan',[PermintaanAmbulanController::class,'create'])->name('permintaan.ambulan.create');
-Route::post('/create/permintaan-ambulan',[PermintaanAmbulanController::class,'store'])->name('permintaan.ambulan.store');
-Route::get('/edit/permintaan-ambulan/{id}',[PermintaanAmbulanController::class,'edit'])->name('permintaan.ambulan.edit');
-Route::post('/update/permintaan-ambulan/{id}',[PermintaanAmbulanController::class,'update'])->name('permintaan.ambulan.update');
-Route::get('/destroy/permintaan-ambulan/{id}',[PermintaanAmbulanController::class,'destroy'])->name('permintaan.ambulan.destroy');
-// Export PDF
-Route::get('/export-permintaan-ambulan-pdf',[PermintaanAmbulanController::class,'exportPermintaanAambulanPdf'])->name('permintaan.ambulan.Pdf');
-// Cetak Pertanggal
-Route::get('/cetak-pertanggal/{tglAwal}/{tglAkhir}',[PermintaanAmbulanController::class,'cetakPertanggal'])->name('cetakPertanggal.pdf');
-
-
-
-//Program Donasi
-Route::get('/program-donasi',[ProgramDonasiController::class, 'index'])->name('dropdown.program.donasi.index');
-Route::get('/program-donasi/show/{id_akun}/program-donasi/{programdonasi_id}',[ProgramDonasiController::class, 'show'])->name('program.donasi.show');
-Route::post('/program-donasi',[ProgramDonasiController::class, 'store'])->name('program.donasi.store');
-Route::post('/program-donasi/{id}',[ProgramDonasiController::class, 'update'])->name('program.donasi.update');
-Route::get('/program-donasi/destroy/{id}',[ProgramDonasiController::class, 'destroy'])->name('program.donasi.destroy');
-
-//Donasi
-Route::get('/donasi', [DonasiController::class, 'index'])->name('drop.donasi.index');
-Route::get('/donasi/create', [DonasiController::class, 'create'])->name('donasi.create');
-Route::post('/donasi/store', [DonasiController::class, 'store'])->name('donasi.store');
-Route::get('/donasi/edit/{id}', [DonasiController::class, 'edit'])->name('donasi.edit');
-Route::post('/donasi/update/{id}', [DonasiController::class, 'update'])->name('donasi.update');
-Route::get('/donasi/destroy{id}', [DonasiController::class, 'destroy'])->name('donasi.destroy');
-// Export PDF
-Route::get('/export-donasi-pdf',[DonasiController::class,'exportPdf'])->name('exportPdf');
-// Cetak Pertanggal
-Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
-// Export Excel
-Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->name('exportdonasiexcel');
-Route::get('/program/{id}/akun/{id_akun}',[DonasiController::class,'programIndex'])->name('program.index');
-//Export Perprogram donasi pertanggal
-// Route::get('/cetak-donasi-program/{id}/pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakProgramPertanggal'])->name('cetakProgramPertanggal.pdf');
-Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{akunId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
-
-
-// Export menggunakan datatables
-Route::get('/export-donasi',[ExportController::class,'exportDonasi'])->name('dropd.exportDonasi');
-Route::get('/export-zakat',[ExportController::class,'exportZakat'])->name('exportZakat');
-Route::get('/export-permintaan-Ambulan',[ExportController::class,'exportPermintaanAmbulan'])->name('exportPermintaanAmbulan');
-
-
-//Zakat
-Route::get('/zakat', [ZakatController::class, 'index'])->name('drop.zakat.index');
-Route::get('/create-zakat', [ZakatController::class, 'create'])->name('zakat.create');
-Route::post('/create-zakat',[ZakatController::class, 'store'])->name('zakat.store');
-Route::get('/edit-zakat/{id}', [ZakatController::class, 'edit'])->name('zakat.edit');
-Route::post('/update-zakat/{id}', [ZakatController::class, 'update'])->name('zakat.update');
-Route::get('/destroy-zakat/{id}', [ZakatController::class, 'destroy'])->name('zakat.destroy');
-// Export PDF
-Route::get('/export-zakat-pdf',[ZakatController::class,'exportZakatPdf'])->name('exportZakatPdf');
-// Cetak Pertanggal
-Route::get('/cetak-zakat-pertanggal/{tglAwal}/{tglAkhir}',[ZakatController::class,'cetakPertanggalZakat'])->name('cetakPertanggalZakat.pdf');
-// Export Excel
-Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->name('exportzakatexcel');
+    //Permintaan Ambulan
+    Route::get('/permintaan-ambulan',[PermintaanAmbulanController::class,'index'])->name('permintaan.ambulan.index');
+    Route::get('/create/permintaan-ambulan',[PermintaanAmbulanController::class,'create'])->name('permintaan.ambulan.create');
+    Route::post('/create/permintaan-ambulan',[PermintaanAmbulanController::class,'store'])->name('permintaan.ambulan.store');
+    Route::get('/edit/permintaan-ambulan/{id}',[PermintaanAmbulanController::class,'edit'])->name('permintaan.ambulan.edit');
+    Route::post('/update/permintaan-ambulan/{id}',[PermintaanAmbulanController::class,'update'])->name('permintaan.ambulan.update');
+    Route::get('/destroy/permintaan-ambulan/{id}',[PermintaanAmbulanController::class,'destroy'])->name('permintaan.ambulan.destroy');
+    // Export PDF
+    Route::get('/export-permintaan-ambulan-pdf',[PermintaanAmbulanController::class,'exportPermintaanAambulanPdf'])->name('permintaan.ambulan.Pdf');
+    // Cetak Pertanggal
+    Route::get('/cetak-pertanggal/{tglAwal}/{tglAkhir}',[PermintaanAmbulanController::class,'cetakPertanggal'])->name('cetakPertanggal.pdf');
 
 
 
-// Route penyaluran donasi
-Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
-Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
-Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
-Route::get('/salurkan-program/{id}/akun/{akun_id}', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
+    //Program Donasi
+    Route::get('/program-donasi',[ProgramDonasiController::class, 'index'])->name('dropdown.program.donasi.index');
+    Route::get('/program-donasi/show/{id_akun}/program-donasi/{programdonasi_id}',[ProgramDonasiController::class, 'show'])->name('program.donasi.show');
+    Route::post('/program-donasi',[ProgramDonasiController::class, 'store'])->name('program.donasi.store');
+    Route::post('/program-donasi/{id}',[ProgramDonasiController::class, 'update'])->name('program.donasi.update');
+    Route::get('/program-donasi/destroy/{id}',[ProgramDonasiController::class, 'destroy'])->name('program.donasi.destroy');
 
-//Penyaluran Zakat
-Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');
-Route::post('zakat/salurkan/{id}', [ZakatController::class,'storeSalurkan'])->name('zakat.storeSalurkan');
+    //Donasi
+    Route::get('/donasi', [DonasiController::class, 'index'])->name('drop.donasi.index');
+    Route::get('/donasi/create', [DonasiController::class, 'create'])->name('donasi.create');
+    Route::post('/donasi/store', [DonasiController::class, 'store'])->name('donasi.store');
+    Route::get('/donasi/edit/{id}', [DonasiController::class, 'edit'])->name('donasi.edit');
+    Route::post('/donasi/update/{id}', [DonasiController::class, 'update'])->name('donasi.update');
+    Route::get('/donasi/destroy{id}', [DonasiController::class, 'destroy'])->name('donasi.destroy');
+    // Export PDF
+    Route::get('/export-donasi-pdf',[DonasiController::class,'exportPdf'])->name('exportPdf');
+    // Cetak Pertanggal
+    Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
+    // Export Excel
+    Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->name('exportdonasiexcel');
+    Route::get('/program/{id}/akun/{id_akun}',[DonasiController::class,'programIndex'])->name('program.index');
+    //Export Perprogram donasi pertanggal
+    // Route::get('/cetak-donasi-program/{id}/pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakProgramPertanggal'])->name('cetakProgramPertanggal.pdf');
+    Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{akunId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
 
 
-Route::get('/validasi/donasi/{id}', [DonasiController::class, 'validasiDonasi'])->name('validasi.donasi');
-Route::get('/validasi/zakat/{id}', [ZakatController::class, 'validasiZakat'])->name('validasi.zakat');
-Route::get('/validasi/permintaan-ambulan/{id}', [PermintaanAmbulanController::class, 'validasiAmbulan'])->name('validasi.ambulan');
-Route::put('perjalanan/{id}/updateStatus', [PermintaanAmbulanController::class,'updateStatus'])->name('perjalanan.updateStatus');
+    // Export menggunakan datatables
+    Route::get('/export-donasi',[ExportController::class,'exportDonasi'])->name('dropd.exportDonasi');
+    Route::get('/export-zakat',[ExportController::class,'exportZakat'])->name('exportZakat');
+    Route::get('/export-permintaan-Ambulan',[ExportController::class,'exportPermintaanAmbulan'])->name('exportPermintaanAmbulan');
 
-//Rumah Sakit
-Route::get('/rumah-sakit', [RumahSakitController::class,'index'])->name('dropdown.rumahsakit.index');
-Route::post('/rumah-sakit/store',[RumahSakitController::class,'store'])->name('rumahsakit.store');
-Route::post('/rumah-sakit/update/{id}',[RumahSakitController::class,'update'])->name('rumahsakit.update');
-Route::get('/rumah-sakit/destroy/{id}', [RumahSakitController::class,'destroy'])->name('rumahsakit.destroy');
 
-// User
-Route::get('/user', [UserController::class, 'index'])->name('dropdo.user.index');
-Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
-Route::get('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-Route::get('/aktivitas/{id}', [ZakatController::class, 'aktivitas'])->name('aktivitas');
+    //Zakat
+    Route::get('/zakat', [ZakatController::class, 'index'])->name('drop.zakat.index');
+    Route::get('/create-zakat', [ZakatController::class, 'create'])->name('zakat.create');
+    Route::post('/create-zakat',[ZakatController::class, 'store'])->name('zakat.store');
+    Route::get('/edit-zakat/{id}', [ZakatController::class, 'edit'])->name('zakat.edit');
+    Route::post('/update-zakat/{id}', [ZakatController::class, 'update'])->name('zakat.update');
+    Route::get('/destroy-zakat/{id}', [ZakatController::class, 'destroy'])->name('zakat.destroy');
+    // Export PDF
+    Route::get('/export-zakat-pdf',[ZakatController::class,'exportZakatPdf'])->name('exportZakatPdf');
+    // Cetak Pertanggal
+    Route::get('/cetak-zakat-pertanggal/{tglAwal}/{tglAkhir}',[ZakatController::class,'cetakPertanggalZakat'])->name('cetakPertanggalZakat.pdf');
+    // Export Excel
+    Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->name('exportzakatexcel');
 
-//Driver
-Route::get('/driver',[DriverController::class,'index'])->name('driver.index');
-Route::post('/driver/store',[DriverController::class,'store'])->name('driver.store');
-Route::post('/driver/update/{id}',[DriverController::class,'update'])->name('driver.update');
-Route::get('/driver/destroy/{id}',[DriverController::class,'destroy'])->name('driver.destroy');
 
-// Akun
-Route::get('/akun',[AkunController::class, 'index'])->name('akun.index');
-Route::get('/akun/delete/{id}',[AkunController::class, 'destroy'])->name('akun.delete');
-Route::post('/akun',[AkunController::class, 'store'])->name('akun.store');
-Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.update');
-Route::get('/detile-akun/{id_akun}/program-donasi',[AkunController::class,'programDonasi'])->name('akun.programDonasi');
 
-//Request Ajax
-// Route::get('/program-donasi/{id_akun}', [DonasiController::class, 'create']);
+    // Route penyaluran donasi
+    Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
+    Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
+    Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
+    Route::get('/salurkan-program/{id}/akun/{akun_id}', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
 
-// Transaction
-Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
-Route::get('/transaction', [LogTransaksiController::class,'index'])->name('index.transaction');
-Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo'])->name('store.transaction');
-//Export Perprogram donasi pertanggal
-Route::get('/cetak-transaksi/pertanggal/{tglAwal}/{tglAkhir}',[LogTransaksiController::class,'cetakPertanggalTransaksi'])->name('cetakPertanggalTransaksi.pdf');
+    //Penyaluran Zakat
+    Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');
+    Route::post('zakat/salurkan/{id}', [ZakatController::class,'storeSalurkan'])->name('zakat.storeSalurkan');
 
-// Dokumentasi
-Route::get('/dokumentasi/index', [DokumentasiController::class, 'index'])->name('dokumentasi.index');
-Route::get('/dokumentasi/create', [DokumentasiController::class, 'create'])->name('dokumentasi.create');
-Route::post('/dokumentasi/post', [DokumentasiController::class, 'store'])->name('dokumentasi.store');
-Route::get('/dokumentasi/show/{id}', [DokumentasiController::class, 'show'])->name('dokumentasi.show');
-Route::get('/dokumentasi/edit/{id}', [DokumentasiController::class, 'edit'])->name('dokumentasi.edit');
-Route::post('/dokumentasi/update/{id}', [DokumentasiController::class, 'update'])->name('dokumentasi.update');
-Route::get('/dokumentasi/destroy/{id}', [DokumentasiController::class, 'destroy'])->name('dokumentasi.destroy');
 
-//Image
-Route::post('/dokumentasi/image', [ImageController::class, 'store'])->name('dokumentasi.image.store');
+    Route::get('/validasi/donasi/{id}', [DonasiController::class, 'validasiDonasi'])->name('validasi.donasi');
+    Route::get('/validasi/zakat/{id}', [ZakatController::class, 'validasiZakat'])->name('validasi.zakat');
+    Route::get('/validasi/permintaan-ambulan/{id}', [PermintaanAmbulanController::class, 'validasiAmbulan'])->name('validasi.ambulan');
+    Route::put('perjalanan/{id}/updateStatus', [PermintaanAmbulanController::class,'updateStatus'])->name('perjalanan.updateStatus');
 
-//Donatur
-Route::get('/donatur',[DonaturController::class,'index'])->name('donatur.index');
+    //Rumah Sakit
+    Route::get('/rumah-sakit', [RumahSakitController::class,'index'])->name('dropdown.rumahsakit.index');
+    Route::post('/rumah-sakit/store',[RumahSakitController::class,'store'])->name('rumahsakit.store');
+    Route::post('/rumah-sakit/update/{id}',[RumahSakitController::class,'update'])->name('rumahsakit.update');
+    Route::get('/rumah-sakit/destroy/{id}', [RumahSakitController::class,'destroy'])->name('rumahsakit.destroy');
+
+    // User
+    Route::get('/user', [UserController::class, 'index'])->name('dropdo.user.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+    Route::get('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/aktivitas/{id}', [ZakatController::class, 'aktivitas'])->name('aktivitas');
+
+    //Driver
+    Route::get('/driver',[DriverController::class,'index'])->name('driver.index');
+    Route::post('/driver/store',[DriverController::class,'store'])->name('driver.store');
+    Route::post('/driver/update/{id}',[DriverController::class,'update'])->name('driver.update');
+    Route::get('/driver/destroy/{id}',[DriverController::class,'destroy'])->name('driver.destroy');
+
+    // Akun
+    Route::get('/akun',[AkunController::class, 'index'])->name('akun.index');
+    Route::get('/akun/delete/{id}',[AkunController::class, 'destroy'])->name('akun.delete');
+    Route::post('/akun',[AkunController::class, 'store'])->name('akun.store');
+    Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.update');
+    Route::get('/detile-akun/{id_akun}/program-donasi',[AkunController::class,'programDonasi'])->name('akun.programDonasi');
+
+    //Request Ajax
+    // Route::get('/program-donasi/{id_akun}', [DonasiController::class, 'create']);
+
+    // Transaction
+    Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
+    Route::get('/transaction', [LogTransaksiController::class,'index'])->name('index.transaction');
+    Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo'])->name('store.transaction');
+    //Export Perprogram donasi pertanggal
+    Route::get('/cetak-transaksi/pertanggal/{tglAwal}/{tglAkhir}',[LogTransaksiController::class,'cetakPertanggalTransaksi'])->name('cetakPertanggalTransaksi.pdf');
+
+    // Dokumentasi
+    Route::get('/dokumentasi/index', [DokumentasiController::class, 'index'])->name('dokumentasi.index');
+    Route::get('/dokumentasi/create', [DokumentasiController::class, 'create'])->name('dokumentasi.create');
+    Route::post('/dokumentasi/post', [DokumentasiController::class, 'store'])->name('dokumentasi.store');
+    Route::get('/dokumentasi/show/{id}', [DokumentasiController::class, 'show'])->name('dokumentasi.show');
+    Route::get('/dokumentasi/edit/{id}', [DokumentasiController::class, 'edit'])->name('dokumentasi.edit');
+    Route::post('/dokumentasi/update/{id}', [DokumentasiController::class, 'update'])->name('dokumentasi.update');
+    Route::get('/dokumentasi/destroy/{id}', [DokumentasiController::class, 'destroy'])->name('dokumentasi.destroy');
+
+    //Image
+    Route::post('/dokumentasi/image', [ImageController::class, 'store'])->name('dokumentasi.image.store');
+
+    //Donatur
+    Route::get('/donatur',[DonaturController::class,'index'])->name('donatur.index');
+    Route::get('/donatur/edit/{id}',[DonaturController::class,'edit'])->name('donatur.edit');
+    Route::post('/donatur/update/{id}',[DonaturController::class,'update'])->name('donatur.update');
 });
-
-
-Route::get('/register/donatur',[DonaturController::class,'create'])->name('donatur.register');
-Route::post('/donatur/user',[DonaturController::class,'store'])->name('donatur.store');
 
 require __DIR__.'/auth.php';

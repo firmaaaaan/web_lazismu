@@ -20,7 +20,11 @@
     <div class="container-xl">
         <div class="card mb-3">
             <div class="card-body">
-                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                @auth
+                    @if (auth()->user()->role=='administrator')
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                    @endif
+                @endauth
             <div class="table-responsive">
                 <table class="table" id="table-datatables">
                     <thead>

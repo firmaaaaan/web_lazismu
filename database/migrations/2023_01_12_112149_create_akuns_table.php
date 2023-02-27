@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('kode')->unique();
             $table->string('nama_akun');
             $table->decimal('persen_hak_amil', 6,2);
-            $table->bigInteger('saldo_awal')->default(0);
-            $table->bigInteger('dipindahkan')->default(0);
+            // $table->bigInteger('saldo_awal')->default(0);
+            // $table->bigInteger('dipindahkans')->default(0);
             $table->timestamps();
         });
     }

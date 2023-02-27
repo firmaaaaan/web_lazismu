@@ -21,14 +21,18 @@
         <div class="card">
             <div class="card-body">
             <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i>Tambah Akun</button>
+                @role('administrator')
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i>Tambah Akun</button>
+                @endrole
                 <table class="table" id="tdatatables">
                     <thead>
                         <tr>
                             <th>Kode </th>
                             <th>Nama Akun</th>
                             <th>Persen Hak Amil</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -37,11 +41,13 @@
                             <td>{{ $item->kode }}</td>
                             <td>{{ $item->nama_akun }}</td>
                             <td>{{ $item->persen_hak_amil }}</td>
-                            <td>
-                                <a href="{{ route('akun.programDonasi',$item->id) }}" class="btn btn-info btn-sm" title="Detile"><i class="bi bi-eye"></i></a>
-                                <button data-bs-toggle="modal" data-bs-target="#example{{ $item->id }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-                                <button data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                            </td>
+                            @role('administrator')
+                                <td>
+                                    <a href="{{ route('akun.programDonasi',$item->id) }}" class="btn btn-info btn-sm" title="Detile"><i class="bi bi-eye"></i></a>
+                                    <button data-bs-toggle="modal" data-bs-target="#example{{ $item->id }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+                                    <button data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>

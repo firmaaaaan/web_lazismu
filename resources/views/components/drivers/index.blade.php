@@ -21,7 +21,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Driver</button>
+                    @role('administrator')
+                        <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Driver</button>
+                    @endrole
                 {{-- <a href="" type="button" class="btn btn-success mt-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
                 <a href="" type="button" class="btn btn-danger mt-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="table-datatables">
@@ -29,9 +31,12 @@
                         <tr>
                             <th>Nama Driver</th>
                             <th>Email</th>
-                            <th>No Telepon</th>
+                            <th>No. Telepon</th>
+                            <th>No. Seri</th>
                             <th>Status</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +45,7 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->no_hp}}</td>
+                            <td>{{ $item->no_seri}}</td>
                             <td>
                                 @if ($item->status_driver=='Aktif')
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status_driver }}</div>
@@ -47,10 +53,12 @@
                                 <div class="btn btn-outline-danger btn-sm">{{ $item->status_driver }}</div>
                                 @endif
                             </td>
-                            <td>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                <a href="{{ route('driver.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
+                            @role('administrator')
+                                <td>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                                    <a href="{{ route('driver.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>
@@ -82,6 +90,10 @@
                     <div>
                         <label class="form-label">No. Handphone</label>
                         <input type="number" name="no_hp" class="form-control">
+                    </div>
+                    <div>
+                        <label class="form-label">No. Seri</label>
+                        <input type="text" name="no_seri" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Status</label>
@@ -125,6 +137,10 @@
                     <div>
                         <label class="form-label">No. Handphone</label>
                         <input type="number" name="no_hp" class="form-control">
+                    </div>
+                    <div>
+                        <label class="form-label">No. Seri</label>
+                        <input type="text" name="no_seri" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Status</label>

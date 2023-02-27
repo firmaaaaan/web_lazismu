@@ -31,7 +31,9 @@
                     </div>
                 @endif
             <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary btn-sm my-2" style="float: right"><i class="bi bi-plus-square"></i> Tambah Rumah Sakit</button>
+                @role('administrator')
+                    <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary btn-sm my-2" style="float: right"><i class="bi bi-plus-square"></i> Tambah Rumah Sakit</button>
+                @endrole
                 {{-- <a href="" type="button" class="btn btn-success btn-sm mt-2 ml-2"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
                 <a href="" type="button" class="btn btn-danger btn-sm mt-2"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="table-datatables">
@@ -39,7 +41,9 @@
                         <tr>
                             <th>Nama Rumah Sakit</th>
                             <th>Alamat</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -47,10 +51,12 @@
                         <tr>
                             <td>{{ $item->nama_rs }}</td>
                             <td>{{ $item->alamat }}</td>
-                            <td>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                <a href="{{ route('rumahsakit.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
+                            @role('administrator')
+                                <td>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                                    <a href="{{ route('rumahsakit.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>

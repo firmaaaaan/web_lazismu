@@ -73,6 +73,7 @@
                         </div>
                     </div> --}}
                 </li>
+                @role('administrator')
                 <li class="nav-item {{ request()->routeIs('#navbar-extra') ? 'active' : '' }} dropdown {{ request()->routeIs('dropd.*') ? 'active' : '' }}">
                     <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
@@ -98,6 +99,7 @@
                         </div>
                     </div>
                 </li>
+                @endrole
                 <li class="nav-item {{ request()->routeIs('#navbar-extra') ? 'active' : '' }} dropdown {{ request()->routeIs('dropdo.*') ? 'active' : '' }}">
                     <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->

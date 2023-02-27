@@ -36,7 +36,9 @@
                     </div>
                 @endif
             <div class="table-responsive">
-                <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Program</button>
+                @role('administrator')
+                    <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Program</button>
+                @endrole
                 {{-- <a href="" type="button" class="btn btn-success mt-2 ml-2 btn-sm"><i class="bi bi-file-earmark-excel-fill"></i>Excel</a>
                 <a href="" type="button" class="btn btn-danger mt-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
                 <table class="table" id="table-datatables">
@@ -47,7 +49,9 @@
                             <th>Nama Program</th>
                             <th>No. Rekening</th>
                             <th>Deskripsi Program</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     @php
@@ -61,10 +65,12 @@
                             <td>{{ $item->nama_program }}</td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{!! $item->deskripsi !!}</td>
-                            <td>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm"" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                <button data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                            </td>
+                            @role('administrator')
+                                <td>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm"" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                                    <button data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>

@@ -31,8 +31,10 @@
                     </div>
                 @endif
             <div class="table-responsive">
-                <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
-                <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+                @role('administrator')
+                    <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
+                    <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
+                @endrole
                 <table class="table" id="datatables">
                     <thead>
                         <tr>
@@ -45,8 +47,10 @@
                             <th>Infaq (Rp)</th>
                             <th>Status Permintaan</th>
                             <th>Status Perjalanan</th>
-                            <th>Feedback</th>
-                            <th>Opsi</th>
+                            @role('administrator')
+                                    <th>Feedback</th>
+                                    <th>Opsi</th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -73,22 +77,24 @@
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status_perjalanan }}</div>
                             @endif
                             </td>
-                            <td>
-                                @if ($item->status_id==4)
-                                    <a href="{{ route('validasi.ambulan', $item->id) }}" class="btn btn-danger btn-sm" title="Ditolak"><i class="bi bi-exclamation-circle"></i></a>
-                                @else
-                                    <a href="{{ route('validasi.ambulan', $item->id) }}" class="btn btn-success btn-sm" title="Diterima"><i class="bi bi-check2-square"></i></a>
-                                @endif
-                                <form method="POST" action="{{ route('perjalanan.updateStatus', $item->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" name="status_perjalanan" class="btn btn-primary btn-sm" value="Selesai" title="Selesai"><i class="bi bi-check2-all"></i></button>
-                                </form>
-                            </td>
-                            <td>
-                                <a href="{{ route('permintaan.ambulan.edit', $item->id)}}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('permintaan.ambulan.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
+                            @role('administrator')
+                                <td>
+                                    @if ($item->status_id==4)
+                                        <a href="{{ route('validasi.ambulan', $item->id) }}" class="btn btn-danger btn-sm" title="Ditolak"><i class="bi bi-exclamation-circle"></i></a>
+                                    @else
+                                        <a href="{{ route('validasi.ambulan', $item->id) }}" class="btn btn-success btn-sm" title="Diterima"><i class="bi bi-check2-square"></i></a>
+                                    @endif
+                                    <form method="POST" action="{{ route('perjalanan.updateStatus', $item->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" name="status_perjalanan" class="btn btn-primary btn-sm" value="Selesai" title="Selesai"><i class="bi bi-check2-all"></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <a href="{{ route('permintaan.ambulan.edit', $item->id)}}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="{{ route('permintaan.ambulan.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                </td>
+                            @endrole
                         </tr>
                         @endforeach
                     </tbody>
