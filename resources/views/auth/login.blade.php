@@ -36,6 +36,11 @@
 			</div>
 			<div class="card card-md">
 				<div class="card-body">
+                    @if ($message = Session::get('Info'))
+                        <div class="alert alert-primary alert-block mb-2">
+                            <p><i class="bi bi-lightbulb-fill"></i><strong>Berhasi! </strong>{{ $message }}</p>
+                        </div>
+                    @endif
 					<h2 class="h2 text-center mb-4">Login dengan akun Anda</h2>
 					<form method="POST" action="{{ route('login') }}">
                         @csrf

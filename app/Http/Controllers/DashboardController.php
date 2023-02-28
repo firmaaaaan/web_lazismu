@@ -12,33 +12,22 @@ class DashboardController extends Controller
 {
     public function index(){
         $donasi=Donasi::all();
-
-
-        $total_zakat=Zakat::all();
-        // Menghitung jumlah zakat
-        $total_zakat = Zakat::sum('nominal');
-
-        // Menghitung jumlah zakat yang tersalurkan
-        $zakat_tersalurkan = Zakat::sum('jumlah_tersisa');
-
-        // Menghitung jumlah zakat yang masih tersisa
-        $total_zakat_tersisa = $total_zakat + $zakat_tersalurkan ;
-        $total_zakat = Zakat::where('status_id', '2')->sum('nominal');
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-        // Menghitung jumlah donasi
         $total_donasi = Donasi::sum('jml_donasi');
-
-        // Menghitung jumlah donasi yang tersalurkan
-        // $total_tersalurkan = Donasi::sum('jumlah_tersisa');
-
-        // Menghitung jumlah donasi yang masih tersisa
-        // $total_tersisa = $total_donasi + $total_tersalurkan;
+        $programDonasi=ProgramDonasi::all();
 
         $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
-        // $total_tersisa = Donasi::where('status_id', '1')->sum('jumlah_tersisa');
-        $programDonasi=ProgramDonasi::all();
-        return view('dashboard', compact('programDonasi','total_donasi','total_zakat','zakat_tersalurkan','total_zakat_tersisa','donasi'));
+
+        // Mendapatkan data jumlah donasi yang sudah divalidasi berdasarkan id program donasi tertentu
+        $dataDonasi = [];
+        foreach ($programDonasi as $program) {
+            $donasi = Donasi::where('programdonasi_id', $program->id)
+                        ->where('status_id', '2')
+                        ->sum('jml_donasi');
+            array_push($dataDonasi, $donasi);
+        }
+        return view('dashboard', compact('programDonasi','total_donasi','donasi','dataDonasi'));
     }
 
 }

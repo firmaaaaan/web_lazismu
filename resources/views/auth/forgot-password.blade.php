@@ -21,6 +21,7 @@
 		<link href="{{ asset('dist') }}/css/tabler-payments.min.css?1668287865" rel="stylesheet"/>
 		<link href="{{ asset('dist') }}/css/tabler-vendors.min.css?1668287865" rel="stylesheet"/>
 		<link href="{{ asset('dist') }}/css/demo.min.css?1668287865" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
         <link rel="shortcut icon" href="{{ asset('dist/img/lazismu.png') }}" type="image/x-icon">
 		<style>
 			@import url('https://rsms.me/inter/inter.css');
@@ -38,6 +39,11 @@
 			</div>
 			<div class="card card-md">
 				<div class="card-body">
+                    @if ($message = Session::get('Info'))
+                        <div class="alert alert-primary alert-block mb-2">
+                            <p><i class="bi bi-lightbulb-fill"></i><strong>Berhasi! </strong>{{ $message }}</p>
+                        </div>
+                    @endif
 					<h2 class="h2 text-center mb-4">Lupa Password</h2>
                     <p>Lupa password Anda? Tidak masalah. Beritahu kami alamat email Anda dan kami akan mengirimkan tautan reset password melalui email yang akan memungkinkan Anda memilih password baru.</p>
 					<form method="POST" action="{{ route('password.email') }}">

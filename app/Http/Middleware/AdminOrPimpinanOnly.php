@@ -22,7 +22,6 @@ class AdminOrPimpinanOnly
         if (!($user && ($user->hasRole('administrator') || $user->hasRole('pimpinan')))) {
             abort(403, 'Unauthorized action.');
         }
-
         return $next($request);
     }
 }

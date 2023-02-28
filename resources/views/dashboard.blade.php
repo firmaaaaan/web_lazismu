@@ -63,10 +63,21 @@
             <div class="col-sm-8">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Grafik Total Donasi Setiap Program</h5>
+                        <h5>Grafik Sisa Saldo Donasi Setiap Program</h5>
                     </div>
                     <div class="card-body">
                         <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Grafik Saldo Donasi Perprogram</h5><br/>
+                        <small class="color:red">sebelum di donasikan</small>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="pie"></canvas>
                     </div>
                 </div>
             </div>
@@ -75,7 +86,7 @@
 </div>
 
 @section('chart')
-            <script>
+        <script>
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -124,5 +135,55 @@
                 }
             });
         </script>
+        <script>
+        var ctx = document.getElementById('pie').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [
+                    @if($programDonasi)
+                        @foreach($programDonasi as $donationProgram)
+                            '{{ $donationProgram->nama_program }}',
+                        @endforeach
+                    @endif
+                ],
+                datasets: [{
+                    label: 'Jumlah Donasi',
+                    data: [
+                        @if($dataDonasi)
+                            @foreach($dataDonasi as $donation)
+                                {{ $donation }},
+                            @endforeach
+                        @endif
+                    ],
+                    backgroundColor: [
+                        @if($programDonasi)
+                            @foreach($programDonasi as $donationProgram)
+                                'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 0.2)',
+                            @endforeach
+                        @endif
+                    ],
+                    borderColor: [
+                        @if($programDonasi)
+                            @foreach($programDonasi as $donationProgram)
+                                'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 1)',
+                            @endforeach
+                        @endif
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
 @endsection
 @endsection
