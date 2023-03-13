@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Report Donasi')
 @section('content')
 
 <div class="page-header d-print-none">
@@ -36,7 +37,13 @@
                     <tbody>
                         @foreach ($donasi as $item)
                         <tr>
-                            <td>{{ $item->user->name }}</td>
+                            <td>
+                                @if ($item->user_id)
+                                    {{ $item->user->name }}
+                                @else
+                                    {{ $item->nama_donatur }}
+                                @endif
+                            </td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->programDonasi->nama_program }}</td>
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>

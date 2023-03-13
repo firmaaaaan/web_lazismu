@@ -27,7 +27,7 @@
                 @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
-                        <p>{{ $message }}</p>
+                        <p><i class="bi bi-check-circle-fill"> <strong>Berhasil!</strong>{{ $message }}</p>
                     </div>
                 @endif
             <div class="table-responsive">

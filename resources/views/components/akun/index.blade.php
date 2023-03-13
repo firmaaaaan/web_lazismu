@@ -88,7 +88,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="user_id">Pesen hak amil</label>
+                            <label for="user_id">Persen hak amil</label>
                             <input type="text" name="persen_hak_amil" class="form-control @error('persen_hak_amil') is-invalid
                             @enderror" value="{{ old('persen_hak_amil') }}">
                             @error('persen_hak_amil')
@@ -136,7 +136,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="user_id">Pesen hak amil</label>
+                            <label for="user_id">Persen hak amil</label>
                             <input type="text" value="{{ $item->persen_hak_amil }}" name="persen_hak_amil" class="form-control @error('persen_hak_amil') is-invalid
                             @enderror" value="{{ old('persen_hak_amil') }}">
                         @error('persen_hak_amil')

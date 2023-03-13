@@ -5,7 +5,23 @@
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-lg-10">
+                @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-block mb-2">
+                                <p><i class="bi bi-check-circle-fill"></i><strong> Penyaluran Berhasil! </strong>{{ $message }}</p>
+                            </div>
+                @endif
+                @if ($message = Session::get('error'))
+                            <div class="alert alert-danger alert-block mb-2">
+                                <p><i class="bi bi-backspace-reverse-fill"></i></i><strong> Penyaluran Gagal! </strong>{{ $message }}</p>
+                            </div>
+                @endif
+                @if ($message = Session::get('belum'))
+                            <div class="alert alert-info alert-block mb-2">
+                                <p><i class="bi bi-lightbulb-fill"></i> <strong> Penyaluran Bermasalah! </strong>{{ $message }}</p>
+                            </div>
+                        @endif
                 <div class="card">
+
                     <div class="card-body d-flex">
                         <div class="thumbnail rounden w-25">
                             <img src="{{ asset('dist/img/lazismu.png') }}" alt="">

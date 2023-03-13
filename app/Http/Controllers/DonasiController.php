@@ -235,7 +235,7 @@ class DonasiController extends Controller
     public function cetakPertanggalDonasi($tglAwal, $tglAkhir){
         // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
         $cetakPertanggalDonasi=Donasi::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
-        $pdf = PDF::loadView('components.pdf.donasi-pertanggal',[ 'cetakPertanggalDonasi'=>$cetakPertanggalDonasi]);
+        $pdf = PDF::loadView('components.pdf.donasi-pertanggal',[ 'cetakPertanggalDonasi'=>$cetakPertanggalDonasi, 'tglAwal'=>$tglAwal,'tglAkhir'=>$tglAkhir]);
         return $pdf->stream('donasi-pertanggal.pdf');
         // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
     }
@@ -274,7 +274,7 @@ class DonasiController extends Controller
 
         // Pastikan jumlah donasi yang tersedia cukup untuk disalurkan
         if ($programDonasi->jumlah_donasi_program < $request->input('tersalurkan')) {
-            return redirect()->route('program.index', $id)->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
+            return back()->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
         }
 
         // Cek apakah ada donasi yang belum tervalidasi
@@ -283,7 +283,7 @@ class DonasiController extends Controller
             ->get();
 
         if ($berlumTervalidasi->sum('jml_donasi') >= $request->input('tersalurkan')) {
-            return redirect()->route('program.index', $id)->with('belum', 'Terdapat donasi yang belum tervalidasi yang tidak bisa disalurkan!');
+            return back()->with('belum', 'Terdapat donasi yang belum tervalidasi yang tidak bisa disalurkan!');
         }
 
         Donasi::where('programdonasi_id', $id)->update(['status_penyaluran' => 'Tersalurkan']);
@@ -294,17 +294,21 @@ class DonasiController extends Controller
         ProgramDonasi::where('id', $id)
             ->update(['tersalurkan' => DB::raw('tersalurkan + '.$tersalurkan)]);
 
-        // // Ubah jumlah donasi tersisa pada tabel donasis
-        // Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
-        //     ->decrement('jml_donasi', $request->input('tersalurkan'));
-
-        return redirect()->route('program.index', $id)->with('success', 'Donasi berhasil disalurkan!');
+        return back()->with('success', 'Donasi berhasil disalurkan!');
     }
 
         public function cetakProgramDanAkunPertanggal( Request $request, $programId, $akunId, $tglAwal, $tglAkhir) {
 
             $programDonasi = ProgramDonasi::findOrFail($programId);
             $akun = Akun::findOrFail($akunId);
+            $programDonasi=ProgramDonasi::find($programId);
+            $donasi=Donasi::all();
+            $donasi_validated = Donasi::where('programdonasi_id', $programId)->where('status_id', 2)->get();
+            $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
+            $donasi=Donasi::where('programdonasi_id', $programId)->get();
+            // $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
+            $total_hak_amil = Donasi::where('programdonasi_id', $programId)->sum('hak_amil');
+            $akun = Akun::find($akunId);
             $cetakProgramDanAkunPertanggal = Donasi::where('programdonasi_id', $programDonasi->id)
                 ->where('id_akun', $akun->id)
                 ->whereBetween('created_at', [$tglAwal, $tglAkhir])
@@ -314,20 +318,12 @@ class DonasiController extends Controller
                 'programDonasi' => $programDonasi,
                 'akun' => $akun,
                 'tglAwal'=> $tglAwal,
-                'tglAkhir'=>$tglAkhir
+                'tglAkhir'=>$tglAkhir,
+                'cetakProgramDanAkunPertanggal'=>$cetakProgramDanAkunPertanggal,
+                'total_hak_amil'=>$total_hak_amil,
+                'donasi'=>$donasi,
+                'totalDonationForProgram'=>$totalDonationForProgram
             ]);
             return $pdf->stream('donasi-program-akun-pertanggal.pdf');
     }
-
-    // public function cetakProgramPertanggal($id,$tglAwal, $tglAkhir){
-
-    //     $donasi=Donasi::all();
-    //     $programDonasi=ProgramDonasi::find($id);
-    //     $cetakProgramPertanggal = Donasi::where('programdonasi_id', $id)
-    //                     ->whereBetween('created_at',[$tglAwal, $tglAkhir])
-    //                     ->get();
-    //     $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[ 'cetakProgramPertanggal'=>$cetakProgramPertanggal,'programDonasi'=>$programDonasi, 'donasi'=>$donasi]);
-
-    //     return $pdf->stream('donasi-program-pertanggal.pdf');
-    // }
 }
