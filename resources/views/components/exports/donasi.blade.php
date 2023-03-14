@@ -26,6 +26,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Customer</th>
                             <th>No. Rekening</th>
                             <th>Program Donasi</th>
@@ -34,9 +35,13 @@
                             <th>Status Penyaluran</th>
                         </tr>
                     </thead>
+                    @php
+                        $no=1
+                    @endphp
                     <tbody>
                         @foreach ($donasi as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>
                                 @if ($item->user_id)
                                     {{ $item->user->name }}

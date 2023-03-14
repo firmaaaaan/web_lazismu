@@ -73,6 +73,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Donatur</th>
                             <th>No. Rekening</th>
                             <th>Jumlah Donasi</th>
@@ -83,9 +84,13 @@
                             <th>Tanggal</th>
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach ($donasi as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>
                                 @if ($item->user_id)
                                     {{ $item->user->name }}
@@ -111,7 +116,7 @@
                                 @endif
                             </td>
                             <td>{{ $item->desk_penyaluran }}</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
                         </tr>
                         @endforeach
                     </tbody>

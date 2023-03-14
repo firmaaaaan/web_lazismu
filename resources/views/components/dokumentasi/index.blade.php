@@ -29,6 +29,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Judul</th>
                             <th>Text</th>
                             @role('administrator')
@@ -36,9 +37,13 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach ($doks as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->judul }}</td>
                             <td>{!! $item->text !!} </td>
                             @role('administrator')

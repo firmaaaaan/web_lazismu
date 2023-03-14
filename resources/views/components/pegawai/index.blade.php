@@ -39,6 +39,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Karyawan</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
@@ -50,9 +51,13 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach ($karyawans as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->nama_karyawan }}</td>
                             <td>{{ $item->tmpt_lahir }}</td>
                             <td>{{ $item->tgl_lahir }}</td>

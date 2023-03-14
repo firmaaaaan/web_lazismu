@@ -29,6 +29,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Driver</th>
                             <th>Email</th>
                             <th>No. Telepon</th>
@@ -39,27 +40,31 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1
+                    @endphp
                     <tbody>
                         @foreach ($driver as $item)
                             <tr>
-                            <td>{{ $item->user->name }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->no_hp}}</td>
-                            <td>{{ $item->no_seri}}</td>
-                            <td>
-                                @if ($item->status_driver=='Aktif')
-                                <div class="btn btn-outline-success btn-sm">{{ $item->status_driver }}</div>
-                                @else
-                                <div class="btn btn-outline-danger btn-sm">{{ $item->status_driver }}</div>
-                                @endif
-                            </td>
-                            @role('administrator')
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->no_hp}}</td>
+                                <td>{{ $item->no_seri}}</td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                    <a href="{{ route('driver.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                    @if ($item->status_driver=='Aktif')
+                                    <div class="btn btn-outline-success btn-sm">{{ $item->status_driver }}</div>
+                                    @else
+                                    <div class="btn btn-outline-danger btn-sm">{{ $item->status_driver }}</div>
+                                    @endif
                                 </td>
-                            @endrole
-                        </tr>
+                                @role('administrator')
+                                    <td>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                                        <a href="{{ route('driver.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                    </td>
+                                @endrole
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

@@ -226,16 +226,25 @@ class DonasiController extends Controller
     }
 
     public function exportPdf(){
-        $donasi=Donasi::all();
-        $pdf = PDF::loadView('components.pdf.donasi',[ 'donasi'=>$donasi]);
-        return $pdf->stream('donasi.pdf');
+        // Mengambil semua data donasi dari database
+        $donasi = Donasi::all();
 
-        // return $pdf->stream('donasi');
+        // Menghitung total donasi dengan menjumlahkan nilai jml_donasi dari setiap data donasi
+        $total_donasi = $donasi->sum('jml_donasi');
+
+        // Membuat objek PDF dengan view 'components.pdf.donasi' dan data $donasi dan $total_donasi
+        $pdf = PDF::loadView('components.pdf.donasi', ['donasi' => $donasi, 'total_donasi' => $total_donasi]);
+
+        // Mengembalikan objek PDF dalam bentuk stream
+        return $pdf->stream('donasi.pdf');
     }
+
+
     public function cetakPertanggalDonasi($tglAwal, $tglAkhir){
         // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
         $cetakPertanggalDonasi=Donasi::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
-        $pdf = PDF::loadView('components.pdf.donasi-pertanggal',[ 'cetakPertanggalDonasi'=>$cetakPertanggalDonasi, 'tglAwal'=>$tglAwal,'tglAkhir'=>$tglAkhir]);
+        $total_donasi = $cetakPertanggalDonasi->sum('jml_donasi');
+        $pdf = PDF::loadView('components.pdf.donasi-pertanggal',[ 'cetakPertanggalDonasi'=>$cetakPertanggalDonasi, 'tglAwal'=>$tglAwal,'tglAkhir'=>$tglAkhir, 'total_donasi'=>$total_donasi]);
         return $pdf->stream('donasi-pertanggal.pdf');
         // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
     }

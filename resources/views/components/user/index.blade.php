@@ -27,6 +27,7 @@
                 <table class="table" id="tdatatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama </th>
                             <th>Email</th>
                             @role('administrator')
@@ -34,9 +35,13 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1
+                    @endphp
                     <tbody>
                         @foreach ($user as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             @role('administrator')

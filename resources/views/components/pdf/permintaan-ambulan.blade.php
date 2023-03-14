@@ -51,7 +51,7 @@
             <thead class="bordered">
                 <tr>
                     <th>No.</th>
-                    <th>Nama Customer</th>
+                    <th>Nama Pasien</th>
                     <th>Tanggal</th>
                     <th>Titik Jemput</th>
                     <th>Tujuan</th>
@@ -66,7 +66,7 @@
             @foreach ($permintaanAmbulan as $item)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $item->user->name }}</td>
+                    <td>{{ $item->nama_pasien }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y')  }}</td>
                             <td>{{ $item->titik_jemput }}</td>
                             <td>{{ $item->rumahsakit->nama_rs }} </td>

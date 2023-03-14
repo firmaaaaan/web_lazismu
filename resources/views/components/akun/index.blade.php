@@ -27,6 +27,7 @@
                 <table class="table" id="tdatatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Kode </th>
                             <th>Nama Akun</th>
                             <th>Persen Hak Amil</th>
@@ -35,9 +36,13 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach ($akun as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->kode }}</td>
                             <td>{{ $item->nama_akun }}</td>
                             <td>{{ $item->persen_hak_amil }}</td>

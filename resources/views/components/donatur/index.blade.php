@@ -24,6 +24,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Donatur</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
@@ -35,10 +36,14 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1
+                    @endphp
                     <tbody>
                         @foreach ($donatur as $item)
 
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->tempat_lahir }}</td>
                             <td>{{ $item->tanggal_lahir }}</td>

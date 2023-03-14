@@ -39,6 +39,7 @@
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Rumah Sakit</th>
                             <th>Alamat</th>
                             @role('administrator')
@@ -46,9 +47,13 @@
                             @endrole
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach ($rumahSakit as $item)
                         <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $item->nama_rs }}</td>
                             <td>{{ $item->alamat }}</td>
                             @role('administrator')

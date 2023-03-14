@@ -86,6 +86,10 @@
                     <td>{{ number_format($item->jml_donasi, 0,',','.') }}</td>
                 </tr>
             @endforeach
+            <tr>
+                    <td colspan="6" class="grand total"><b>TOTAL(Rp)</b></td>
+                    <td class="grand total">{{ number_format($total_donasi , 0, ',', '.') }}</td>
+                </tr>
             </tbody>
         </table>
     </body>

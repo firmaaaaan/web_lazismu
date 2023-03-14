@@ -47,6 +47,8 @@
                             <th>No</th>
                             <th>Nama Program</th>
                             <th>Deskripsi Program</th>
+                            <th>Tersalurkan (Rp)</th>
+                            <th>Sisa Donasi (Rp)</th>
                             @role('administrator')
                                 <th>Opsi</th>
                             @endrole
@@ -61,6 +63,8 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $item->nama_program }}</td>
                             <td>{!! $item->deskripsi !!}</td>
+                            <td>{{ number_format($item->tersalurkan , 0, ',', '.') }}</td>
+                            <td>{{ number_format($item->jumlah_donasi_program , 0, ',', '.') }}</td>
                             @role('administrator')
                                 <td>
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm"" title="Edit"><i class="bi bi-pencil-square"></i></button>

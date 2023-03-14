@@ -106,7 +106,7 @@
             </tbody>
         </table>
         <div  class="mt-3" id="notices">
-        <div>NOTICE:</div>
+        <div>CATATAN:</div>
             <div class="notice">
                 Jika nominal total berbeda dengan nominal subtotal dengan pengeluaran 0 maka perhatikan pada menu log transaksi, bisa jadi anda telah melakukan perpindahan saldo
             </div>
