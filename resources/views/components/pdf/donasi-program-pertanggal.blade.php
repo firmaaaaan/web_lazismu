@@ -34,6 +34,10 @@
             background-color: #04AA6D;
             color: white;
             }
+            #notices {
+                color: #5d6975;
+                margin-top: 4px;
+            }
             p {
                 margin-bottom: 3px; /* mengatur padding bawah paragraf sebesar 20 piksel */
                 display: flex; /* mengatur display paragraf menjadi flex */
@@ -101,5 +105,11 @@
             </tr>
             </tbody>
         </table>
+        <div  class="mt-3" id="notices">
+        <div>NOTICE:</div>
+            <div class="notice">
+                Jika nominal total berbeda dengan nominal subtotal dengan pengeluaran 0 maka perhatikan pada menu log transaksi, bisa jadi anda telah melakukan perpindahan saldo
+            </div>
+        </div>
     </body>
 </html>

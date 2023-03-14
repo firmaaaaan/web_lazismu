@@ -137,7 +137,8 @@ class LogTransaksiController extends Controller
         // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
         $programDonasi=ProgramDonasi::all();
         $cetakPertanggalTransaksi=LogTransaksi::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
-        $pdf = PDF::loadView('components.pdf.transaksi-pertanggal',[ 'cetakPertanggalTransaksi'=>$cetakPertanggalTransaksi,'programDonasi'=>$programDonasi]);
+        $pdf = PDF::loadView('components.pdf.transaksi-pertanggal',[ 'cetakPertanggalTransaksi'=>$cetakPertanggalTransaksi,'programDonasi'=>$programDonasi,'tglAwal'=> $tglAwal,
+                'tglAkhir'=>$tglAkhir]);
         return $pdf->stream('transaksi-pertanggal.pdf');
         // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
     }

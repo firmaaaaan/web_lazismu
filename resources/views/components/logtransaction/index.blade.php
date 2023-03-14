@@ -20,15 +20,14 @@
     <div class="container-xl">
         <div class="card mb-3">
             <div class="card-body">
-                @auth
-                    @if (auth()->user()->role=='administrator')
+                @role('administrator')
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
-                    @endif
-                @endauth
+                @endrole
             <div class="table-responsive">
                 <table class="table" id="table-datatables">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Program Donasi Asal</th>
                             <th>Program Donasi Tujuan</th>
                             <th>Nominal (Rp)</th>
@@ -36,13 +35,17 @@
                             <th>Keterangan</th>
                         </tr>
                     </thead>
+                    @php
+                        $no=1;
+                    @endphp
                     <tbody>
                         @foreach($logs as $log)
                             <tr>
+                                <td>{{ $no++ }}</td>
                                 <td>{{ $log->programdonasi->nama_program }}</td>
                                 <td>{{ $log->programdonasi_tujuan->nama_program }}</td>
                                 <td>{{ number_format($log->nominal, 0, ',', '.') }}</td>
-                                <td>{{ $log->created_at }}</td>
+                                <td>{{ \Carbon\Carbon::parse($log->created_at )->format('d M Y')  }}</td>
                                 <td>{{ $log->keterangan }}</td>
                             </tr>
                         @endforeach
