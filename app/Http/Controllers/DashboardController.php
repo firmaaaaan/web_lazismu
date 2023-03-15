@@ -16,6 +16,8 @@ class DashboardController extends Controller
 // ---------------------------------------------------------------------------
         $total_donasi = Donasi::sum('jml_donasi');
         $programDonasi=ProgramDonasi::all();
+        $totalTersalurkan=$programDonasi->sum('tersalurkan');
+        $tersisa=$programDonasi->sum('jumlah_donasi_program');
 
         $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
 
@@ -27,7 +29,7 @@ class DashboardController extends Controller
                         ->sum('jml_donasi');
             array_push($dataDonasi, $donasi);
         }
-        return view('dashboard', compact('programDonasi','total_donasi','donasi','dataDonasi'));
+        return view('dashboard', compact('tersisa','totalTersalurkan', 'programDonasi','total_donasi','donasi','dataDonasi'));
     }
 
 }

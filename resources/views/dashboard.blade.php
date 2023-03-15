@@ -38,7 +38,29 @@
                         <h3>Total Saldo:</h3>
                     </div>
                     <div class="card-body text-center">
-                        <div class="h1 mb-3" style="color: green">Rp.{{ number_format($total_donasi, 0, ',', '.') }}</div>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="h1 mb-3" style="color: green">Rp.{{ number_format($total_donasi, 0, ',', '.') }}</div>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b>TERSALURKAN</b>
+                                    <p>Rp.{{ number_format($totalTersalurkan, 0, ',', '.') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b>TERSISA</b>
+                                    <p>Rp.{{ number_format($tersisa, 0, ',', '.') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
