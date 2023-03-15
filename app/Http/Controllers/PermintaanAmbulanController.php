@@ -164,7 +164,8 @@ class PermintaanAmbulanController extends Controller
 
         public function exportPermintaanAambulanPdf(){
         $permintaanAmbulan=permintaanAmbulan::all();
-        $pdf = PDF::loadView('components.pdf.permintaan-ambulan',[ 'permintaanAmbulan'=>$permintaanAmbulan]);
+        $totalInfaq=$permintaanAmbulan->sum('infaq');
+        $pdf = PDF::loadView('components.pdf.permintaan-ambulan',[ 'totalInfaq'=>$totalInfaq, 'permintaanAmbulan'=>$permintaanAmbulan]);
         return $pdf->stream('permintaan-ambulan.pdf');
 
         // return $pdf->stream('donasi');
@@ -173,7 +174,8 @@ class PermintaanAmbulanController extends Controller
     public function cetakPertanggal($tglAwal, $tglAkhir){
         // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
     $cetakPertanggal=permintaanAmbulan::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
-    $pdf = PDF::loadView('components.pdf.permintaan-ambulan-pertanggal',[ 'cetakPertanggal'=>$cetakPertanggal,'tglAwal'=> $tglAwal,
+    $totalInfaq=$cetakPertanggal->sum('infaq');
+    $pdf = PDF::loadView('components.pdf.permintaan-ambulan-pertanggal',[ 'totalInfaq'=>$totalInfaq,'cetakPertanggal'=>$cetakPertanggal,'tglAwal'=> $tglAwal,
                 'tglAkhir'=>$tglAkhir]);
     return $pdf->stream('permintaan-ambulan.pdf');
     // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));

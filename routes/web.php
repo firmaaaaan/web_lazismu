@@ -73,7 +73,8 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::post('/program-donasi',[ProgramDonasiController::class, 'store'])->name('program.donasi.store');
     Route::post('/program-donasi/{id}',[ProgramDonasiController::class, 'update'])->name('program.donasi.update');
     Route::get('/program-donasi/destroy/{id}',[ProgramDonasiController::class, 'destroy'])->name('program.donasi.destroy');
-
+// Cetak Pertanggal
+    Route::get('/cetak-program-donasi-pertanggal/{tglAwal}/{tglAkhir}',[ProgramDonasiController::class,'cetakPertanggalProgramDonasi'])->name('cetakPertanggalProgramDonasi.pdf');
     //Donasi
     Route::get('/donasi', [DonasiController::class, 'index'])->name('drop.donasi.index');
     Route::get('/donasi/create', [DonasiController::class, 'create'])->name('donasi.create');

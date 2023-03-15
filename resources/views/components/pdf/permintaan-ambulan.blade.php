@@ -56,7 +56,7 @@
                     <th>Titik Jemput</th>
                     <th>Tujuan</th>
                     <th>Infaq</th>
-                    <th>Status Perjalanan</th>
+                    <th>Status Permintaan</th>
                 </tr>
             </thead>
             @php
@@ -67,17 +67,26 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $item->nama_pasien }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y')  }}</td>
-                            <td>{{ $item->titik_jemput }}</td>
-                            <td>{{ $item->rumahsakit->nama_rs }} </td>
-                            <td>{{ $item->infaq }}</td>
-                            <td>
-                            @if ($item->status_id == 4)
-                                <div class="btn btn-outline-success btn-sm">{{ $item->status_perjalanan }}</div>
-                            @endif
-                            </td>
+                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y')  }}</td>
+                    <td>{{ $item->titik_jemput }}</td>
+                    <td>{{ $item->rumahsakit->nama_rs }} </td>
+                    <td>{{ $item->infaq }}</td>
+                    <td>
+                        @if ($item->status_id ==3)
+                            <div>{{ $item->status->nama_status }} </div>
+                        @elseif ($item->status_id ==4)
+                            <div>{{ $item->status->nama_status }} </div>
+                        @else
+                            <div>{{ $item->status->nama_status }} </div>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
+                <tr>
+                    <td colspan="5" class="grand total"><b>TOTAL INFAQ(Rp)</b></td>
+                    <td class="grand total"><b>{{ number_format($totalInfaq , 0, ',', '.') }}</b></td>
+                    <td class="grand total"></td>
+                </tr>
             </tbody>
         </table>
     </body>

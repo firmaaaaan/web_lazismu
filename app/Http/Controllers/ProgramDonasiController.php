@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
+use PDF;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
 use Illuminate\Support\Facades\DB;
@@ -126,4 +127,19 @@ class ProgramDonasiController extends Controller
             }
             return back()->withSuccess('Program donasi berhasil dihapus beserta seluruh data terkait.');
         }
+
+        public function cetakPertanggalProgramDonasi($tglAwal, $tglAkhir){
+            $cetakPertanggalProgramDonasi = ProgramDonasi::whereBetween('created_at', [$tglAwal, $tglAkhir])->get();
+            $sisaDonasi = $cetakPertanggalProgramDonasi->sum('jumlah_donasi_program');
+            $totalTersalurkan = $cetakPertanggalProgramDonasi->sum('tersalurkan');
+            $pdf = PDF::loadView('components.pdf.program-pertanggal', [
+                'cetakPertanggalProgramDonasi' => $cetakPertanggalProgramDonasi,
+                'tglAwal' => $tglAwal,
+                'tglAkhir' => $tglAkhir,
+                'sisaDonasi' => $sisaDonasi,
+                'totalTersalurkan' => $totalTersalurkan,
+            ]);
+            return $pdf->stream('program-donasi-pertanggal.pdf');
+        }
+
 }

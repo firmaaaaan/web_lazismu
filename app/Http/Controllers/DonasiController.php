@@ -315,7 +315,6 @@ class DonasiController extends Controller
             $donasi_validated = Donasi::where('programdonasi_id', $programId)->where('status_id', 2)->get();
             $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
             $donasi=Donasi::where('programdonasi_id', $programId)->get();
-            // $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
             $total_hak_amil = Donasi::where('programdonasi_id', $programId)->sum('hak_amil');
             $akun = Akun::find($akunId);
             $cetakProgramDanAkunPertanggal = Donasi::where('programdonasi_id', $programDonasi->id)

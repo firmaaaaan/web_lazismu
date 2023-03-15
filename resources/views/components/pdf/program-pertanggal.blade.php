@@ -47,46 +47,41 @@
         <!-- Tulis konten HTML Anda di sini -->
         <h6 style="text-align: center">REKAPITULASI ZIS</h4>
         <h6 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h6>
+        <p style="text-align: left">Dari Tanggal<strong>              {{ \Carbon\Carbon::parse($tglAwal)->format('d M Y') }}</strong></p>
+        <p style="text-align: left">Sampai Tanggal<strong>            {{ \Carbon\Carbon::parse($tglAkhir)->format('d M Y') }}</strong></p>
         <table class="" id="transaksi">
             <thead class="bordered">
                 <tr>
-                    <th>No.</th>
-                    <th>Nama Donatur</th>
-                    <th>Progam Donasi</th>
-                    <th>Tanggal Donasi</th>
-                    <th>Status Penyaluran</th>
-                    <th>Keterangan</th>
-                    <th>Jumlah Donasi (Rp)</th>
+                    <th>No</th>
+                    <th>Nama Program</th>
+                    <th>Deskripsi Program</th>
+                    <th>Tanggal</th>
+                    <th>Tersalurkan (Rp)</th>
+                    <th>Sisa Donasi (Rp)</th>
                 </tr>
             </thead>
             @php
                 $no=1;
             @endphp
             <tbody>
-            @foreach ($donasi as $item)
+            @foreach ($cetakPertanggalProgramDonasi as $item)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>
-                        @if ($item->user_id)
-                            {{ $item->user->name }}
-                        @else
-                            {{ $item->nama_donatur }}
-                        @endif
-                    </td>
-                    <td>{{ $item->programDonasi->nama_program }}</td>
+                    <td>{{ $item->nama_program }}</td>
+                    <td>{!! $item->deskripsi !!}</td>
                     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
-                        @if ($item->status_penyaluran=='Belum Tersalurkan')
-                            <td>{{ $item->status_penyaluran }}</td>
-                        @else
-                            <td>{{ $item->status_penyaluran }}</td>
-                        @endif
-                        <td>{!! $item->keterangan !!}</td>
-                    <td>{{ number_format($item->jml_donasi, 0,',','.') }}</td>
+                    <td>{{ number_format($item->tersalurkan , 0, ',', '.') }}</td>
+                    <td>{{ number_format($item->jumlah_donasi_program , 0, ',', '.') }}</td>
                 </tr>
             @endforeach
+                {{-- <tr>
+                    <td colspan="4" class="grand total"><b>TOTAL TERSALURKAN(Rp)</b></td>
+                    <td class="grand total">{{ number_format($totalTersalurkan , 0, ',', '.') }}</td>
+                </tr> --}}
                 <tr>
-                    <td colspan="6" class="grand total"><b>TOTAL(Rp)</b></td>
-                    <td class="grand total"><b>{{ number_format($total_donasi , 0, ',', '.') }}</b></td>
+                    <td colspan="4" class="grand total"><b>TOTAL(Rp)</b></td>
+                    <td class="grand total"><b>{{ number_format($totalTersalurkan , 0, ',', '.') }}</b></td>
+                    <td class="grand total"><b>{{ number_format($sisaDonasi , 0, ',', '.') }}</b></td>
                 </tr>
             </tbody>
         </table>

@@ -82,33 +82,34 @@
                     </td>
                     <td>{{ $item->programDonasi->nama_program }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
-                        @if ($item->status_penyaluran=='Belum Tersalurkan')
-                            <td>{{ $item->status_penyaluran }}</td>
+                    <td>{{ $item->status_penyaluran }}</td>
+                    @if ($item->status_penyaluran=='Belum Tersalurkan')
+                            <td>{!! $item->keterangan !!}</td>
                         @else
-                            <td>{{ $item->status_penyaluran }}</td>
+                            <td>{{ $item->desk_penyaluran }}</td>
                         @endif
-                        <td>{!! $item->keterangan !!}</td>
+
                     <td>{{ number_format($item->jml_donasi, 0,',','.') }}</td>
                 </tr>
             @endforeach
             <tr>
                 <td colspan="6"><b>SUBTOTAL(Rp)</b></td>
-                <td class="total">{{ number_format($totalDonationForProgram, 0, ',', '.') }}</td>
+                <td class="total"><b>{{ number_format($totalDonationForProgram, 0, ',', '.') }}</b></td>
             </tr>
             <tr>
                 <td colspan="6"><b>PENGELUARAN(Rp)</b></td>
-                <td class="total">{{ number_format($programDonasi->tersalurkan, 0, ',', '.') }}</td>
+                <td class="total"><b>{{ number_format($programDonasi->tersalurkan, 0, ',', '.') }}</b></td>
             </tr>
             <tr>
                 <td colspan="6" class="grand total"><b>TOTAL(Rp)</b></td>
-                <td class="grand total">{{ number_format($programDonasi->jumlah_donasi_program , 0, ',', '.') }}</td>
+                <td class="grand total"><b>{{ number_format($programDonasi->jumlah_donasi_program , 0, ',', '.') }}</b></td>
             </tr>
             </tbody>
         </table>
         <div  class="mt-3" id="notices">
         <div>CATATAN:</div>
             <div class="notice">
-                Jika nominal total berbeda dengan nominal subtotal dengan pengeluaran 0 maka perhatikan pada menu log transaksi, bisa jadi anda telah melakukan perpindahan saldo
+                Jika nominal total tidak sesuai, maka perhatikan pada menu log transaksi, bisa jadi anda telah melakukan perpindahan saldo
             </div>
         </div>
     </body>
