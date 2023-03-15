@@ -46,7 +46,7 @@
                             <th>Keterangan</th>
                             <th>Infaq (Rp)</th>
                             <th>Status Permintaan</th>
-                            <th>Status Perjalanan</th>
+                            <th>Status</th>
                             @role('administrator')
                                     <th>Feedback</th>
                                     <th>Opsi</th>
@@ -75,6 +75,8 @@
                             <td>
                             @if ($item->status_id == 4)
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status_perjalanan }}</div>
+                            @elseif ($item->status_id == 5)
+                                <div>Mohon maaf, permintaan anda ditolak, kemungkinan masalah jarak dan kelengkapan deskripsi. Mohon periksa kembali.</div>
                             @endif
                             </td>
                             @role('administrator')
@@ -102,7 +104,24 @@
             </div>
             </div>
         </div>
-        {{ $permintaanAmbulan->links() }}
     </div>
 </div>
+{{-- @foreach ($permintaanAmbulan as $item)
+    <div class="modal fade" id="alasan{{ $item->id }}" tabindex="-1"  aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-body">
+                <form action="" method="POST">
+                    <label for="">Berikan alasan:</label>
+                    <textarea name="alasan" class="form-control"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+                <a type="submit" href="{{ route('validasi.ambulan', $item->id) }}"  class="btn btn-danger">Kirim</a>
+            </div>
+            </div>
+        </div>
+    </div>
+@endforeach --}}
 @endsection

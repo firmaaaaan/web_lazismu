@@ -33,7 +33,7 @@
                             <th>Keterangan</th>
                             <th>Infaq (Rp)</th>
                             <th>Status Permintaan</th>
-                            <th>Status Perjalanan</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +59,8 @@
                             <td>
                             @if ($item->status_id == 4)
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status_perjalanan }}</div>
+                            @elseif ($item->status_id == 5)
+                                <div>Mohon maaf, permintaan anda ditolak, kemungkinan masalah jarak dan kelengkapan deskripsi. Mohon periksa kembali.</div>
                             @endif
                             </td>
                         </tr>

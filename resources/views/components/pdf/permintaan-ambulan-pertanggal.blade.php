@@ -59,6 +59,7 @@
                     <th>Tujuan</th>
                     <th>Infaq</th>
                     <th>Status Permintaan</th>
+                    <th>Keterangan</th>
                 </tr>
             </thead>
             @php
@@ -72,7 +73,7 @@
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y')  }}</td>
                             <td>{{ $item->titik_jemput }}</td>
                             <td>{{ $item->rumahsakit->nama_rs }} </td>
-                            <td>{{ $item->infaq }}</td>
+                            <td>{{ number_format($item->infaq , 0, ',', '.') }}</td>
                             <td>
                                 @if ($item->status_id ==3)
                                     <div>{{ $item->status->nama_status }} </div>
@@ -82,11 +83,19 @@
                                     <div>{{ $item->status->nama_status }} </div>
                                 @endif
                             </td>
+                            <td>
+                                @if ($item->status_id == 4)
+                                    <div>{{ $item->status_perjalanan }}</div>
+                                @elseif ($item->status_id == 5)
+                                    <div>Mohon maaf, permintaan anda ditolak, kemungkinan masalah jarak dan kelengkapan deskripsi. Mohon periksa kembali.</div>
+                                @endif
+                            </td>
                 </tr>
             @endforeach
             <tr>
                     <td colspan="5" class="grand total"><b>TOTAL INFAQ(Rp)</b></td>
                     <td class="grand total"><b>{{ number_format($totalInfaq , 0, ',', '.') }}</b></td>
+                    <td class="grand total"></td>
                     <td class="grand total"></td>
                 </tr>
             </tbody>

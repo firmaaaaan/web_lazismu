@@ -128,7 +128,7 @@ class PermintaanAmbulanController extends Controller
         return redirect()->route('permintaan.ambulan.index');
     }
 
-        public function validasiAmbulan($id){
+        public function validasiAmbulan(Request $request, $id){
         $permintaanAmbulan= \DB::table('permintaan_ambulans')->where('id', $id)->first();
         $status_sekarang = $permintaanAmbulan->status_id;
 

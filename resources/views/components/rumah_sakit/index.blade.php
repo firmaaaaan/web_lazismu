@@ -22,12 +22,12 @@
             <div class="card-body">
                 @if ($message = Session::get('Success'))
                     <div class="alert alert-success alert-block mb-2">
-                        <p>{{ $message }}</p>
+                        <p><i class="bi bi-check-circle-fill"></i> <strong>Berhasil!</strong> {{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
-                        <p><i class="bi bi-check-circle-fill"> <strong>Berhasil!</strong>{{ $message }}</p>
+                        <p><i class="bi bi-lightbulb-fill"></i> <strong>Berhasil!</strong>{{ $message }}</p>
                     </div>
                 @endif
             <div class="table-responsive">
@@ -59,7 +59,8 @@
                             @role('administrator')
                                 <td>
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                    <a href="{{ route('rumahsakit.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleted{{ $item->id }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></button>
+                                    {{-- <a href="" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a> --}}
                                 </td>
                             @endrole
                         </tr>
@@ -69,7 +70,6 @@
             </div>
             </div>
         </div>
-        {{ $rumahSakit->links() }}
     </div>
 </div>
 
@@ -138,6 +138,23 @@
                 </form>
             </div>
         </div>
+        </div>
+    </div>
+@endforeach
+
+@foreach ($rumahSakit as $item)
+    <div class="modal fade" id="deleted{{ $item->id }}" tabindex="-1"  aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-title">Apa anda yakin?</div>
+                <div>Jika {{ $item->nama_rs }} dihapus maka permintaan ambulan yang terkait akan terhapus permanen.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ route('rumahsakit.destroy', $item->id) }}"  class="btn btn-danger">Iya, Hapus RS</a>
+            </div>
+            </div>
         </div>
     </div>
 @endforeach

@@ -175,7 +175,7 @@
             <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-title">Apa anda yakin?</div>
-                <div>Jika Program Donasi dihapus maka donasi yang terkait akan terhapus permanen</div>
+                <div>Jika Program {{ $item->nama_program }} dihapus maka donasi yang terkait akan terhapus permanen.</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>

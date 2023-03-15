@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('rumahsakit_id');
             $table->integer('infaq')->nullable();
             $table->text('keterangan')->nullable();
+            $table->text('alasan')->nullable();
             $table->integer('status_id')->nullable();
             $table->string('status_perjalanan')->nullable();
             $table->timestamps();
