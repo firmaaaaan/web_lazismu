@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary btn-sm ml-2" style="float:right">Buat Permintaan</button>
+                            <button type="submit" class="btn btn-primary btn-sm mr-2" style="float:right">Buat Permintaan</button>
                         </div>
                 </form>
             </div>

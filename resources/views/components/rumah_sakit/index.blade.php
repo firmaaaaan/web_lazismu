@@ -25,6 +25,11 @@
                         <p><i class="bi bi-check-circle-fill"></i> <strong>Berhasil!</strong> {{ $message }}</p>
                     </div>
                 @endif
+                @if ($message = Session::get('withSuccess'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p><i class="bi bi-check-circle-fill"></i> <strong>Berhasil!</strong> {{ $message }}</p>
+                    </div>
+                @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
                         <p><i class="bi bi-lightbulb-fill"></i> <strong>Berhasil!</strong>{{ $message }}</p>

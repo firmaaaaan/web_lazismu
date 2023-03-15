@@ -45,12 +45,15 @@
                 text-align: right; /* mengatur text-align elemen strong menjadi right */
                 margin-right: 10px; /* mengatur margin-right elemen strong menjadi 10 piksel */
             }
+            h2{
+                margin-bottom: 2px;
+            }
         </style>
     </head>
     <body>
         <!-- Tulis konten HTML Anda di sini -->
-        <h6 style="text-align: center">REKAPITULASI ZIS</h4>
-        <h6 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h6>
+        <h2 style="text-align: center">REKAPITULASI ZIS</h2>
+        <h2 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h2>
         <p style="text-align: left">Jenis Program<strong>             {{ $programDonasi->nama_program }}</strong></p>
         <p style="text-align: left">Dari Tanggal<strong>              {{ \Carbon\Carbon::parse($tglAwal)->format('d M Y') }}</strong></p>
         <p style="text-align: left">Sampai Tanggal<strong>            {{ \Carbon\Carbon::parse($tglAkhir)->format('d M Y') }}</strong></p>

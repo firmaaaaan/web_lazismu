@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\RumahSakit;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
+use App\Models\permintaanAmbulan;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class RumahSakitController extends Controller
@@ -95,10 +97,23 @@ class RumahSakitController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(RumahSakit $rumahSakit, $id)
-    {
-        $rumahSakit=RumahSakit::find($id);
-        $rumahSakit->delete();
-        return redirect()->route('dropdown.rumahsakit.index');
+        {
+            $rumahSakit = RumahSakit::find($id);
+            if (!$rumahSakit) {
+                return back()->withError('Rumah Sakit tidak ditemukan');
+            }
+            DB::beginTransaction();
+            try {
+                // hapus semua data yang terkait dengan Rumah Sakit yang dihapus
+                permintaanAmbulan::where('rumahsakit_id', $rumahSakit->id)->delete();
 
-    }
+                // hapus rumah sakit
+                $rumahSakit->delete();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return back()->withError('Terjadi kesalahan: ' . $e->getMessage());
+            }
+            return back()->withSuccess('Rumah sakit berhasil dihapus beserta seluruh data terkait.');
+        }
 }

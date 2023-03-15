@@ -41,8 +41,8 @@
                         @foreach ($permintaanAmbulan as $item)
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td>{{ $item->user->name }}</td>
-                            <td>{{ $item->tanggal }}</td>
+                            <td>{{ $item->nama_pasien }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y')  }}</td>
                             <td>{{ $item->titik_jemput }}</td>
                             <td>{{ $item->rumahsakit->nama_rs }} </td>
                             <td>{!! $item->keterangan !!}</td>

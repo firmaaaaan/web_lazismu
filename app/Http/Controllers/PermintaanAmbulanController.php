@@ -173,7 +173,7 @@ class PermintaanAmbulanController extends Controller
 
     public function cetakPertanggal($tglAwal, $tglAkhir){
         // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
-    $cetakPertanggal=permintaanAmbulan::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
+    $cetakPertanggal=permintaanAmbulan::all()->whereBetween('tanggal',[$tglAwal, $tglAkhir]);
     $totalInfaq=$cetakPertanggal->sum('infaq');
     $pdf = PDF::loadView('components.pdf.permintaan-ambulan-pertanggal',[ 'totalInfaq'=>$totalInfaq,'cetakPertanggal'=>$cetakPertanggal,'tglAwal'=> $tglAwal,
                 'tglAkhir'=>$tglAkhir]);
