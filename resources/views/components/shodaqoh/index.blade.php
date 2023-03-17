@@ -35,7 +35,6 @@
                             <th>Program Dipilih</th>
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
-                            <th>Status Penyaluran</th>
                             @role('administrator')
                                 <th>Feedback</th>
                                 <th>Opsi</th>
@@ -67,13 +66,7 @@
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status->nama_status }}</div>
                             @endif
                             </td>
-                            <td>
-                                @if ($item->status_penyaluran=='Belum Tersalurkan')
-                                    <div class="btn btn-outline-danger btn-sm">{{ $item->status_penyaluran }}</div>
-                                @else
-                                    <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
-                                @endif
-                            </td>
+
                             @role('administrator')
                                 <td>
                                     @if ($item->status_id==1)

@@ -32,7 +32,6 @@
                             <th>Program Donasi</th>
                             <th>Jumlah Donasi (Rp)</th>
                             <th>Keterangan</th>
-                            <th>Status Penyaluran</th>
                         </tr>
                     </thead>
                     @php
@@ -53,13 +52,6 @@
                             <td>{{ $item->programDonasi->nama_program }}</td>
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
                             <td>{{ $item->keterangan }}</td>
-                            <td>
-                                @if ($item->status_penyaluran=='Belum Tersalurkan')
-                                    <div class="btn btn-outline-danger btn-sm">{{ $item->status_penyaluran }}</div>
-                                @else
-                                    <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
-                                @endif
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>

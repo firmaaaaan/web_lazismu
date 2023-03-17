@@ -79,7 +79,6 @@
                             <th>Jumlah Donasi</th>
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
-                            <th>Status Penyaluran</th>
                             <th>Di Salurkan Kepada</th>
                             <th>Tanggal</th>
                         </tr>
@@ -107,13 +106,6 @@
                             @else
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status->nama_status }}</div>
                             @endif
-                            </td>
-                            <td>
-                                @if ($item->status_penyaluran=='Belum Tersalurkan')
-                                    <div class="btn btn-outline-danger btn-sm">{{ $item->status_penyaluran }}</div>
-                                @else
-                                    <div class="btn btn-outline-success btn-sm">{{ $item->status_penyaluran }}</div>
-                                @endif
                             </td>
                             <td>{{ $item->desk_penyaluran }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>

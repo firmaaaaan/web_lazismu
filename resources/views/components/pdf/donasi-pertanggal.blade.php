@@ -45,8 +45,8 @@
     </head>
     <body>
         <!-- Tulis konten HTML Anda di sini -->
-        <h2 style="text-align: center">REKAPITULASI ZIS</h2>
-        <h2 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h2>
+        <h6 style="text-align: center">REKAPITULASI ZIS</h6>
+        <h6 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h6>
         <p style="text-align: left">Dari Tanggal<strong>              {{ \Carbon\Carbon::parse($tglAwal)->format('d M Y') }}</strong></p>
         <p style="text-align: left">Sampai Tanggal<strong>            {{ \Carbon\Carbon::parse($tglAkhir)->format('d M Y') }}</strong></p>
         <table class="" id="transaksi">
@@ -56,7 +56,6 @@
                     <th>Nama Donatur</th>
                     <th>Progam Donasi</th>
                     <th>Tanggal Donasi</th>
-                    <th>Status Penyaluran</th>
                     <th>Keterangan</th>
                     <th>Jumlah Donasi (Rp)</th>
                 </tr>
@@ -77,17 +76,12 @@
                     </td>
                     <td>{{ $item->programDonasi->nama_program }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
-                        @if ($item->status_penyaluran=='Belum Tersalurkan')
-                            <td>{{ $item->status_penyaluran }}</td>
-                        @else
-                            <td>{{ $item->status_penyaluran }}</td>
-                        @endif
-                        <td>{!! $item->keterangan !!}</td>
+                    <td>{!! $item->keterangan !!}</td>
                     <td>{{ number_format($item->jml_donasi, 0,',','.') }}</td>
                 </tr>
             @endforeach
                 <tr>
-                    <td colspan="6" class="grand total"><b>TOTAL(Rp)</b></td>
+                    <td colspan="5" class="grand total"><b>TOTAL(Rp)</b></td>
                     <td class="grand total"><b>{{ number_format($total_donasi , 0, ',', '.') }}</b></td>
                 </tr>
             </tbody>
