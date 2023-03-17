@@ -45,8 +45,8 @@
     </head>
     <body>
         <!-- Tulis konten HTML Anda di sini -->
-        <h2 style="text-align: center">LAPORAN PERMINTAAN AMBULAN</h2>
-        <h2 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h2>
+        <h6 style="text-align: center">LAPORAN PERMINTAAN AMBULAN</h6>
+        <h6 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h6>
         <p style="text-align: left">Dari Tanggal<strong>              {{ \Carbon\Carbon::parse($tglAwal)->format('d M Y') }}</strong></p>
         <p style="text-align: left">Sampai Tanggal<strong>            {{ \Carbon\Carbon::parse($tglAkhir)->format('d M Y') }}</strong></p>
         <table class="" id="transaksi">

@@ -45,8 +45,8 @@
     </head>
     <body>
         <!-- Tulis konten HTML Anda di sini -->
-        <h2 style="text-align: center">LAPORAN PERMINTAAN AMBULAN</h2>
-        <h2 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h2>
+        <h6 style="text-align: center">LAPORAN PERMINTAAN AMBULAN</h6>
+        <h6 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h6>
         <table class="" id="transaksi">
             <thead class="bordered">
                 <tr>
