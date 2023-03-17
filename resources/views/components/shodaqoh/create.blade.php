@@ -54,37 +54,6 @@
                         @error('no_rek')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        {{-- <div class="row">
-                                <div class="col-md-3">
-                                    <label for="">Nama Bank</label>
-                                    <input type="text" class="form-control" name="nama_bank">
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="user_id">No. Rekening</label>
-                                    <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
-                                    @enderror" value="{{ old('no_rek') }}" placeholder="Contoh: BSI 1745351819">
-                                @error('no_rek')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                </div>
-                                <div class="col-md-4">
-                                    <label for=""> Pemilik Rekening</label>
-                                    <input type="text" class="form-control" name="pemilik_rekening">
-                                </div>
-                            </div> --}}
-                        </div>
-                        <div class="form-group">
-                            <label for="user_id">Akun yang dipilih</label>
-                            <select name="id_akun" id="id_akun" class="form-control @error('id_akun') is-invalid
-                            @enderror" value="{{ old('id_akun') }}">
-                                <option value="">--Pilih Akun--</option>
-                                @foreach ($akun as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama_akun }}</option>
-                                @endforeach
-                            </select>
-                        @error('id_akun')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
@@ -92,7 +61,7 @@
                             @enderror" value="{{ old('programdonasi_id') }}">
                                 <option value="">--Pilih Jenis Program--</option>
                                 @foreach ($programDonasi as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
+                                <option value="{{ $item->id }}">{{ $item->nama_akun }}-{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
                         @error('programdonasi_id')

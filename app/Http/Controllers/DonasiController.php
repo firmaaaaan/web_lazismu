@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Exports\DonasiExport;
 use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DonasiController extends Controller
@@ -23,13 +24,16 @@ class DonasiController extends Controller
      */
     public function index()
     {
-        $donasi=Donasi::all();
-        $donasi=Donasi::simplePaginate(15);
-        $user=User::all();
-        $programDonasi=ProgramDonasi::all();
+        $donasi = Donasi::join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
+                        ->join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
+                        ->select('donasis.*', 'program_donasis.nama_program', 'akuns.nama_akun')
+                        ->simplePaginate(15);
+        $user = User::all();
+        $programDonasi = ProgramDonasi::all();
         $total_donasi = Donasi::sum('jml_donasi');
-        return view('components.shodaqoh.index', compact('donasi','user','total_donasi','programDonasi'));
+        return view('components.shodaqoh.index', compact('donasi', 'user', 'total_donasi', 'programDonasi'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,7 +45,9 @@ class DonasiController extends Controller
 
         $user=User::all();
         $akun=Akun::all();
-        $programDonasi=ProgramDonasi::all();
+        $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
+                                    ->select('program_donasis.id', 'program_donasis.nama_program', 'akuns.nama_akun','akuns.persen_hak_amil')
+                                    ->get();
         $donasi=Donasi::all();
         return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun','user'));
     }
@@ -53,51 +59,44 @@ class DonasiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+{
+    $request->validate([
+        'jml_donasi'=>'required',
+        'programdonasi_id'=>'required'
+    ]);
 
-        $request->validate([
-            'jml_donasi'=>'required',
-            'id_akun'=>'required',
-            'programdonasi_id'=>'required'
-        ]);
+    // Join antara tabel akun dan program donasi
+    $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
+        ->where('program_donasis.id', $request->programdonasi_id)
+        ->select('program_donasis.*', 'akuns.persen_hak_amil')
+        ->first();
 
-        // Mencari akun yang sesuai dengan id_akun yang diterima dari form
-        $akun = Akun::find($request->id_akun);
+    // Menghitung nilai hak_amil
+    $hak_amil = $request->jml_donasi * $programDonasi->persen_hak_amil / 100;
 
-        // Mendapatkan nilai persen_hak_amil dari akun yang ditemukan
-        $persen_hak_amil = $akun->persen_hak_amil;
+    $donasis = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
+    $jumlah_donasi = $donasis->sum('jml_donasi');
+    ProgramDonasi::where('id_akun', $programDonasi->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
 
+    // Check if user is admin
+    $donasi=Donasi::create([
+        'jml_donasi'=>$request->jml_donasi,
+        'no_rek'=>$request->no_rek,
+        'keterangan'=>$request->keterangan,
+        'status_id'=>'2',
+        'user_id'=>$request->user_id,
+        'programdonasi_id'=>$request->programdonasi_id,
+        'hak_amil'=>$hak_amil,
+        'nama_donatur'=>$request->nama_donatur
+    ]);
 
+    $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
+    $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
+    $programDonasi->save();
 
-        // Menghitung nilai hak_amil
-        $hak_amil = $request->jml_donasi * $persen_hak_amil / 100;
+    return back()->with('sukses', 'Terima kasih telah melakukan donasi');
+}
 
-        $donasis = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
-        $jumlah_donasi = $donasis->sum('jml_donasi');
-        ProgramDonasi::where('id_akun', $request->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
-
-        // Mencari donasi yang baru saja ditambahkan ke database
-        Donasi::where('programdonasi_id', $request->programdonasi_id)
-            ->orderBy('created_at', 'desc')
-            ->first();
-        $donasi=Donasi::create([
-            'jml_donasi'=>$request->jml_donasi,
-            'no_rek'=>$request->no_rek,
-            'keterangan'=>$request->keterangan,
-            'status_id'=>'1',
-            'user_id'=>$request->user_id,
-            'id_akun'=>$request->id_akun,
-            'programdonasi_id'=>$request->programdonasi_id,
-            'hak_amil'=>$hak_amil,
-            'nama_donatur'=>$request->nama_donatur
-        ]);
-        $programDonasi = ProgramDonasi::find($request->input('programdonasi_id'));
-        $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
-        $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
-        $programDonasi->save();
-
-        return back()->with('sukses', 'Terima kasih telah melakukan donasi');
-    }
 
     /**
      * Display the specified resource.
@@ -120,7 +119,9 @@ class DonasiController extends Controller
     {
         $donasi=Donasi::find($id);
         $akun=Akun::all();
-        $programDonasi=ProgramDonasi::all();
+        $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
+                                    ->select('program_donasis.id', 'program_donasis.nama_program', 'akuns.nama_akun','akuns.persen_hak_amil')
+                                    ->get();
         $user=User::all();
         return view('components.shodaqoh.edit', compact('programDonasi', 'donasi','akun','user'));
 

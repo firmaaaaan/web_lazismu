@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('nama_donatur')->nullable();
-            $table->integer('id_akun')->nullable();
+            // $table->integer('id_akun')->nullable();
             $table->integer('programdonasi_id')->nullable();
             $table->integer('jml_donasi')->nullable();
             $table->string('no_rek')->nullable();

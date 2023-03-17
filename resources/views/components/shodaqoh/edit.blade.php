@@ -39,22 +39,12 @@
                             <input type="text" value="{{ $donasi->nama_donatur }}" class="form-control" name="nama_donatur">
                         </div>
                         <div class="form-group">
-                            <label for="user_id">Akun yang dipilih</label>
-                            <select name="id_akun" id="id_akun" class="form-control">
-                                <option value="">--Pilih Akun--</option>
-                                @foreach ($akun as $item)
-                                <option value="{{ $item->id }}" @if ($item->id == $donasi->id_akun) selected
-                                @endif>{{ $item->nama_akun }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
                             <select name="programdonasi_id" id="programdonasi_id" class="form-control">
                                 <option value="">--Pilih Jenis Program--</option>
                                 @foreach ($programDonasi as $item)
                                 <option value="{{ $item->id }}"@if ($item->id == $donasi->programdonasi_id) selected
-                                @endif>{{ $item->nama_program }}</option>
+                                @endif>{{ $item->nama_akun }}-{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
                         </div>
