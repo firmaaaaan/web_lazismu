@@ -12,11 +12,6 @@ class Donasi extends Model
     protected $table ='donasis';
     protected $guarded=['id'];
 
-    protected $attributes = [
-    'status_penyaluran' => 'Belum Tersalurkan'
-    ];
-
-
     public function status(){
         return $this->belongsTo(Status::class);
     }

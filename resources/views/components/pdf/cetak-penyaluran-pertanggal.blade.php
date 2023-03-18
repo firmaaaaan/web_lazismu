@@ -45,7 +45,7 @@
     </head>
     <body>
         <!-- Tulis konten HTML Anda di sini -->
-        <h6 style="text-align: center">CATATAN TRANSAKSI</h6>
+        <h6 style="text-align: center">CATATAN PENYALURAN</h6>
         <h6 style="text-align: center">KANTOR LAYANAN LAZISMU BANGUNTAPAN SELATAN</h6>
         <p style="text-align: left">Dari Tanggal<strong>              {{ \Carbon\Carbon::parse($tglAwal)->format('d M Y') }}</strong></p>
         <p style="text-align: left">Sampai Tanggal<strong>            {{ \Carbon\Carbon::parse($tglAkhir)->format('d M Y') }}</strong></p>
@@ -53,25 +53,23 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Program Donasi Asal</th>
-                            <th>Program Donasi Tujuan</th>
-                            <th>Nominal(Rp)</th>
+                            <th>Program Donasi</th>
+                            <th>Disalurkan Ke:</th>
+                            <th>Nominal (Rp)</th>
                             <th>Tanggal</th>
-                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     @php
                         $no=1;
                     @endphp
                     <tbody>
-                        @foreach($cetakPertanggalTransaksi as $log)
+                        @foreach($penyaluran as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $log->programdonasi->nama_program }}</td>
-                                <td>{{ $log->programdonasi_tujuan->nama_program }}</td>
-                                <td>{{ number_format($log->nominal, 0, ',', '.') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($log->created_at)->format('d M Y') }}</td>
-                                <td>{{ $log->keterangan }}</td>
+                                <td>{{ $item->nama_program }}</td>
+                                <td>{{ $item->deskripsi_penyaluran }}</td>
+                                <td>{{ number_format($item->nominal, 0, ',', '.') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->created_at )->format('d M Y')  }}</td>
                             </tr>
                         @endforeach
                     </tbody>

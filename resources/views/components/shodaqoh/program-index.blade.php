@@ -130,16 +130,16 @@
         </div>
         <div class="modal-body">
             <form method="GET" action="">
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="akunId">Akun:</label>
                     <select name="id_akun" id="akunId" class="form-control" required>
                         <option value="{{ $akun->id }}" disabled selected>{{ $akun->nama_akun }}</option>
                     </select>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label for="programId">Program Donasi:</label>
                     <select name="programdonasi_id" id="programId" class="form-control" required>
-                        <option value="{{ $programDonasi->id }}" disabled selected>{{ $programDonasi->nama_program }}</option>
+                        <option value="{{ $programDonasi->id }}" disabled selected>{{ $programDonasi->nama_akun }}{{ $programDonasi->nama_program }}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -153,7 +153,7 @@
                 {{-- <button type="submit" class="btn btn-primary btn-sm">Cetak Laporan</button> --}}
                 {{-- <a href="" type="submit" onclick="this.href='/cetak-program-dan-akun-pertanggal/{{ 'programId'=>$programDonasi->id }}/{{ 'akunId'=>$akun->id }}'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a> --}}
             {{-- <a href="{{ route('cetak.program-akun-pertanggal', ['programId' => $programDonasi->id, 'akunId' => $akun->id, 'tglAwal' => 'tglAwal', 'tglAkhir' => 'tglAkhir']) }}"+ document.getElementById('tglAwal').value +"/"+ document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a> --}}
-            <a href="" type="submit" onclick="this.href='/cetak-program-dan-akun-pertanggal/{{ $programDonasi->id }}/{{ $akun->id }}/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
+            <a href="" type="submit" onclick="this.href='/cetak-program-dan-akun-pertanggal/{{ $programDonasi->id }}/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
         </form>
         </div>
         {{-- <div class="modal-footer">

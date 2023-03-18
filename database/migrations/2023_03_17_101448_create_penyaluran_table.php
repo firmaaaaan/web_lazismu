@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('programdonasi_id')->nullable();
             $table->bigInteger('nominal')->nullable();
-            $table->bigInteger('deskripsi_penyaluran')->nullable();
+            $table->text('deskripsi_penyaluran')->nullable();
             $table->timestamps();
         });
     }

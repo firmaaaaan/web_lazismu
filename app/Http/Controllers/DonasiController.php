@@ -307,25 +307,25 @@ class DonasiController extends Controller
         return back()->with('success', 'Donasi berhasil disalurkan!');
     }
 
-        public function cetakProgramDanAkunPertanggal( Request $request, $programId, $akunId, $tglAwal, $tglAkhir) {
+        public function cetakProgramDanAkunPertanggal( Request $request, $programId, $tglAwal, $tglAkhir) {
 
             $programDonasi = ProgramDonasi::findOrFail($programId);
-            $akun = Akun::findOrFail($akunId);
+            // $akun = Akun::findOrFail($akunId);
             $programDonasi=ProgramDonasi::find($programId);
             $donasi=Donasi::all();
             $donasi_validated = Donasi::where('programdonasi_id', $programId)->where('status_id', 2)->get();
             $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
             $donasi=Donasi::where('programdonasi_id', $programId)->get();
             $total_hak_amil = Donasi::where('programdonasi_id', $programId)->sum('hak_amil');
-            $akun = Akun::find($akunId);
+            // $akun = Akun::find($akunId);
             $cetakProgramDanAkunPertanggal = Donasi::where('programdonasi_id', $programDonasi->id)
-                ->where('id_akun', $akun->id)
+                // ->where('id_akun', $akun->id)
                 ->whereBetween('created_at', [$tglAwal, $tglAkhir])
                 ->get();
             $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[
                 'cetakProgramDanAkunPertanggal' => $cetakProgramDanAkunPertanggal,
                 'programDonasi' => $programDonasi,
-                'akun' => $akun,
+                // 'akun' => $akun,
                 'tglAwal'=> $tglAwal,
                 'tglAkhir'=>$tglAkhir,
                 'cetakProgramDanAkunPertanggal'=>$cetakProgramDanAkunPertanggal,

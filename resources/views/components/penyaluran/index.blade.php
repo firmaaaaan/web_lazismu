@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Data Perpindahan Saldo')
+@section('title', 'Data Penyaluran')
 @section('content')
 <div class="page-header d-print-none">
     <div class="container-xl">
@@ -10,7 +10,7 @@
             Overview
             </div>
             <h2 class="page-title">
-            Log Transaksi Perpindahan Saldo
+            Log Penyaluran Donasi
             </h2>
         </div>
         </div>
@@ -28,25 +28,23 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Program Donasi Asal</th>
-                            <th>Program Donasi Tujuan</th>
+                            <th>Program Donasi</th>
+                            <th>Disalurkan Ke:</th>
                             <th>Nominal (Rp)</th>
                             <th>Tanggal</th>
-                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     @php
                         $no=1;
                     @endphp
                     <tbody>
-                        @foreach($logs as $log)
+                        @foreach($penyaluran as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $log->programdonasi->nama_program }}</td>
-                                <td>{{ $log->programdonasi_tujuan->nama_program }}</td>
-                                <td>{{ number_format($log->nominal, 0, ',', '.') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($log->created_at )->format('d M Y')  }}</td>
-                                <td>{{ $log->keterangan }}</td>
+                                <td>{{ $item->nama_program }}</td>
+                                <td>{{ $item->deskripsi_penyaluran }}</td>
+                                <td>{{ number_format($item->nominal, 0, ',', '.') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->created_at )->format('d M Y')  }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -60,7 +58,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Cetak Transaksi Pertanggal</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Cetak Penyaluran Pertanggal</h5>
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -75,7 +73,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-            <a href="" type="submit" onclick="this.href='/cetak-transaksi/pertanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
+            <a href="" type="submit" onclick="this.href='/cetak-penyaluran/pertanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" target="_blank" class="btn btn-primary btn-sm">Cetak Pertanggal</a>
         </div>
         </div>
     </div>

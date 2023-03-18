@@ -125,22 +125,31 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item {{ request()->routeIs('index.transaction') ? 'active' : '' }}" >
-                    <a class="nav-link" href="{{ route('index.transaction') }}" >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-orientation" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <li class="nav-item {{ request()->routeIs('index.transaction') ? 'active' : '' }} dropdown {{ request()->routeIs('d.*') ? 'active' : '' }}" >
+                    <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shredder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                            <path d="M10 21h-3a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v2"></path>
-                            <path d="M13 20h5a2 2 0 0 0 2 -2v-5"></path>
-                            <path d="M15 22l-2 -2l2 -2"></path>
-                            <path d="M18 15l2 -2l2 2"></path>
+                            <path d="M4 10m0 1a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z"></path>
+                            <path d="M17 10v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4m5 5v5m4 -5v2m-8 -2v3"></path>
                         </svg>
                         </span>
                         <span class="nav-link-title">
-                        Transaksi
+                        Log Transaksi
                         </span>
                     </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            <a class="dropdown-item" href="{{ route('d.index.transaction') }}">
+                            Perpindahan Saldo
+                            </a>
+                            <a class="dropdown-item" href="{{ route('index.penyaluran') }}">
+                            Penyaluran
+                            </a>
+                        </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
