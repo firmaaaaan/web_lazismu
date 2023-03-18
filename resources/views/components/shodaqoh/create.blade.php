@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
-                            <select name="programdonasi_id" id="programdonasi_id" class="form-control @error('programdonasi_id') is-invalid
+                            <select name="programdonasi_id" id="programdonasi_id" class="select2 form-control @error('programdonasi_id') is-invalid
                             @enderror" value="{{ old('programdonasi_id') }}">
                                 <option value="">--Pilih Jenis Program--</option>
                                 @foreach ($programDonasi as $item)

@@ -61,18 +61,8 @@ class PenyaluranController extends Controller
             if ($programDonasi->jumlah_donasi_program < $request->input('nominal')) {
                 return back()->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
             }
-            // Cek apakah ada donasi yang belum tervalidasi
-                    $berlumTervalidasi = Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
-                        ->where('status_id', 1)
-                        ->get();
-
-                    if ($berlumTervalidasi->sum('jml_donasi') >= $request->input('tersalurkan')) {
-                        return back()->with('belum', 'Terdapat donasi yang belum tervalidasi yang tidak bisa disalurkan!');
-                    }
             $programDonasi->jumlah_donasi_program -= $nominal;
             $programDonasi->save();
-
-
 
             // Simpan data penyaluran
             Penyaluran::create([
@@ -80,6 +70,14 @@ class PenyaluranController extends Controller
                 'nominal' => $nominal,
                 'deskripsi_penyaluran'=>$request->deskripsi_penyaluran
             ]);
+
+            // Jumlahkan nilai nominal penyaluran untuk program_donasi yang bersangkutan
+            $tersalurkan = Penyaluran::where('programdonasi_id', $programdonasi_id)->sum('nominal');
+
+            // Update nilai tersalurkan pada tabel program_donasi
+            $programDonasi = ProgramDonasi::find($programdonasi_id);
+            $programDonasi->tersalurkan = $tersalurkan;
+            $programDonasi->save();
 
             return back()->with('success', 'Donasi berhasil disalurkan');
         }
@@ -102,9 +100,11 @@ class PenyaluranController extends Controller
      * @param  \App\Models\Penyaluran  $penyaluran
      * @return \Illuminate\Http\Response
      */
-    public function edit(Penyaluran $penyaluran)
+    public function edit($id)
     {
-        //
+        $programDonasi = ProgramDonasi::all();
+        $penyaluran = Penyaluran::find($id);
+        return view('components.penyaluran.edit', compact('programDonasi', 'penyaluran'));
     }
 
     /**
@@ -114,10 +114,22 @@ class PenyaluranController extends Controller
      * @param  \App\Models\Penyaluran  $penyaluran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Penyaluran $penyaluran)
+    public function update(Request $request, $id)
     {
-        //
+        $penyaluran = Penyaluran::find($id);
+        $penyaluran->update($request->all());
+
+        // update jumlah_donasi_program dan tersalurkan di tabel program_donasi
+        $programDonasi = ProgramDonasi::find($penyaluran->programdonasi_id);
+        $programDonasi->jumlah_donasi_program -= $penyaluran->nominal;
+        $programDonasi->jumlah_donasi_program += $penyaluran->nominal;
+        $programDonasi->tersalurkan -= $penyaluran->nominal;
+        $programDonasi->tersalurkan += $penyaluran->nominal;
+        $programDonasi->update();
+
+        return redirect()->route('index.penyaluran')->with('success', 'Data penyaluran berhasil diperbarui!');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -125,9 +137,23 @@ class PenyaluranController extends Controller
      * @param  \App\Models\Penyaluran  $penyaluran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penyaluran $penyaluran)
+    public function destroy($id)
     {
-        //
+        $penyaluran=Penyaluran::find($id);
+        // Ambil program_donasi_id sebelum dihapus
+        $programdonasi_id = $penyaluran->programdonasi_id;
+        $nominal = $penyaluran->nominal;
+
+        // Hapus record penyaluran
+        $penyaluran->delete();
+
+        // Update program_donasi
+        $programDonasi = ProgramDonasi::find($programdonasi_id);
+        $programDonasi->jumlah_donasi_program += $nominal;
+        $programDonasi->tersalurkan -= $nominal;
+        $programDonasi->update();
+
+        return back()->with('info','Penyaluran berhasil dihapus');
     }
 
     public function cetakPertanggalPenyaluran($tglAwal, $tglAkhir)

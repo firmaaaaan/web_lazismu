@@ -31,7 +31,6 @@ class ExportController extends Controller
     {
         $user=User::all();
         $rumahsakit=RumahSakit::all();
-        // $permintaanAmbulan=permintaanAmbulan::latest()->get();
         $permintaanAmbulan=permintaanAmbulan::latest()->simplePaginate(15);
         return view('components.exports.permintaan-ambulan', compact('user','rumahsakit','permintaanAmbulan'))->with('i');
     }

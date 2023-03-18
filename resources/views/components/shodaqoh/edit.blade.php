@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
-                            <select name="programdonasi_id" id="programdonasi_id" class="form-control">
+                            <select name="programdonasi_id" id="programdonasi_id" class="select2 form-control">
                                 <option value="">--Pilih Jenis Program--</option>
                                 @foreach ($programDonasi as $item)
                                 <option value="{{ $item->id }}"@if ($item->id == $donasi->programdonasi_id) selected

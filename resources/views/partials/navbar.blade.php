@@ -100,32 +100,7 @@
                     </div>
                 </li>
                 @endrole
-                <li class="nav-item {{ request()->routeIs('#navbar-extra') ? 'active' : '' }} dropdown {{ request()->routeIs('dropdo.*') ? 'active' : '' }}">
-                    <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="9" /><line x1="15" y1="15" x2="18.35" y2="18.35" /><line x1="9" y1="15" x2="5.65" y2="18.35" /><line x1="5.65" y1="5.65" x2="9" y2="9" /><line x1="18.35" y1="5.65" x2="15" y2="9" /></svg>
-                        </span>
-                        <span class="nav-link-title">
-                        Pengguna
-                        </span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                        <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="{{ route('dropdo.user.index') }}">
-                            Users
-                            </a>
-                            <a class="dropdown-item" href="{{ route('driver.index') }}">
-                            Driver
-                            </a>
-                            <a class="dropdown-item" href="{{ route('donatur.index') }}">
-                            Donatur
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item {{ request()->routeIs('index.transaction') ? 'active' : '' }} dropdown {{ request()->routeIs('d.*') ? 'active' : '' }}" >
+                                <li class="nav-item {{ request()->routeIs('index.transaction') ? 'active' : '' }} dropdown {{ request()->routeIs('d.*') ? 'active' : '' }}" >
                     <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shredder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -146,6 +121,37 @@
                             </a>
                             <a class="dropdown-item" href="{{ route('index.penyaluran') }}">
                             Penyaluran
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item {{ request()->routeIs('#navbar-extra') ? 'active' : '' }} dropdown {{ request()->routeIs('dropdo.*') ? 'active' : '' }}">
+                    <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+                        </svg>
+                        </span>
+                        <span class="nav-link-title">
+                        Pengguna
+                        </span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            <a class="dropdown-item" href="{{ route('dropdo.user.index') }}">
+                            Users
+                            </a>
+                            <a class="dropdown-item" href="{{ route('driver.index') }}">
+                            Driver
+                            </a>
+                            <a class="dropdown-item" href="{{ route('donatur.index') }}">
+                            Donatur
                             </a>
                         </div>
                         </div>

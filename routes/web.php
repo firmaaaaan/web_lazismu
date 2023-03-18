@@ -177,7 +177,10 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     // Penyaluran
     Route::get('/data-penyaluran',[PenyaluranController::class,'index'])->name('index.penyaluran');
     Route::get('/salurkan-donasi-program',[PenyaluranController::class,'create'])->name('program.salurkan');
+    Route::get('/edit-salurkan-donasi-program/{id}',[PenyaluranController::class,'edit'])->name('edit.salurkan');
     Route::post('/salurkan-donasi-program',[PenyaluranController::class,'store'])->name('store.program.salurkan');
+    Route::post('/update-donasi-program/{id}',[PenyaluranController::class,'update'])->name('update.program.salurkan');
+    Route::get('/delete-donasi-program/{id}',[PenyaluranController::class,'destroy'])->name('destroy.program.salurkan');
     // Cetak Penyaluran pertanggal
     Route::get('/cetak-penyaluran/pertanggal/{tglAwal}/{tglAkhir}',[PenyaluranController::class,'cetakPertanggalPenyaluran'])->name('cetakPertanggalPenyaluran.pdf');
 });
