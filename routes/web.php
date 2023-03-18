@@ -86,12 +86,9 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/export-donasi-pdf',[DonasiController::class,'exportPdf'])->name('exportPdf');
     // Cetak Pertanggal
     Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
-    // Export Excel
-    Route::get('/export-donasi-excel', [DonasiController::class,'exportExcel'])->name('exportdonasiexcel');
     Route::get('/program/{id}/akun/{akun_id}',[DonasiController::class,'programIndex'])->name('program.index');
-    //Export Perprogram donasi pertanggal
-    // Route::get('/cetak-donasi-program/{id}/pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakProgramPertanggal'])->name('cetakProgramPertanggal.pdf');
-    Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
+    // //Export Perprogram donasi pertanggal
+    // Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
 
 
     // Export menggunakan datatables
@@ -114,8 +111,6 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     // Export Excel
     Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->name('exportzakatexcel');
 
-
-
     // Route penyaluran donasi
     Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
     Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
@@ -126,7 +121,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');
     Route::post('zakat/salurkan/{id}', [ZakatController::class,'storeSalurkan'])->name('zakat.storeSalurkan');
 
-
+    // Validasi Donasi
     Route::get('/validasi/donasi/{id}', [DonasiController::class, 'validasiDonasi'])->name('validasi.donasi');
     Route::get('/validasi/zakat/{id}', [ZakatController::class, 'validasiZakat'])->name('validasi.zakat');
     Route::get('/validasi/permintaan-ambulan/{id}', [PermintaanAmbulanController::class, 'validasiAmbulan'])->name('validasi.ambulan');
@@ -158,9 +153,6 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::post('/akun/update/{id}',[AkunController::class, 'update'])->name('akun.update');
     Route::get('/detile-akun/{id_akun}/program-donasi',[AkunController::class,'programDonasi'])->name('akun.programDonasi');
 
-    //Request Ajax
-    // Route::get('/program-donasi/{id_akun}', [DonasiController::class, 'create']);
-
     // Transaction
     Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
     Route::get('/transaction', [LogTransaksiController::class,'index'])->name('d.index.transaction');
@@ -177,9 +169,6 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::post('/dokumentasi/update/{id}', [DokumentasiController::class, 'update'])->name('dokumentasi.update');
     Route::get('/dokumentasi/destroy/{id}', [DokumentasiController::class, 'destroy'])->name('dokumentasi.destroy');
 
-    //Image
-    Route::post('/dokumentasi/image', [ImageController::class, 'store'])->name('dokumentasi.image.store');
-
     //Donatur
     Route::get('/donatur',[DonaturController::class,'index'])->name('donatur.index');
     Route::get('/donatur/edit/{id}',[DonaturController::class,'edit'])->name('donatur.edit');
@@ -189,6 +178,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/data-penyaluran',[PenyaluranController::class,'index'])->name('index.penyaluran');
     Route::get('/salurkan-donasi-program',[PenyaluranController::class,'create'])->name('program.salurkan');
     Route::post('/salurkan-donasi-program',[PenyaluranController::class,'store'])->name('store.program.salurkan');
+    // Cetak Penyaluran pertanggal
     Route::get('/cetak-penyaluran/pertanggal/{tglAwal}/{tglAkhir}',[PenyaluranController::class,'cetakPertanggalPenyaluran'])->name('cetakPertanggalPenyaluran.pdf');
 });
 

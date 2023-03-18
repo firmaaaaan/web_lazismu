@@ -66,9 +66,7 @@
                         </div>
                     @endif
             <div class="table-responsive">
-                <a href="{{ route('donasi.Programsalurkan', ['id' => $programDonasi->id, 'akun_id' => $akun->id]) }}" class="btn btn-primary btn-sm mb-2" title="Salurkan"><i class="bi bi-box2-heart-fill"></i>Salurkan Donasi</a>
-                {{-- <a href="{{ route('donasi.create') }}" type="button" class="btn btn-primary btn-sm mr-2" style="float: right"><i class="bi bi-plus-square"></i>Tambah donasi</a>
-                <a href="{{ route('exportPdf') }} " type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a> --}}
+                {{-- <a href="{{ route('donasi.Programsalurkan', ['id' => $programDonasi->id, 'akun_id' => $akun->id]) }}" class="btn btn-primary btn-sm mb-2" title="Salurkan"><i class="bi bi-box2-heart-fill"></i>Salurkan Donasi</a> --}}
                 <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
                 <table class="table" id="table-datatables">
                     <thead>
