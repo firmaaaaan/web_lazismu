@@ -21,6 +21,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 @role('administrator')
+                <a href="{{ route('create.transaction') }}" class="btn btn-success btn-sm  mb-2"> <i class="bi bi-wallet-fill"></i> Transfer</a>
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
                 @endrole
             <div class="table-responsive">

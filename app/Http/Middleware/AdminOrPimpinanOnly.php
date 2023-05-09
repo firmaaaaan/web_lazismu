@@ -20,7 +20,7 @@ class AdminOrPimpinanOnly
         $user = $request->user();
 
         if (!($user && ($user->hasRole('administrator') || $user->hasRole('pimpinan')))) {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'MAAF, ANDA TIDAK MEMILIKI AKSES UNTUK MASUK KE HALAMAN ADMIN.');
         }
         return $next($request);
     }

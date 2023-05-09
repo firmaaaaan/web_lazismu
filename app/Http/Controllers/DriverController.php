@@ -61,8 +61,8 @@ class DriverController extends Controller
         $driver=Driver::create($request->all());
 
         $user->attachRole('driver');
-        event(new Registered($user));
-        Auth::login($user);
+        // event(new Registered($user));
+        // Auth::login($user);
         return back();
     }
 
