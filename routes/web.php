@@ -157,6 +157,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/create-transaction', [LogTransaksiController::class,'create'])->name('create.transaction');
     Route::get('/transaction', [LogTransaksiController::class,'index'])->name('d.index.transaction');
     Route::post('/create-transaction', [LogTransaksiController::class,'transferSaldo'])->name('store.transaction');
+    Route::get('/deleted-transaction/{id}', [LogTransaksiController::class,'destroy'])->name('destroy.transaksi');
     //Export Perprogram donasi pertanggal
     Route::get('/cetak-transaksi/pertanggal/{tglAwal}/{tglAkhir}',[LogTransaksiController::class,'cetakPertanggalTransaksi'])->name('cetakPertanggalTransaksi.pdf');
 
@@ -173,6 +174,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/donatur',[DonaturController::class,'index'])->name('donatur.index');
     Route::get('/donatur/edit/{id}',[DonaturController::class,'edit'])->name('donatur.edit');
     Route::post('/donatur/update/{id}',[DonaturController::class,'update'])->name('donatur.update');
+    Route::get('/tambah-donatur',[DonaturController::class,'tambah'])->name('donatur.tambah');
 
     // Penyaluran
     Route::get('/data-penyaluran',[PenyaluranController::class,'index'])->name('index.penyaluran');

@@ -20,6 +20,9 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+            {{-- @role('administrator')
+                    <a href="{{ route('donatur.tambah') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Donatur</a>
+            @endrole --}}
                 <div class="table-responsive">
                 <table class="table" id="table-datatables">
                     <thead>

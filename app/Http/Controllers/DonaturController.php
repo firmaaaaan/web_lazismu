@@ -36,6 +36,11 @@ class DonaturController extends Controller
         return view('components.donatur.create');
     }
 
+    public function tambah()
+    {
+        return view('components.donatur.tambah');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -21,8 +21,8 @@ class LogTransaksiController extends Controller
     public function index()
     {
         $programDonasi=ProgramDonasi::all();
-        $logs=LogTransaksi::all();
-        return view('components.logtransaction.index', compact('logs','programDonasi'));
+        $logTransaksi=LogTransaksi::all();
+        return view('components.logtransaction.index', compact('logTransaksi','programDonasi'));
     }
 
     /**
@@ -129,10 +129,17 @@ class LogTransaksiController extends Controller
      * @param  \App\Models\LogTransaksi  $logTransaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LogTransaksi $logTransaksi)
+    public function destroy(LogTransaksi $id)
     {
-        //
+        $logTransaksi = LogTransaksi::findOrFail($id);
+        $logTransaksi->delete();
+        $programDonasi = $logTransaksi->programDonasi;
+        $programDonasi->jumlah_donasi_program += $logTransaksi->nominal;
+        $programDonasi->save();
+        return back();
     }
+
+
     public function cetakPertanggalTransaksi($tglAwal, $tglAkhir){
         // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
         $programDonasi=ProgramDonasi::all();

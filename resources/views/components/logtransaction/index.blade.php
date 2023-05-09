@@ -33,13 +33,14 @@
                             <th>Nominal (Rp)</th>
                             <th>Tanggal</th>
                             <th>Keterangan</th>
+                            <th>Opsi</th>
                         </tr>
                     </thead>
                     @php
                         $no=1;
                     @endphp
                     <tbody>
-                        @foreach($logs as $log)
+                        @foreach($logTransaksi as $log)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $log->programdonasi->nama_program }}</td>
@@ -47,6 +48,9 @@
                                 <td>{{ number_format($log->nominal, 0, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($log->created_at )->format('d M Y')  }}</td>
                                 <td>{{ $log->keterangan }}</td>
+                                <td>
+                                    <a href="{{ route('destroy.transaksi', $log->id) }}" class="btn btn-danger btn-sm" title="Edit"><i class="bi bi-trash"></i></a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

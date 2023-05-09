@@ -32,7 +32,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button type="submit" class="btn btn-success mt-2">Save</button>
+            <button type="submit" class="btn btn-success mt-2">Simpan</button>
 
             @if (session('status') === 'password-updated')
                 <p
@@ -41,7 +41,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Tersimpan.') }}</p>
             @endif
         </div>
     </form>

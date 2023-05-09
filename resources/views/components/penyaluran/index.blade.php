@@ -31,7 +31,7 @@
                 @endif
             <div class="card-body">
                 @role('administrator')
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i> Cetak Pertanggal</button>
                 @endrole
             <div class="table-responsive">
                 <table class="table" id="table-datatables">
@@ -57,7 +57,7 @@
                                 <td>{{ number_format($item->nominal, 0, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at )->format('d M Y')  }}</td>
                                 <td>
-                                    <a href="{{ route('edit.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                    {{-- <a href="{{ route('edit.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a> --}}
                                     <a href="{{ route('destroy.program.salurkan', $item->id) }}" class="btn btn-danger btn-sm" title="Edit"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>

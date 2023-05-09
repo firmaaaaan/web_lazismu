@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('Informasi Profile') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
@@ -48,7 +48,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button type="submit" class="btn btn-success mt-2">Save</button>
+            <button type="submit" class="btn btn-success mt-2">Simpan</button>
 
             @if (session('status') === 'profile-updated')
                 <p
