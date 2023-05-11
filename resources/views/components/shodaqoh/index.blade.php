@@ -59,7 +59,7 @@
                             </td>
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
-                            <td>{{ $item->programDonasi->nama_program }}</td>
+                            <td>{{ $item->programDonasi->akun->nama_akun }} - {{ $item->programDonasi->nama_program }}</td>
                             <td>{!! $item->keterangan !!}</td>
                             <td>
                             @if ($item->status_id ==1)

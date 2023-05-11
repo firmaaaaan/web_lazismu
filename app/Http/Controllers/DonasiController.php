@@ -83,7 +83,7 @@ class DonasiController extends Controller
         'jml_donasi'=>$request->jml_donasi,
         'no_rek'=>$request->no_rek,
         'keterangan'=>$request->keterangan,
-        'status_id'=>'2',
+        'status_id'=>'1',
         'user_id'=>$request->user_id,
         'programdonasi_id'=>$request->programdonasi_id,
         'hak_amil'=>$hak_amil,
@@ -264,48 +264,6 @@ class DonasiController extends Controller
         $akun = Akun::find($akun_id);
         return view('components.shodaqoh.program-index', compact('donasi','akun','total_hak_amil','programDonasi','totalDonationForProgram'));
     }
-
-    // public function salurkanProgram($id){
-    //     $programDonasi = ProgramDonasi::find($id);
-    //     $donasi = Donasi::where('programdonasi_id', $id)->first();
-    //     $akun = Akun::all();
-    //     return view('components.shodaqoh.salurkan-program', compact('programDonasi', 'donasi', 'akun'));
-    // }
-    // public function storeSalurkanProgram(Request $request, $id)
-    // {
-
-    //     $donasi=Donasi::find($id);
-    //     $donasi->update($request->all());
-
-    //     $programDonasi = ProgramDonasi::find($id);
-    //     $tersalurkan = $request->input('tersalurkan');
-    //     // $tersalurkan = $request->input('desk_penyaluran');
-
-
-    //     // Pastikan jumlah donasi yang tersedia cukup untuk disalurkan
-    //     if ($programDonasi->jumlah_donasi_program < $request->input('tersalurkan')) {
-    //         return back()->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
-    //     }
-
-    //     // Cek apakah ada donasi yang belum tervalidasi
-    //     $berlumTervalidasi = Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
-    //         ->where('status_id', 1)
-    //         ->get();
-
-    //     if ($berlumTervalidasi->sum('jml_donasi') >= $request->input('tersalurkan')) {
-    //         return back()->with('belum', 'Terdapat donasi yang belum tervalidasi yang tidak bisa disalurkan!');
-    //     }
-
-    //     Donasi::where('programdonasi_id', $id)->update(['status_penyaluran' => 'Tersalurkan']);
-
-    //     // Proses penyaluran donasi
-    //     $programDonasi->jumlah_donasi_program -= $tersalurkan;
-    //     $programDonasi->save();
-    //     ProgramDonasi::where('id', $id)
-    //         ->update(['tersalurkan' => DB::raw('tersalurkan + '.$tersalurkan)]);
-
-    //     return back()->with('success', 'Donasi berhasil disalurkan!');
-    // }
 
         public function cetakProgramDanAkunPertanggal( Request $request, $programId, $tglAwal, $tglAkhir) {
 

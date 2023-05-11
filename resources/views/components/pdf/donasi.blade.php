@@ -72,7 +72,7 @@
                             {{ $item->nama_donatur }}
                         @endif
                     </td>
-                    <td>{{ $item->programDonasi->nama_program }}</td>
+                    <td>{{ $item->programDonasi->akun->nama_akun }} - {{ $item->programDonasi->nama_program }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
                     <td>{!! $item->keterangan !!}</td>
                     <td>{{ number_format($item->jml_donasi, 0,',','.') }}</td>

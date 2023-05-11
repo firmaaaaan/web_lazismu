@@ -50,7 +50,7 @@
                             <td>{{ $item->no_rek }}</td>
                             <td>{{ $item->programDonasi->nama_program }}</td>
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
-                            <td>{{ $item->keterangan }}</td>
+                            <td>{!! $item->keterangan !!}</td>
                         </tr>
                         @endforeach
                     </tbody>

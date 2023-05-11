@@ -88,7 +88,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/cetak-donasi-pertanggal/{tglAwal}/{tglAkhir}',[DonasiController::class,'cetakPertanggalDonasi'])->name('cetakPertanggalDonasi.pdf');
     Route::get('/program/{id}/akun/{akun_id}',[DonasiController::class,'programIndex'])->name('program.index');
     // //Export Perprogram donasi pertanggal
-    // Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
+    Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
 
 
     // Export menggunakan datatables
