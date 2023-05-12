@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
+use App\Models\Donatur;
 use Illuminate\Http\Request;
 use App\Exports\DonasiExport;
 use App\Models\ProgramDonasi;
@@ -292,5 +293,17 @@ class DonasiController extends Controller
                 'totalDonationForProgram'=>$totalDonationForProgram
             ]);
             return $pdf->stream('donasi-program-akun-pertanggal.pdf');
+    }
+
+    public function invoice($id){
+        $donasi = DB::table('donasis')
+                ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
+                ->join('users', 'donasis.user_id', '=', 'users.id')
+                ->select('donasis.*', 'users.name')
+                ->select('donasis.*', 'program_donasis.nama_program')
+                ->where('donasis.id', $id)
+                ->first();
+    $programDonasi = ProgramDonasi::all();
+        return view('components.shodaqoh.donasi-invoice', compact('donasi','programDonasi'));
     }
 }

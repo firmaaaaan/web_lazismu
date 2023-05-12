@@ -83,6 +83,7 @@
                                     <a href="{{ route('program.index', ['id' => $item->programDonasi->id, 'akun_id' => $item->programDonasi->akun->id]) }}" class="btn btn-info btn-sm" title="Detail"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('donasi.edit', $item->id) }} " class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
                                     <a href="{{ route('donasi.destroy',$item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
+                                    <a href="{{ route('donasi.invoice',$item->id) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
                                 </td>
                             @endrole
                         </tr>

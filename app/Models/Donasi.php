@@ -30,4 +30,11 @@ class Donasi extends Model
     public function akun(){
         return $this->belongsTo(Akun::class,'id_akun');
     }
+    public function donatur(){
+        return $this->hasMany(Donatur::class);
+    }
+    // public function programonasi()
+    // {
+    //     return $this->belongsTo(ProgramDonasi::class);
+    // }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\DonaturController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ValidasiController;
@@ -89,37 +90,14 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/program/{id}/akun/{akun_id}',[DonasiController::class,'programIndex'])->name('program.index');
     // //Export Perprogram donasi pertanggal
     Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
-
+    //Cetak invoice
+    Route::get('/cetak-invoice/{id}',[DonasiController::class,'invoice'])->name('donasi.invoice');
 
     // Export menggunakan datatables
     Route::get('/export-donasi',[ExportController::class,'exportDonasi'])->name('dropd.exportDonasi');
     Route::get('/export-zakat',[ExportController::class,'exportZakat'])->name('exportZakat');
     Route::get('/export-permintaan-Ambulan',[ExportController::class,'exportPermintaanAmbulan'])->name('exportPermintaanAmbulan');
 
-
-    //Zakat
-    Route::get('/zakat', [ZakatController::class, 'index'])->name('drop.zakat.index');
-    Route::get('/create-zakat', [ZakatController::class, 'create'])->name('zakat.create');
-    Route::post('/create-zakat',[ZakatController::class, 'store'])->name('zakat.store');
-    Route::get('/edit-zakat/{id}', [ZakatController::class, 'edit'])->name('zakat.edit');
-    Route::post('/update-zakat/{id}', [ZakatController::class, 'update'])->name('zakat.update');
-    Route::get('/destroy-zakat/{id}', [ZakatController::class, 'destroy'])->name('zakat.destroy');
-    // Export PDF
-    Route::get('/export-zakat-pdf',[ZakatController::class,'exportZakatPdf'])->name('exportZakatPdf');
-    // Cetak Pertanggal
-    Route::get('/cetak-zakat-pertanggal/{tglAwal}/{tglAkhir}',[ZakatController::class,'cetakPertanggalZakat'])->name('cetakPertanggalZakat.pdf');
-    // Export Excel
-    Route::get('/export-zakat-excel', [ZakatController::class,'exportExcelZakat'])->name('exportzakatexcel');
-
-    // Route penyaluran donasi
-    Route::get('/donasi/{id}/salurkan', [DonasiController::class,'salurkan'])->name('donasi.salurkan');
-    Route::post('/salurkan/{id}', [DonasiController::class,'storeSalurkan'])->name('donasi.storeSalurkan');
-    Route::post('/salurkan/program/{id}', [DonasiController::class,'storeSalurkanProgram'])->name('donasi.storeSalurkanProgram');
-    Route::get('/salurkan-program/{id}/akun/{akun_id}', [DonasiController::class,'salurkanProgram'])->name('donasi.Programsalurkan');
-
-    //Penyaluran Zakat
-    Route::get('/zakat/{id}/salurkan', [ZakatController::class,'salurkan'])->name('zakat.salurkan');
-    Route::post('zakat/salurkan/{id}', [ZakatController::class,'storeSalurkan'])->name('zakat.storeSalurkan');
 
     // Validasi Donasi
     Route::get('/validasi/donasi/{id}', [DonasiController::class, 'validasiDonasi'])->name('validasi.donasi');
@@ -175,6 +153,9 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/donatur/edit/{id}',[DonaturController::class,'edit'])->name('donatur.edit');
     Route::post('/donatur/update/{id}',[DonaturController::class,'update'])->name('donatur.update');
     Route::get('/tambah-donatur',[DonaturController::class,'tambah'])->name('donatur.tambah');
+
+    // Invoice
+    Route::get('/invoice/{id}',[InvoiceController::class,'showInvoice'])->name('donatur.showInvoice');
 
     // Penyaluran
     Route::get('/data-penyaluran',[PenyaluranController::class,'index'])->name('index.penyaluran');

@@ -47,7 +47,7 @@
 
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $item->user->name }}</td>
+                            <td><a href="{{ route('donatur.showInvoice', $item->id) }}">{{ $item->user->name }}</a></td>
                             <td>{{ $item->tempat_lahir }}</td>
                             <td>{{ $item->tanggal_lahir }}</td>
                             <td>{{ $item->no_hp }}</td>
