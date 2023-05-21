@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use PDF;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Donasi;
 use App\Models\Donatur;
+
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+
 use App\Models\ProgramDonasi;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class InvoiceController extends Controller
@@ -18,79 +22,47 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showInvoice($id){
-        $donatur=Donatur::find($id);
-        $donasi = DB::table('donasis')
-                    ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
-                    ->select('donasis.*', 'program_donasis.nama_program')
-                    ->get();
-        $programDonasi=ProgramDonasi::all();
-        return view('components.invoice.invoice', compact('donasi','donatur','programDonasi'));
-    }
+    public function showInvoice($id, $user_id)
+        {
+            $donatur = Donatur::find($id);
+
+            $donasi = DB::table('donasis')
+                ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
+                ->select('donasis.*', 'program_donasis.nama_program')
+                ->where('donasis.user_id', $user_id) // Filter by user_id
+                ->get();
+
+            $totalDonasi = DB::table('donasis')
+                ->where('user_id', $user_id)
+                ->sum('jml_donasi');
+
+            $programDonasi = ProgramDonasi::all();
+            $today = Carbon::now()->format('Y-m-d');
+            $futureDate = Carbon::now()->addDays(30)->format('Y-m-d');
+
+            return view('components.invoice.invoice', compact('futureDate','today','donasi', 'donatur', 'programDonasi', 'totalDonasi'));
+        }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function cetakInvoice($id){
+        // Retrieve the donor and donation information
+        $donatur = Donatur::find($id);
+        $donasi = DB::table('donasis')
+            ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
+            ->select('donasis.*', 'program_donasis.nama_program')
+            ->where('donasis.donatur_id', $id)
+            ->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Invoice $invoice)
-    {
-        //
-    }
+        // Generate the PDF invoice using the Laravel PDF library
+        $pdf = PDF::loadView('components.pdf.invoice-pdf', compact('donasi', 'donatur','today'));
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Invoice $invoice)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Invoice $invoice)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Invoice $invoice)
-    {
-        //
+        // Set the PDF filename and download it
+        return $pdf->download('invoice.pdf');
     }
 }

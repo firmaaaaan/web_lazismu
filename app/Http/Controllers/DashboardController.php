@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Zakat;
 use App\Models\Donasi;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Zakat;
 
 class DashboardController extends Controller
 {
@@ -14,10 +15,10 @@ class DashboardController extends Controller
         $donasi=Donasi::all();
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-        $total_donasi = Donasi::sum('jml_donasi');
+        $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
         $programDonasi=ProgramDonasi::all();
         $totalTersalurkan=$programDonasi->sum('tersalurkan');
-        $tersisa=$programDonasi->sum('jumlah_donasi_program');
+        $tersisa=$total_donasi - $totalTersalurkan;
 
         $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
 
@@ -29,7 +30,18 @@ class DashboardController extends Controller
                         ->sum('jml_donasi');
             array_push($dataDonasi, $donasi);
         }
-        return view('dashboard', compact('tersisa','totalTersalurkan', 'programDonasi','total_donasi','donasi','dataDonasi'));
+
+        $donationsPerYear = DB::table('donasis')
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('SUM(jml_donasi) as total_donations'))
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->get();
+
+        // Calculate total donations per month
+        $donationsPerMonth = DB::table('donasis')
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('SUM(jml_donasi) as total_donations'))
+            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
+            ->get();
+        return view('dashboard', compact('donationsPerYear','donationsPerMonth','tersisa','totalTersalurkan', 'programDonasi','total_donasi','donasi','dataDonasi'));
     }
 
 }

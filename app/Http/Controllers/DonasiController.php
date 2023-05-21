@@ -297,13 +297,24 @@ class DonasiController extends Controller
 
     public function invoice($id){
         $donasi = DB::table('donasis')
-                ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
-                ->join('users', 'donasis.user_id', '=', 'users.id')
-                ->select('donasis.*', 'users.name')
-                ->select('donasis.*', 'program_donasis.nama_program')
-                ->where('donasis.id', $id)
-                ->first();
-    $programDonasi = ProgramDonasi::all();
-        return view('components.shodaqoh.donasi-invoice', compact('donasi','programDonasi'));
+            ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
+            ->join('users', 'donasis.user_id', '=', 'users.id')
+            ->select('donasis.*', 'users.name', 'program_donasis.nama_program')
+            ->where('donasis.id', $id)
+            ->first();
+
+        $donatur = DB::table('donasis')
+            ->join('users', 'donasis.user_id', '=', 'users.id')
+            ->select('users.*')
+            ->where('donasis.id', $id)
+            ->first();
+
+        $programDonasi = ProgramDonasi::all();
+        $today = Carbon::now()->format('Y-m-d');
+
+        return view('components.shodaqoh.donasi-invoice', compact('today','donasi', 'donatur', 'programDonasi'));
+
     }
+
+
 }

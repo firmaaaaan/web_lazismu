@@ -43,10 +43,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="">Nama Donatur</label> <small style="color: red">*Jika donatur tidak ada (Opsional)</small>
-                            <input type="text" value="" class="form-control" name="nama_donatur">
-                        </div>
+                        <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#donaturModal"><i class="bi bi-person-add"></i> Tambah donatur</div>
                         <div class="form-group">
                             <label for="user_id">No. Rekening</label> <small style="color:red">*Contoh: BSI 12345678 an Firmansyah (opsional)</small>
                             <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
@@ -75,6 +72,54 @@
                 <button type="submit" class="btn btn-primary btn-block mt-3">Lanjutkan pembayaran</button>
             </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="donaturModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tambah donatur</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="card card-md" method="POST" action="{{ route('donatur.store') }}">
+                @csrf
+				<div class="card-body">
+                    <div>
+                        <label class="form-label">Nama Lengkap</label>
+                        <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="nama_donatur" :value="old('name')" required autofocus />
+                        <x-input-error :messages="$errors->get('name_donatur')" class="mt-2" />
+                    </div>
+					<div class="mb-3 my-2">
+                        <label class="form-label">Email</label>
+                        <x-text-input id="email" class="block mt-1 w-full form-control" type="email" name="email" :value="old('email')" required />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+					</div>
+					<div class="mb-3">
+					<label class="form-label">Password</label>
+						<x-text-input id="password" class="block mt-1 w-full form-control"
+                                type="password"
+                                name="password"
+                                required autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+					</div>
+                    <div class="mb-3">
+                        <label class="form-label">Konfirmasi Password</label>
+                            <x-text-input id="password_confirmation" class="block mt-1 w-full form-control"
+                                type="password"
+                                name="password_confirmation" required />
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                    </div>
+					<div class="form-footer">
+					<button type="submit" class="btn btn-primary w-100">Buat akun baru</button>
+					</div>
+				</div>
+			</form>
+        </div>
         </div>
     </div>
 </div>

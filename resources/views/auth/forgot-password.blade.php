@@ -35,7 +35,7 @@
 		<div class="page page-center">
 			<div class="container container-tight py-4">
 			<div class="text-center mb-4">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('dist/img/lazismu.png') }}" width="150" alt=""></a>
+				<a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('dist/img/lazismuu.png') }}" width="150" alt=""></a>
 			</div>
 			<div class="card card-md">
 				<div class="card-body">

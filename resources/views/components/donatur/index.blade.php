@@ -47,7 +47,7 @@
 
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td><a href="{{ route('donatur.showInvoice', $item->id) }}">{{ $item->user->name }}</a></td>
+                            <td>{{ $item->user->name }}</td>
                             <td>{{ $item->tempat_lahir }}</td>
                             <td>{{ $item->tanggal_lahir }}</td>
                             <td>{{ $item->no_hp }}</td>
@@ -56,6 +56,7 @@
                             @role('administrator')
                                 <td>
                                     <a href="{{ route('donatur.edit', $item->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="Edit"></i></a>
+                                    <a href="{{ route('donatur.showInvoice', ['id' => $item->id, 'user_id' => $item->user_id]) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
                                 </td>
                             @endrole
                         </tr>

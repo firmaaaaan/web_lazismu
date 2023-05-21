@@ -155,7 +155,8 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/tambah-donatur',[DonaturController::class,'tambah'])->name('donatur.tambah');
 
     // Invoice
-    Route::get('/invoice/{id}',[InvoiceController::class,'showInvoice'])->name('donatur.showInvoice');
+    Route::get('/invoice/{id}/{user_id}',[InvoiceController::class,'showInvoice'])->name('donatur.showInvoice');
+    // Route::get('/invoice-pdf/{id}/{user_id}',[InvoiceController::class,'cetakInvoice'])->name('donatur.cetakInvoice');
 
     // Penyaluran
     Route::get('/data-penyaluran',[PenyaluranController::class,'index'])->name('index.penyaluran');

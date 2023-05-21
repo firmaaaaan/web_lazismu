@@ -67,9 +67,7 @@
             @foreach ($cetakPertanggalDonasi as $item)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>
-                        @if ($item->user_id)
-                            {{ $item->user->name }}
+                    <td>{{ $item->user->name }}
                         @else
                             {{ $item->nama_donatur }}
                         @endif
