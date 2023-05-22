@@ -97,7 +97,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Grafik Saldo Donasi Perprogram</h5><br/>
-                        <small class="color:red">sebelum disalurkan</small>
+                        <small class="color:red">sebelum disalurkan & dipindahkan</small>
                     </div>
                     <div class="card-body">
                         <canvas id="pie"></canvas>
@@ -109,9 +109,9 @@
                     <div class="card-header">
                         <h5>Grafik Saldo Donasi Perbulan</h5></div>
                     <div class="mx-3 mt-3 mr">
-                        <label for="yearSelect">Select Year:</label>
+                        <label for="yearSelect">Pilih Tahun:</label>
                         <select class="form-control" id="yearSelect" onchange="handleYearChange()">
-                            <option value="">All Years</option>
+                            <option value="">Semua Tahun</option>
                             @foreach($donationsPerYear as $donation)
                                 <option value="{{ $donation->year }}">{{ $donation->year }}</option>
                             @endforeach

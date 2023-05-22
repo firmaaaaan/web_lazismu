@@ -11,7 +11,7 @@ class LogTransaksi extends Model
     protected $table="log_transaksis";
     protected $guard=['id'];
 
-    public function programdonasi()
+    public function programdonasi_asal()
     {
         return $this->belongsTo(ProgramDonasi::class, 'id_programdonasi_asal');
     }
@@ -19,4 +19,8 @@ class LogTransaksi extends Model
     {
         return $this->belongsTo(ProgramDonasi::class, 'id_programdonasi_tujuan');
     }
+    public function programDonasi()
+{
+    return $this->belongsTo(ProgramDonasi::class, 'programdonasi_id');
+}
 }

@@ -33,8 +33,8 @@
             <div class="table-responsive">
                 @role('administrator')
                     <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
-                    <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i>PDF</a>
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm"><i class="bi bi-printer-fill"></i>Cetak Pertanggal</button>
+                    <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i> PDF</a>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm"><i class="bi bi-printer-fill"></i> Cetak Pertanggal</button>
                 @endrole
                 <table class="table" id="datatables">
                     <thead>

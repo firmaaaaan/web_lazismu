@@ -22,7 +22,7 @@
             <div class="card-body">
                 @if ($message = Session::get('Success'))
                     <div class="alert alert-success alert-block mb-2">
-                        <p><i class="bi bi-check-circle-fill">{{ $message }}</p>
+                        <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('Update'))

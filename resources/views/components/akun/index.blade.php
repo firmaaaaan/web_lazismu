@@ -22,7 +22,7 @@
             <div class="card-body">
             <div class="table-responsive">
                 @role('administrator')
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i>Tambah Akun</button>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Akun</button>
                 @endrole
                 <table class="table" id="tdatatables">
                     <thead>

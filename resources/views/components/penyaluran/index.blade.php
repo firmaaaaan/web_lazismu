@@ -19,17 +19,17 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card mb-3">
-            @if ($message = Session::get('success'))
+            <div class="card-body">
+                @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-block mb-2">
                         <p><i class="bi bi-check-circle-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('info'))
-                    <div class="alert alert-success alert-block mb-2">
+                    <div class="alert alert-info alert-block mb-2">
                         <p><i class="bi bi-lightbulb-fill"></i> <strong> Pemberitahuan! </strong>{{ $message }}</p>
                     </div>
                 @endif
-            <div class="card-body">
                 @role('administrator')
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i> Cetak Pertanggal</button>
                 @endrole

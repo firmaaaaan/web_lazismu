@@ -178,6 +178,12 @@ class DonasiController extends Controller
         //update jumlah program donasi
         $jumlah_donasi = Donasi::where('programdonasi_id', $programdonasi_id)->sum('jml_donasi');
         ProgramDonasi::where('id', $programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
+
+        // Decrement jumlah_donasi_program by 1 if it is greater than 0
+    ProgramDonasi::where('id', $programdonasi_id)
+        ->where('jumlah_donasi_program', '>', 0)
+        ->decrement('jumlah_donasi_program', 0);
+
         return redirect()->route('drop.donasi.index');
     }
 

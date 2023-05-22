@@ -129,15 +129,29 @@ class LogTransaksiController extends Controller
      * @param  \App\Models\LogTransaksi  $logTransaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LogTransaksi $id)
-    {
-        $logTransaksi = LogTransaksi::findOrFail($id);
-        $logTransaksi->delete();
-        $programDonasi = $logTransaksi->programDonasi;
-        $programDonasi->jumlah_donasi_program += $logTransaksi->nominal;
-        $programDonasi->save();
-        return back();
+public function destroy($id)
+{
+    $logTransaksi = LogTransaksi::findOrFail($id);
+    $nominal = $logTransaksi->nominal; // Simpan jumlah transaksi awal
+
+    $programDonasiAwal = $logTransaksi->id_programdonasi_asal;
+    if ($programDonasiAwal) {
+        $programDonasiAwalModel = ProgramDonasi::findOrFail($programDonasiAwal);
+        $programDonasiAwalModel->jumlah_donasi_program += $nominal;
+        $programDonasiAwalModel->save();
     }
+
+    $programDonasiAkhir = $logTransaksi->id_programdonasi_tujuan;
+    if ($programDonasiAkhir) {
+        $programDonasiAkhirModel = ProgramDonasi::findOrFail($programDonasiAkhir);
+        $programDonasiAkhirModel->jumlah_donasi_program -= $nominal;
+        $programDonasiAkhirModel->save();
+    }
+
+    $logTransaksi->delete();
+
+    return back();
+}
 
 
     public function cetakPertanggalTransaksi($tglAwal, $tglAkhir){

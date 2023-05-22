@@ -61,6 +61,15 @@ class PenyaluranController extends Controller
             if ($programDonasi->jumlah_donasi_program < $request->input('nominal')) {
                 return back()->with('error', 'Jumlah donasi yang tersedia tidak cukup untuk disalurkan!');
             }
+
+            // Cek apakah ada donasi yang belum tervalidasi
+            $berlumTervalidasi = Donasi::where('programdonasi_id', $request->input('programdonasi_id'))
+                ->where('status_id', 1)
+                ->get();
+
+            if ($berlumTervalidasi->isNotEmpty()) {
+                return back()->with('error', 'Terdapat donasi yang belum tervalidasi yang tidak bisa disalurkan!');
+            }
             $programDonasi->jumlah_donasi_program -= $nominal;
             $programDonasi->save();
 
