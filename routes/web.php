@@ -13,6 +13,7 @@ use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\MustahikController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenyaluranController;
@@ -167,6 +168,12 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/delete-donasi-program/{id}',[PenyaluranController::class,'destroy'])->name('destroy.program.salurkan');
     // Cetak Penyaluran pertanggal
     Route::get('/cetak-penyaluran/pertanggal/{tglAwal}/{tglAkhir}',[PenyaluranController::class,'cetakPertanggalPenyaluran'])->name('cetakPertanggalPenyaluran.pdf');
+
+    // Mustahik
+    Route::get('/data-mustahik', [MustahikController::class, 'index'])->name('dropdown.index');
+    Route::post('/store-mustahik', [MustahikController::class, 'store'])->name('store.mustahik');
+    Route::post('/update-mustahik/{id}', [MustahikController::class, 'update'])->name('update.mustahik');
+    Route::get('/destroy-mustahik/{id}', [MustahikController::class, 'destroy'])->name('destroy.mustahik');
 });
 
 require __DIR__.'/auth.php';

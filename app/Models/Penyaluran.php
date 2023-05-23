@@ -10,4 +10,8 @@ class Penyaluran extends Model
     use HasFactory;
     protected $table='penyaluran';
     protected $guarded=['id'];
+
+    public function Mustahik(){
+        return $this->hasMany(Mustahik::class);
+    }
 }

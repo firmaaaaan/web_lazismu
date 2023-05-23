@@ -31,6 +31,9 @@
                             <a class="dropdown-item" href="{{ route('dropdown.program.donasi.index') }}">
                                 Data Program
                             </a>
+                            <a class="dropdown-item" href="{{ route('dropdown.index') }}">
+                                Data Mustahik
+                            </a>
                             <a class="dropdown-item" href="{{ route('dropdown.pegawai.index') }}">
                                 Data Karyawan
                             </a>
