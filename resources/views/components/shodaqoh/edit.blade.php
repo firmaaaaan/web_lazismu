@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <div class="thumbnail rounden w-25">
-                            <img src="{{ asset('dist/img/lazismu.png') }}" alt="" width="150">
+                            <img src="{{ asset('dist/img/lazismuu.png') }}" alt="" width="150">
                         </div>
                         <div class="body ml-3">
                             <h2>Edit Donasi</h2>
@@ -33,10 +33,6 @@
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Nama Donatur</label> <small style="color: red">*Jika donatur tidak ada (Opsional)</small>
-                            <input type="text" value="{{ $donasi->nama_donatur }}" class="form-control" name="nama_donatur">
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>

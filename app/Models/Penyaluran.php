@@ -11,7 +11,8 @@ class Penyaluran extends Model
     protected $table='penyaluran';
     protected $guarded=['id'];
 
-    public function Mustahik(){
-        return $this->hasMany(Mustahik::class);
+    public function mustahik()
+    {
+        return $this->belongsTo(Mustahik::class, 'id_mustahik');
     }
 }

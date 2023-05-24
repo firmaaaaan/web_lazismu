@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Donasi;
+use App\Models\Mustahik;
 use App\Models\Penyaluran;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
-use PDF;
 
 class PenyaluranController extends Controller
 {
@@ -18,12 +19,13 @@ class PenyaluranController extends Controller
      */
     public function index()
     {
+        $mustahik=Mustahik::all();
         $programDonasi=ProgramDonasi::all();
         $penyaluran=Penyaluran::join('program_donasis', 'program_donasis.id', '=', 'penyaluran.programdonasi_id')
                     ->select('penyaluran.*', 'program_donasis.nama_program')
                     ->get();
 
-        return view('components.penyaluran.index', compact('programDonasi','penyaluran'));
+        return view('components.penyaluran.index', compact('programDonasi','penyaluran','mustahik'));
     }
 
     /**
@@ -34,8 +36,9 @@ class PenyaluranController extends Controller
     public function create()
     {
         $programDonasi=ProgramDonasi::all();
+        $mustahik=Mustahik::all();
         $donasi=Donasi::all();
-        return view('components.penyaluran.create', compact('programDonasi','donasi'));
+        return view('components.penyaluran.create', compact('programDonasi','donasi','mustahik'));
     }
 
     /**
@@ -52,6 +55,7 @@ class PenyaluranController extends Controller
 
             $programdonasi_id = $request->input('programdonasi_id');
             $nominal = $request->input('nominal');
+            $id_mustahik = $request->input('id_mustahik');
 
 
             // Kurangi nilai nominal_program pada tabel program_donasi
@@ -77,7 +81,8 @@ class PenyaluranController extends Controller
             Penyaluran::create([
                 'programdonasi_id' => $programdonasi_id,
                 'nominal' => $nominal,
-                'deskripsi_penyaluran'=>$request->deskripsi_penyaluran
+                'deskripsi_penyaluran'=>$request->deskripsi_penyaluran,
+                'id_mustahik' => $id_mustahik
             ]);
 
             // Jumlahkan nilai nominal penyaluran untuk program_donasi yang bersangkutan

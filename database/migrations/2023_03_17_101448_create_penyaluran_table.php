@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('penyaluran', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('programdonasi_id')->nullable();
+            $table->bigInteger('id_mustahik')->nullable();
             $table->bigInteger('nominal')->nullable();
             $table->text('deskripsi_penyaluran')->nullable();
             $table->timestamps();

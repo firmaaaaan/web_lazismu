@@ -42,11 +42,18 @@
                                     <option value="{{ $item->id }}">{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
+                            <label for="">Penerima</label>
+                            <select name="id_mustahik" id="" class="select2 form-control mb-2">
+                                <option value="">--Pilih mustahik--</option>
+                                @foreach ($mustahik as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->alamat }}</option>
+                                @endforeach
+                            </select>
                         <div class="bg-light rounded d-flex align items center p-3">
                             <h1 class="font-weight-bold w-25">Rp.</h1>
                             <input type="number" class="form-control" name="nominal" id="id">
                         </div>
-                        <label for="">Disalurkan ke:</label>
+                        <label for="">Keterngan</label>
                         <textarea name="deskripsi_penyaluran" class="form-control" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>

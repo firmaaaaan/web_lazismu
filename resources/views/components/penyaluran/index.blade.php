@@ -39,8 +39,9 @@
                         <tr>
                             <th>No</th>
                             <th>Program Donasi</th>
-                            <th>Disalurkan Ke:</th>
+                            <th>Penerima</th>
                             <th>Nominal (Rp)</th>
+                            <th>Keterangan</th>
                             <th>Tanggal</th>
                             <th>Opsi</th>
                         </tr>
@@ -53,11 +54,11 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $item->nama_program }}</td>
-                                <td>{{ $item->deskripsi_penyaluran }}</td>
+                                <td>{{ $item->mustahik->nama }} - {{ $item->mustahik->alamat }}</td>
                                 <td>{{ number_format($item->nominal, 0, ',', '.') }}</td>
+                                <td>{{ $item->deskripsi_penyaluran }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at )->format('d M Y')  }}</td>
                                 <td>
-                                    {{-- <a href="{{ route('edit.salurkan', $item->id) }}" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a> --}}
                                     <a href="{{ route('destroy.program.salurkan', $item->id) }}" class="btn btn-danger btn-sm" title="Edit"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
