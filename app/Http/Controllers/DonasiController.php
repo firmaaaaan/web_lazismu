@@ -8,12 +8,10 @@ use Carbon\Carbon;
 use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
-use App\Models\Donatur;
 use Illuminate\Http\Request;
 use App\Exports\DonasiExport;
 use App\Models\ProgramDonasi;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DonasiController extends Controller
@@ -143,7 +141,6 @@ class DonasiController extends Controller
 
         $donasi = Donasi::find($id);
         $programdonasi_id = $request->input('programdonasi_id');
-        // $programdonasi = ProgramDonasi::find($programdonasi_id);
         $akun = Akun::find($id);
         $persen_hak_amil = $akun->persen_hak_amil;
 
@@ -249,24 +246,20 @@ class DonasiController extends Controller
 
 
     public function cetakPertanggalDonasi($tglAwal, $tglAkhir){
-        // dd(["Tanggal Awal:".$tglAwal, "Tanggal Akhir:".$tglAkhir]);
         $cetakPertanggalDonasi=Donasi::all()->whereBetween('created_at',[$tglAwal, $tglAkhir]);
         $total_donasi = $cetakPertanggalDonasi->sum('jml_donasi');
         $pdf = PDF::loadView('components.pdf.donasi-pertanggal',[ 'cetakPertanggalDonasi'=>$cetakPertanggalDonasi, 'tglAwal'=>$tglAwal,'tglAkhir'=>$tglAkhir, 'total_donasi'=>$total_donasi]);
         return $pdf->stream('donasi-pertanggal.pdf');
-        // return view('components.pdf.permintaan-ambulan-pertanggal', compact('cetakPertanggal'));
     }
     public function exportExcel(){
         return Excel::download(new DonasiExport,'donasi.xlsx');
     }
     public function programIndex($id, $akun_id){
-        // $donasi=Donasi::find($id);
         $programDonasi=ProgramDonasi::find($id);
         $donasi=Donasi::all();
         $donasi_validated = Donasi::where('programdonasi_id', $id)->where('status_id', 2)->get();
         $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
         $donasi=Donasi::where('programdonasi_id', $id)->get();
-        // $totalDonationForProgram = Donasi::where('programdonasi_id', $id)->sum('jml_donasi');
         $total_hak_amil = Donasi::where('programdonasi_id', $id)->sum('hak_amil');
         $akun = Akun::find($akun_id);
         return view('components.shodaqoh.program-index', compact('donasi','akun','total_hak_amil','programDonasi','totalDonationForProgram'));
@@ -275,22 +268,18 @@ class DonasiController extends Controller
         public function cetakProgramDanAkunPertanggal( Request $request, $programId, $tglAwal, $tglAkhir) {
 
             $programDonasi = ProgramDonasi::findOrFail($programId);
-            // $akun = Akun::findOrFail($akunId);
             $programDonasi=ProgramDonasi::find($programId);
             $donasi=Donasi::all();
             $donasi_validated = Donasi::where('programdonasi_id', $programId)->where('status_id', 2)->get();
             $totalDonationForProgram = $donasi_validated->sum('jml_donasi');
             $donasi=Donasi::where('programdonasi_id', $programId)->get();
             $total_hak_amil = Donasi::where('programdonasi_id', $programId)->sum('hak_amil');
-            // $akun = Akun::find($akunId);
             $cetakProgramDanAkunPertanggal = Donasi::where('programdonasi_id', $programDonasi->id)
-                // ->where('id_akun', $akun->id)
                 ->whereBetween('created_at', [$tglAwal, $tglAkhir])
                 ->get();
             $pdf = PDF::loadView('components.pdf.donasi-program-pertanggal',[
                 'cetakProgramDanAkunPertanggal' => $cetakProgramDanAkunPertanggal,
                 'programDonasi' => $programDonasi,
-                // 'akun' => $akun,
                 'tglAwal'=> $tglAwal,
                 'tglAkhir'=>$tglAkhir,
                 'cetakProgramDanAkunPertanggal'=>$cetakProgramDanAkunPertanggal,

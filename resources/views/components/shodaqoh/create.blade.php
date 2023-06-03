@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <div class="thumbnail rounden w-25">
-                            <img src="{{ asset('dist/img/lazismu.png') }}" alt="" width="150">
+                            <img src="{{ asset('dist/img/lazismuu.png') }}" alt="" width="150">
                         </div>
                         <div class="body ml-3">
                             <h2>Donasi</h2>

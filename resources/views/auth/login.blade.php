@@ -70,7 +70,7 @@
 				</div>
 			</div>
 			<div class="text-center text-muted mt-3">
-				Tidak mempunyai akun? <a href="{{ route('donatur.register') }}" tabindex="-1">Daftar</a>
+				{{-- Tidak mempunyai akun? <a href="{{ route('donatur.register') }}" tabindex="-1">Daftar</a> --}}
 			</div>
 			</div>
 		</div>

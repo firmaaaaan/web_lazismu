@@ -13,8 +13,6 @@ class DashboardController extends Controller
 {
     public function index(){
         $donasi=Donasi::all();
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
         $total_donasi = Donasi::where('status_id', '2')->sum('jml_donasi');
         $programDonasi=ProgramDonasi::all();
         $totalTersalurkan=$programDonasi->sum('tersalurkan');
