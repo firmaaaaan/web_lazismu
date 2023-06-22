@@ -1,4 +1,5 @@
 @extends('layouts.master')
+section('title', 'Data Program Akun')
 @section('content')
 
 <div class="page-header d-print-none">

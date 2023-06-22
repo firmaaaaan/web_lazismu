@@ -66,7 +66,7 @@ class PermintaanAmbulanController extends Controller
             'keterangan'=>$request->keterangan,
             'status_id'=>'3',
         ]);
-        return redirect()->route('permintaan.ambulan.index')->with('Success','Permintaan ambulan berhasil dibuat');
+        return redirect()->route('permintaan.ambulan.index')->with('Success','Permintaan anda  telah dikirim');
     }
 
     /**
@@ -111,7 +111,7 @@ class PermintaanAmbulanController extends Controller
         ]);
         $permintaanAmbulan=permintaanAmbulan::find($id);
         $permintaanAmbulan->update($request->all());
-        return redirect()->route('permintaan.ambulan.index')->with('Update','Permintaan ambulan berhasil diupdate');
+        return redirect()->route('permintaan.ambulan.index')->with('Update','Permintaan anda telah diupdate');
     }
 
     /**
@@ -125,7 +125,7 @@ class PermintaanAmbulanController extends Controller
         $permintaanAmbulan=permintaanAmbulan::find($id);
         $permintaanAmbulan->delete();
 
-        return redirect()->route('permintaan.ambulan.index');
+        return redirect()->route('permintaan.ambulan.index')->with('delete','Permintaan anda telah dihapus');
     }
 
         public function validasiAmbulan(Request $request, $id){

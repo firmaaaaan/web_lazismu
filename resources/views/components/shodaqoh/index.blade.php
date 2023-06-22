@@ -36,6 +36,7 @@
                             <th>Jumlah Donasi (Rp)</th>
                             <th>Program Dipilih</th>
                             <th>Keterangan</th>
+                            <th>Bukti TF</th>
                             <th>Status Donasi</th>
                             @role('administrator')
                                 <th>Feedback</th>
@@ -61,6 +62,7 @@
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
                             <td>{{ $item->programDonasi->akun->nama_akun }} - {{ $item->programDonasi->nama_program }}</td>
                             <td>{!! $item->keterangan !!}</td>
+                            <td><a href="/buktitf/{{ $item->buktiTf }}" target="_blank"><img src="/buktitf/{{ $item->buktiTf }}" alt="Gambar Donasi"></td></a>
                             <td>
                             @if ($item->status_id ==1)
                                 <div class="btn btn-outline-danger btn-sm">{{ $item->status->nama_status }}</div>

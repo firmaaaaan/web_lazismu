@@ -50,6 +50,10 @@
                         </div>
                         <label for="">Keterangan</label>
                         <textarea class="form-control" id="editor" name="keterangan" id="" cols="30" rows="10">{{ $donasi->keterangan }}</textarea>
+                        <div class="form-group">
+                            <label for="">Uplode bukti Transfer</label>
+                            <input type="file" name="buktiTf" class="form-control">
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-3 btn-sm">Lanjutkan pembayaran</button>

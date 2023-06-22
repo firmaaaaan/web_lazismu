@@ -40,7 +40,7 @@ class MustahikController extends Controller
             'nama'=>'required',
         ]);
         Mustahik::create($request->all());
-        return back();
+        return back()->with('success','Mustahik telah ditambahkan');
     }
 
     /**
@@ -77,7 +77,7 @@ class MustahikController extends Controller
         $mustahik=Mustahik::find($id);
         $mustahik->update($request->all());
 
-        return back();
+        return back()->with('info','Mustahik telah diperbarui');
     }
 
     /**
@@ -90,6 +90,6 @@ class MustahikController extends Controller
     {
         $nustahik=Mustahik::find($id);
         $nustahik->delete();
-        return back();
+        return back()->with('delete','Mustahik telah dihapus');
     }
 }

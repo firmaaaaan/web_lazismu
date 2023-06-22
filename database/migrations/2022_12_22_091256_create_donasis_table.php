@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('no_rek')->nullable();
             $table->bigInteger('hak_amil')->default(0);
             $table->text('keterangan')->nullable();
+            $table->string('buktiTf')->nullable();
             $table->integer('status_id')->nullable();
             $table->timestamps();
         });

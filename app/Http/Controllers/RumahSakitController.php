@@ -47,7 +47,7 @@ class RumahSakitController extends Controller
             'alamat'=>'required'
         ]);
         RumahSakit::create($request->all());
-        return back()->with('Success','Data rumah sakit berhasil ditambahkan');
+        return back()->with('Success','Data rumah sakit telah ditambahkan');
     }
 
     /**
@@ -87,7 +87,7 @@ class RumahSakitController extends Controller
         ]);
         $rumahSakit=RumahSakit::find($id);
         $rumahSakit->update($request->all());
-        return back()->with('Update','Data rumah sakit berhasil diupdate');
+        return back()->with('Update','Data rumah sakit telah diupdate');
     }
 
     /**
@@ -114,6 +114,6 @@ class RumahSakitController extends Controller
                 DB::rollBack();
                 return back()->withError('Terjadi kesalahan: ' . $e->getMessage());
             }
-            return back()->withSuccess('Rumah sakit berhasil dihapus beserta seluruh data terkait.');
+            return back()->with('delete','Rumah sakit telah dihapus beserta seluruh data terkait.');
         }
 }

@@ -58,43 +58,50 @@ class DonasiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'jml_donasi'=>'required',
-        'programdonasi_id'=>'required'
-    ]);
+    {
+        $request->validate([
+            'jml_donasi'=>'required',
+            'programdonasi_id'=>'required'
+        ]);
 
-    // Join antara tabel akun dan program donasi
-    $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
-        ->where('program_donasis.id', $request->programdonasi_id)
-        ->select('program_donasis.*', 'akuns.persen_hak_amil')
-        ->first();
+        // Join antara tabel akun dan program donasi
+        $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
+            ->where('program_donasis.id', $request->programdonasi_id)
+            ->select('program_donasis.*', 'akuns.persen_hak_amil')
+            ->first();
 
-    // Menghitung nilai hak_amil
-    $hak_amil = $request->jml_donasi * $programDonasi->persen_hak_amil / 100;
+        // Menghitung nilai hak_amil
+        $hak_amil = $request->jml_donasi * $programDonasi->persen_hak_amil / 100;
 
-    $donasis = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
-    $jumlah_donasi = $donasis->sum('jml_donasi');
-    ProgramDonasi::where('id_akun', $programDonasi->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
+        $donasis = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
+        $jumlah_donasi = $donasis->sum('jml_donasi');
+        ProgramDonasi::where('id_akun', $programDonasi->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
 
-    // Check if user is admin
-    $donasi=Donasi::create([
-        'jml_donasi'=>$request->jml_donasi,
-        'no_rek'=>$request->no_rek,
-        'keterangan'=>$request->keterangan,
-        'status_id'=>'1',
-        'user_id'=>$request->user_id,
-        'programdonasi_id'=>$request->programdonasi_id,
-        'hak_amil'=>$hak_amil,
-        'nama_donatur'=>$request->nama_donatur
-    ]);
+        // Mengupload gambar
+        if($image=$request->file('buktiTf')){
+            $destinationPath='buktitf/';
+            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
+            $image->move($destinationPath, $programImage);
+        }
+        // Check if user is admin
+        $donasi=Donasi::create([
+            'jml_donasi'=>$request->jml_donasi,
+            'no_rek'=>$request->no_rek,
+            'keterangan'=>$request->keterangan,
+            'status_id'=>'1',
+            'user_id'=>$request->user_id,
+            'programdonasi_id'=>$request->programdonasi_id,
+            'hak_amil'=>$hak_amil,
+            'nama_donatur'=>$request->nama_donatur,
+            'buktiTf'=>$programImage
+        ]);
 
-    $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
-    $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
-    $programDonasi->save();
+        $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
+        $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
+        $programDonasi->save();
 
-    return back()->with('sukses', 'Terima kasih telah melakukan donasi');
-}
+        return back()->with('sukses', 'Terima kasih telah melakukan donasi');
+    }
 
 
     /**
@@ -142,7 +149,21 @@ class DonasiController extends Controller
         $donasi = Donasi::find($id);
         $programdonasi_id = $request->input('programdonasi_id');
         $akun = Akun::find($id);
+
+        // Find the associated Akun
+        $akun = Akun::find($donasi->programDonasi->id_akun);
+
+        if (!$akun) {
+            return back()->with('error', 'Akun tidak ditemukan');
+        }
         $persen_hak_amil = $akun->persen_hak_amil;
+
+        // Mengupload gambar baru (jika ada)
+        if($image=$request->file('buktiTf')){
+            $destinationPath='buktitf/';
+            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
+            $image->move($destinationPath, $programImage);
+        }
 
         $donasi->update($request->all());
 

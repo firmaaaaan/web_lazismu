@@ -20,6 +20,21 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-block mb-2">
+                                <p><i class="bi bi-check-circle-fill"></i><strong> Berhasil! </strong>{{ $message }}</p>
+                            </div>
+                @endif
+                @if ($message = Session::get('info'))
+                            <div class="alert alert-primary alert-block mb-2">
+                                <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                            </div>
+                @endif
+                @if ($message = Session::get('delete'))
+                            <div class="alert alert-primary alert-block mb-2">
+                                <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                            </div>
+                @endif
             <div class="table-responsive">
                 @role('administrator')
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary my-2 mr-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Mustahik</button>

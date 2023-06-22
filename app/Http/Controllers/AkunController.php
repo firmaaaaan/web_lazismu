@@ -49,7 +49,7 @@ class AkunController extends Controller
         ]);
         $akun=Akun::all();
         Akun::create($request->all());
-        return back();
+        return back()->with('success', 'Akun telah ditambahkan');
     }
 
     /**
@@ -82,18 +82,32 @@ class AkunController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Akun $akun, $id)
-    {
-        $request->validate([
-            'kode'=>'required|unique:akuns',
-            'nama_akun' => 'required',
-            'persen_hak_amil'=>'required'
-        ]);
-        $akun=Akun::find($id);
-        $akun->update($request->all());
+{
+    $request->validate([
+        'kode' => 'required|unique:akuns,kode,' . $id,
+        'nama_akun' => 'required',
+        'persen_hak_amil' => 'required'
+    ]);
+
+    $akun = Akun::findOrFail($id);
+    $akun->update($request->all());
+
+    $programDonasi = $akun->programDonasi;
+    
+    if ($programDonasi) {
+        $id_akun = $programDonasi->akun->id;
         $persen_hak_amil = $request->input('persen_hak_amil');
-        Donasi::where('id_akun', $id)->update(['hak_amil' => DB::raw("jml_donasi * $persen_hak_amil/100")]);
-        return back();
+
+        Donasi::where('id_akun', $id_akun)
+            ->update(['hak_amil' => DB::raw("jml_donasi * $persen_hak_amil/100")]);
+        
+        return back()->with('info', 'Akun berhasil diperbarui');
+    } else {
+        // Tindakan jika entitas ProgramDonasi tidak ditemukan
+        return back()->with('error', 'Tidak ada Program Donasi yang terkait dengan Akun ini');
     }
+}
+
 
     /**
      * Remove the specified resource from storage.
