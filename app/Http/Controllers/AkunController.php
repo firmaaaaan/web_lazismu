@@ -92,15 +92,17 @@ class AkunController extends Controller
     $akun = Akun::findOrFail($id);
     $akun->update($request->all());
 
-    $programDonasi = $akun->programDonasi;
-    
+    $programDonasi = ProgramDonasi::where('id_akun', $id)->first();
+
     if ($programDonasi) {
-        $id_akun = $programDonasi->akun->id;
+        $id_akun_program_donasi = $programDonasi->id;
         $persen_hak_amil = $request->input('persen_hak_amil');
 
-        Donasi::where('id_akun', $id_akun)
-            ->update(['hak_amil' => DB::raw("jml_donasi * $persen_hak_amil/100")]);
-        
+        DB::table('donasis')
+            ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id_akun')
+            ->where('donasis.programdonasi_id', $id_akun_program_donasi)
+            ->update(['donasis.hak_amil' => DB::raw("donasis.jml_donasi * $persen_hak_amil/100")]);
+
         return back()->with('info', 'Akun berhasil diperbarui');
     } else {
         // Tindakan jika entitas ProgramDonasi tidak ditemukan

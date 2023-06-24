@@ -79,7 +79,7 @@ class DonasiController extends Controller
 
         // Mengupload gambar
         if($image=$request->file('buktiTf')){
-            $destinationPath='buktitf/';
+            $destinationPath='images/';
             $programImage = date('YmdHis') .".". $image->getClientOriginalName();
             $image->move($destinationPath, $programImage);
         }
@@ -143,42 +143,45 @@ class DonasiController extends Controller
     public function update(Request $request, Donasi $donasi, $id)
     {
         $request->validate([
-            'jml_donasi'=>'required',
+            'jml_donasi' => 'required',
+            'buktiTf' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+    
         $donasi = Donasi::find($id);
         $programdonasi_id = $request->input('programdonasi_id');
-        $akun = Akun::find($id);
-
+    
         // Find the associated Akun
         $akun = Akun::find($donasi->programDonasi->id_akun);
-
+    
         if (!$akun) {
             return back()->with('error', 'Akun tidak ditemukan');
         }
+    
         $persen_hak_amil = $akun->persen_hak_amil;
-
+    
         // Mengupload gambar baru (jika ada)
-        if($image=$request->file('buktiTf')){
-            $destinationPath='buktitf/';
-            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
+        if ($request->hasFile('buktiTf')) {
+            $image = $request->file('buktiTf');
+            $destinationPath = 'buktitf/';
+            $programImage = date('YmdHis') . "." . $image->getClientOriginalName();
             $image->move($destinationPath, $programImage);
+            // Set the file name on the Donasi model
+            $donasi->buktiTf = $programImage;
         }
-
+    
         $donasi->update($request->all());
-
-        // update hak_amil
-        $donasi->hak_amil = ($request->jml_donasi * $persen_hak_amil)/100;
+    
+        // Update hak_amil
+        $donasi->hak_amil = ($request->jml_donasi * $persen_hak_amil) / 100;
         $donasi->save();
-
-        //update jumlah program donasi
+    
+        // Update jumlah program donasi
         $jumlah_donasi = Donasi::where('programdonasi_id', $programdonasi_id)->sum('jml_donasi');
         ProgramDonasi::where('id', $programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
-
-
+    
         return redirect()->route('drop.donasi.index');
-
     }
+    
 
     /**
      * Remove the specified resource from storage.
