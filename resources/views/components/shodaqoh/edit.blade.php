@@ -30,7 +30,7 @@
                                 {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
                                 <option value="">--Cari Donatur--</option>
                                 @foreach ($user as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @if(auth()->user()->name) selected @endif>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -48,10 +48,10 @@
                             <label for="user_id">No. Rekening</label>
                             <input type="text" value="{{ $donasi->no_rek }}" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
                         </div>
-                        <label for="">Keterangan</label>
+                        <label>Keterangan</label>
                         <textarea class="form-control" id="editor" name="keterangan" id="" cols="30" rows="10">{{ $donasi->keterangan }}</textarea>
                         <div class="form-group">
-                            <label for="">Uplode bukti Transfer</label>
+                            <label>Uplode bukti Transfer</label>
                             <input type="file" name="buktiTf" class="form-control">
                         </div>
                     </div>

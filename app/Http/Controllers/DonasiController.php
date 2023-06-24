@@ -79,7 +79,7 @@ class DonasiController extends Controller
 
         // Mengupload gambar
         if($image=$request->file('buktiTf')){
-            $destinationPath='images/';
+            $destinationPath='buktitf/';
             $programImage = date('YmdHis') .".". $image->getClientOriginalName();
             $image->move($destinationPath, $programImage);
         }
@@ -144,7 +144,7 @@ class DonasiController extends Controller
     {
         $request->validate([
             'jml_donasi' => 'required',
-            'buktiTf' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+
         ]);
     
         $donasi = Donasi::find($id);
@@ -160,16 +160,19 @@ class DonasiController extends Controller
         $persen_hak_amil = $akun->persen_hak_amil;
     
         // Mengupload gambar baru (jika ada)
-        if ($request->hasFile('buktiTf')) {
-            $image = $request->file('buktiTf');
-            $destinationPath = 'buktitf/';
-            $programImage = date('YmdHis') . "." . $image->getClientOriginalName();
+        if($image=$request->file('buktiTf')){
+            $destinationPath='buktitf/';
+            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
             $image->move($destinationPath, $programImage);
-            // Set the file name on the Donasi model
-            $donasi->buktiTf = $programImage;
         }
     
-        $donasi->update($request->all());
+        $donasi->update([
+            'jml_donasi'=>$request->jml_donasi,
+            'no_rek'=>$request->no_rek,
+            'keterangan'=>$request->keterangan,
+            'user_id'=>$request->user_id,
+            'buktiTf'=>$programImage
+        ]);
     
         // Update hak_amil
         $donasi->hak_amil = ($request->jml_donasi * $persen_hak_amil) / 100;
