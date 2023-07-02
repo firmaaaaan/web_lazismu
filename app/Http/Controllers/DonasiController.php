@@ -45,8 +45,8 @@ class DonasiController extends Controller
         $user=User::all();
         $akun=Akun::all();
         $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
-                                    ->select('program_donasis.id', 'program_donasis.nama_program', 'akuns.nama_akun','akuns.persen_hak_amil')
-                                    ->get();
+                                        ->select('program_donasis.id', 'program_donasis.nama_program', 'akuns.nama_akun','akuns.persen_hak_amil')
+                                        ->get();
         $donasi=Donasi::all();
         return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun','user'));
     }

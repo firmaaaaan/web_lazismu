@@ -49,7 +49,7 @@ class AkunController extends Controller
         ]);
         $akun=Akun::all();
         Akun::create($request->all());
-        return back()->with('success', 'Akun telah ditambahkan');
+        return back()->with('success', 'Data akun telah ditambahkan');
     }
 
     /**
@@ -108,6 +108,7 @@ class AkunController extends Controller
         // Tindakan jika entitas ProgramDonasi tidak ditemukan
         return back()->with('error', 'Tidak ada Program Donasi yang terkait dengan Akun ini');
     }
+    return back()->with('info', 'Data akun telah diubah');
 }
 
 
