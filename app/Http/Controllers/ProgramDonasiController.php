@@ -53,7 +53,7 @@ class ProgramDonasiController extends Controller
 
         $input = $request->all();
         ProgramDonasi::create($input);
-        return back()->with('Success','Program donasi berhasil dibuat');
+        return back()->with('Success','Program donasi telah ditambahkan');
     }
 
     /**
@@ -98,7 +98,7 @@ class ProgramDonasiController extends Controller
         $programDonasi=ProgramDonasi::find($id);
         $input = $request->all();
         $programDonasi->update($input);
-        return back()->with('Update','Program donasi berhasil diupdate');
+        return back()->with('Update','Program donasi telah diubah');
     }
 
     /**
@@ -125,7 +125,7 @@ class ProgramDonasiController extends Controller
                 DB::rollBack();
                 return back()->withError('Terjadi kesalahan: ' . $e->getMessage());
             }
-            return back()->withSuccess('Program donasi berhasil dihapus beserta seluruh data terkait.');
+            return back()->with('delete','Program donasi telah dihapus beserta seluruh data terkait.');
         }
 
         public function cetakPertanggalProgramDonasi($tglAwal, $tglAkhir){

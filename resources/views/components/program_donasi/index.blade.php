@@ -22,17 +22,17 @@
             <div class="card-body">
                 @if ($message = Session::get('Success'))
                     <div class="alert alert-success alert-block mb-2">
-                        <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
+                        <p><i class="bi bi-check-circle-fill"></i> <strong>Berhasil!</strong> {{ $message }}</p>
                     </div>
                 @endif
-                @if ($message = Session::get('withSuccess'))
-                    <div class="alert alert-success alert-block mb-2">
-                        <p><i class="bi bi-check-circle-fill"></i>{{ $message }}</p>
+                @if ($message = Session::get('delete'))
+                    <div class="alert alert-primary alert-block mb-2">
+                        <p><i class="bi bi-lightbulb-fill"></i> <strong>Pemberitahuan!</strong> {{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
-                        <p><i class="bi bi-lightbulb-fill"></i>{{ $message }}</p>
+                        <p><i class="bi bi-lightbulb-fill"></i> <strong> Pemberitahuan!</strong> {{ $message }}</p>
                     </div>
                 @endif
             <div class="table-responsive">
@@ -176,8 +176,8 @@
                 <div>Jika Program {{ $item->nama_program }} dihapus maka donasi yang terkait akan terhapus permanen.</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
-                <a href="{{ route('program.donasi.destroy', $item->id) }}"  class="btn btn-danger">Iya, Hapus Program</a>
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Batal</button>
+                <a href="{{ route('program.donasi.destroy', $item->id) }}"  class="btn btn-danger btn-sm">Iya, Hapus Program</a>
             </div>
             </div>
         </div>
