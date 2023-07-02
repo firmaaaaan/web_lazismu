@@ -20,7 +20,7 @@
 
                             </header>
                             <!-- Post content-->
-                            <section class="mb-5 text-center w-100">
+                            <section class="mb-5 text-left w-100">
                                 <p class="fs-5 mb-4">{!! $doks->text !!}</p>
                             </section>
                         </article>

@@ -114,6 +114,6 @@ class RumahSakitController extends Controller
                 DB::rollBack();
                 return back()->withError('Terjadi kesalahan: ' . $e->getMessage());
             }
-            return back()->with('delete','Rumah sakit telah dihapus beserta seluruh data terkait.');
+            return back()->with('delete','Data rumah sakit telah dihapus beserta seluruh data terkait.');
         }
 }

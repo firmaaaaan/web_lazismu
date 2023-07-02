@@ -120,7 +120,7 @@
                         @enderror
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
                     </div>
                 </form>
@@ -157,8 +157,8 @@
                         @enderror
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -177,7 +177,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Batal</button>
-                <a href="{{ route('program.donasi.destroy', $item->id) }}"  class="btn btn-danger btn-sm">Iya, Hapus Program</a>
+                <a href="{{ route('program.donasi.destroy', $item->id) }}"  class="btn btn-danger btn-sm">Iya, hapus Program</a>
             </div>
             </div>
         </div>

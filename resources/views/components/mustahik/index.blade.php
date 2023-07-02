@@ -148,7 +148,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                 </div>
             </form>
         </div>

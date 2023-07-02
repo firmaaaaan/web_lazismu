@@ -180,8 +180,8 @@
                 <div>Jika Akun {{ $it->nama_akun }} dihapus maka program donasi dan donasi yang terkait akan terhapus permanen.</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
-                <a href="{{ route('akun.delete', $item->id) }}"  class="btn btn-danger">Iya, Hapus akun</a>
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Batal</button>
+                <a href="{{ route('akun.delete', $item->id) }}"  class="btn btn-danger btn-sm">Iya, hapus akun</a>
             </div>
             </div>
         </div>

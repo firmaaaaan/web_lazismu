@@ -106,7 +106,7 @@
                         @enderror
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
                     </div>
                 </form>
@@ -137,7 +137,7 @@
                         <textarea type="date" name="alamat" class="form-control">{{ $item->alamat }}</textarea>
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                     </div>
                 </form>
@@ -156,8 +156,8 @@
                 <div>Jika {{ $item->nama_rs }} dihapus maka permintaan ambulan yang terkait akan terhapus permanen.</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
-                <a href="{{ route('rumahsakit.destroy', $item->id) }}"  class="btn btn-danger">Iya, Hapus RS</a>
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Tutup</button>
+                <a href="{{ route('rumahsakit.destroy', $item->id) }}"  class="btn btn-danger  btn-sm">Iya, hapus RS</a>
             </div>
             </div>
         </div>

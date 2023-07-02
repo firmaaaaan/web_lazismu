@@ -22,17 +22,17 @@
             <div class="card-body">
                 @if ($message = Session::get('Success'))
                     <div class="alert alert-success alert-block mb-2">
-                        <p><i class="bi bi-check-circle-fill"></i><strong>Berhasil! </strong>{{ $message }}</p>
+                        <p><i class="bi bi-check-circle-fill"></i><strong> Berhasil! </strong>{{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('Update'))
                     <div class="alert alert-primary alert-block mb-2">
-                        <p><i class="bi bi-lightbulb-fill"></i><strong>Pemberitahuan! </strong>{{ $message }}</p>
+                        <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
                     </div>
                 @endif
                 @if ($message = Session::get('delete'))
                     <div class="alert alert-primary alert-block mb-2">
-                        <p><i class="bi bi-lightbulb-fill"></i><strong>Pemberitahuan! </strong>{{ $message }}</p>
+                        <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
                     </div>
                 @endif
                 <div class="table-responsive">
@@ -144,7 +144,7 @@
                         @enderror
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary btn-sm" >Tambah Karyawan</button>
                     </div>
                 </form>
@@ -192,7 +192,7 @@
                         <input type="date" value="{{ $item->tgl_kerja }}" name="tgl_kerja" class="form-control">
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-success btn-sm" >Simpan</button>
                     </div>
                 </form>

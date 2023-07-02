@@ -91,7 +91,7 @@ class KaryawanController extends Controller
         ]);
         $karyawans=Karyawan::find($id);
         $karyawans->update($request->all());
-        return back()->with('Update','Data pegawai telah diupdate');
+        return back()->with('Update','Data pegawai telah diubah');
     }
 
     /**
