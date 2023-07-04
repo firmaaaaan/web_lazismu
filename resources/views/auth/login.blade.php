@@ -54,7 +54,7 @@
                             <label class="form-label">
                                 Password
                                 <span class="form-label-description">
-                                <a href="{{ route('password.request') }}">Lupa password</a>
+                                {{-- <a href="{{ route('password.request') }}">Lupa password</a> --}}
                                 </span>
                             </label>
                                 <x-text-input id="password" class="block mt-1 w-full form-control"

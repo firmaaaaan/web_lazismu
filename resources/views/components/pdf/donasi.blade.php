@@ -66,8 +66,8 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>
-                        @if ($item->user_id)
-                            {{ $item->user->name }}
+                        @if ($item->id_donatur)
+                            {{ $item->donatur->nama_donatur }}
                         @else
                             {{ $item->nama_donatur }}
                         @endif

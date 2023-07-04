@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
+use App\Models\Donatur;
 use Illuminate\Http\Request;
 use App\Exports\DonasiExport;
 use App\Models\ProgramDonasi;
@@ -43,12 +44,13 @@ class DonasiController extends Controller
     {
 
         $user=User::all();
+        $donatur=Donatur::all();
         $akun=Akun::all();
         $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
                                         ->select('program_donasis.id', 'program_donasis.nama_program', 'akuns.nama_akun','akuns.persen_hak_amil')
                                         ->get();
         $donasi=Donasi::all();
-        return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun','user'));
+        return view('components.shodaqoh.create', compact('programDonasi', 'donasi','akun','user','donatur'));
     }
 
     /**
@@ -73,9 +75,10 @@ class DonasiController extends Controller
         // Menghitung nilai hak_amil
         $hak_amil = $request->jml_donasi * $programDonasi->persen_hak_amil / 100;
 
-        $donasis = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
-        $jumlah_donasi = $donasis->sum('jml_donasi');
+        $donasi = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
+        $jumlah_donasi = $donasi->sum('jml_donasi');
         ProgramDonasi::where('id_akun', $programDonasi->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
+
 
         // Mengupload gambar
         if($image=$request->file('buktiTf')){
@@ -83,17 +86,18 @@ class DonasiController extends Controller
             $programImage = date('YmdHis') .".". $image->getClientOriginalName();
             $image->move($destinationPath, $programImage);
         }
-        // Check if user is admin
+
         $donasi=Donasi::create([
             'jml_donasi'=>$request->jml_donasi,
+            'nama_donatur'=>$request->nama_donatur,
             'no_rek'=>$request->no_rek,
             'keterangan'=>$request->keterangan,
             'status_id'=>'1',
-            'user_id'=>$request->user_id,
+            'id_donatur'=>$request->id_donatur,
             'programdonasi_id'=>$request->programdonasi_id,
             'hak_amil'=>$hak_amil,
             'nama_donatur'=>$request->nama_donatur,
-            'buktiTf'=>$programImage
+            // 'buktiTf'=>$programImage
         ]);
 
         $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
@@ -125,11 +129,12 @@ class DonasiController extends Controller
     {
         $donasi=Donasi::find($id);
         $akun=Akun::all();
+        $donatur=Donatur::all();
         $programDonasi = ProgramDonasi::join('akuns', 'program_donasis.id_akun', '=', 'akuns.id')
                                     ->select('program_donasis.id', 'program_donasis.nama_program', 'akuns.nama_akun','akuns.persen_hak_amil')
                                     ->get();
         $user=User::all();
-        return view('components.shodaqoh.edit', compact('programDonasi', 'donasi','akun','user'));
+        return view('components.shodaqoh.edit', compact('programDonasi', 'donasi','akun','user','donatur'));
 
     }
 
@@ -158,7 +163,9 @@ class DonasiController extends Controller
         }
     
         $persen_hak_amil = $akun->persen_hak_amil;
-    
+
+        // Initialize the programImage variable
+        $programImage = $donasi->buktiTf;
         // Mengupload gambar baru (jika ada)
         if($image=$request->file('buktiTf')){
             $destinationPath='buktitf/';
@@ -168,9 +175,10 @@ class DonasiController extends Controller
     
         $donasi->update([
             'jml_donasi'=>$request->jml_donasi,
+            'nama_donatur'=>$request->nama_donatur,
             'no_rek'=>$request->no_rek,
             'keterangan'=>$request->keterangan,
-            'user_id'=>$request->user_id,
+            'id_donatur'=>$request->id_donatur,
             'buktiTf'=>$programImage
         ]);
     
@@ -316,26 +324,11 @@ class DonasiController extends Controller
             ]);
             return $pdf->stream('donasi-program-akun-pertanggal.pdf');
     }
-
-    public function invoice($id){
-        $donasi = DB::table('donasis')
-            ->join('program_donasis', 'donasis.programdonasi_id', '=', 'program_donasis.id')
-            ->join('users', 'donasis.user_id', '=', 'users.id')
-            ->select('donasis.*', 'users.name', 'program_donasis.nama_program')
-            ->where('donasis.id', $id)
-            ->first();
-
-        $donatur = DB::table('donasis')
-            ->join('users', 'donasis.user_id', '=', 'users.id')
-            ->select('users.*')
-            ->where('donasis.id', $id)
-            ->first();
-
-        $programDonasi = ProgramDonasi::all();
+    public function faktur($id) {
+        $donasi = Donasi::with('programDonasi','donatur')->find($id);
         $today = Carbon::now()->format('Y-m-d');
-
-        return view('components.shodaqoh.donasi-invoice', compact('today','donasi', 'donatur', 'programDonasi'));
-
+        $thirtyDaysAhead = Carbon::now()->addDays(30)->format('Y-m-d');
+        return view('components.shodaqoh.invoice-donasi', compact('donasi','today','thirtyDaysAhead','donasi'));
     }
 
 

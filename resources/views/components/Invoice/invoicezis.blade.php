@@ -1,55 +1,54 @@
 @extends('layouts.master')
 @section('title','Invoice')
-@section('content')
 @section('style')
- <style>
+<style>
     @font-face {
-  font-family: SourceSansPro;
-  src: url(SourceSansPro-Regular.ttf);
+    font-family: SourceSansPro;
+    src: url(SourceSansPro-Regular.ttf);
 }
 
 a {
-  color: #0087C3;
-  text-decoration: none;
+    color: #0087C3;
+    text-decoration: none;
 }
 
 .header {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #AAAAAA;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #AAAAAA;
 }
 #logo {
-  float: left;
-  margin-top: 6px;
-  margin-bottom: 6px
+    float: left;
+    margin-top: 6px;
+    margin-bottom: 6px
 }
 
 #logo img {
-  height: 100px;
+    height: 100px;
 }
 
 #company {
-  float: right;
-  text-align: right;
+    float: right;
+    text-align: right;
 }
 
 
 #details {
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 #client {
-  padding-left: 6px;
-  float: left;
+    padding-left: 6px;
+    float: left;
 }
 
 #client .to {
-  color: #777777;
+    color: #777777;
 }
 
 h2.name {
-  font-size: 1.4em;
-  font-weight: normal;
-  margin: 0;
+    font-size: 1.4em;
+    font-weight: normal;
+    margin: 0;
 }
 
 #invoice {
@@ -57,12 +56,6 @@ h2.name {
   text-align: right;
 }
 
-#invoice h1 {
-  font-size: 2.4em;
-  line-height: 1em;
-  font-weight: normal;
-  margin: 0  0 10px 0;
-}
 
 #invoice .date {
   font-size: 1.1em;
@@ -77,6 +70,7 @@ h2.name {
 #notices{
     padding-left: 6px;
     text-align: center;
+
 }
 
 #notices .notice {
@@ -98,14 +92,14 @@ h2.name {
                     <div class="row g-2 align-items-center">
                     <div class="col">
                         <h2 class="page-title">
-                        Cetak Faktur
+                        Faktur
                         </h2>
                     </div>
                     <!-- Page title actions -->
                     <div class="col-auto ms-auto d-print-none">
-                        <button type="button" class="btn btn-primary" onclick="javascript:window.print();">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="javascript:window.print();">
                         <!-- Download SVG icon from http://tabler-icons.io/i/printer -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2"></path><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4"></path><rect x="7" y="13" width="10" height="8" rx="2"></rect></svg>
+                        <i class="bi bi-printer"></i>
                         Cetak Faktur
                         </button>
                     </div>
@@ -132,31 +126,45 @@ h2.name {
             <div id="details" class="clearfix">
                 <div id="client">
                 <div class="to">FAKTUR:</div>
-                <h2 class="name">{{ $donatur->name }}</h2>
-                {{-- <div class="address">{{ $donatur->alamat }}</div> --}}
-                <div class="email"><a href="{{ $donatur->email }}">{{ $donatur->email }}</a></div>
+                <h2 class="name">{{ $donatur->nama_donatur }}</h2>
+                <div class="address">-</div>
+                <div class="email"><a href="-">-</a></div>
                 </div>
                 <div id="invoice">
                 <div class="date">{{ \Carbon\Carbon::parse($today)->format('d M Y') }}</div>
-                {{-- <div class="date">Tanggal Berakhir Faktur: {{ \Carbon\Carbon::parse($futureDate)->format('d M Y') }}</div> --}}
+                <div class="date">Tanggal Berakhir Faktur: {{ \Carbon\Carbon::parse($thirtyDaysAhead)->format('d M Y') }}</div>
                 </div>
             </div>
             <table class="table">
                 <thead>
                     <tr>
-
+                        <th >NO</th>
                         <th >PROGRAM DONASI</th>
                         <th >TANGGAL</th>
                         <th >JUMLAH</th>
                     </tr>
                 </thead>
+                @php
+                $no=1;
+                @endphp
                 <tbody>
+                    @foreach ($donasi as $item)
                     <tr>
-                        <td>{{ $donasi->nama_program }}</td>
-                        <td>{{ \Carbon\Carbon::parse($donasi->created_at)->format('d M Y') }}</td>
-                        <td>{{ number_format($donasi->jml_donasi, 0, ',', '.') }}</td>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $item->nama_program }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
+                        <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"> TOTAL</td>
+                    <td colspan="2">{{ number_format($totalDonasi, 0, ',', '.') }}</td>
+                </tr>
+                </tfoot>
             </table>
             <div id="thanks"></div>
             <div id="notices">

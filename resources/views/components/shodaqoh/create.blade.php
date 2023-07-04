@@ -34,24 +34,28 @@
                         @enderror
                         </div>
                         <div class="form-group">
-                            <label for="user_id">Donatur</label>
-                            <select name="user_id" id="" class="form-control select2">
+                            <label for="">Donatur</label>
+                            <select name="id_donatur" id="" class="form-control select2">
                                 {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
                                 <option value="">--Cari Donatur--</option>
-                                @foreach ($user as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @foreach ($donatur as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_donatur }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#donaturModal"><i class="bi bi-person-add"></i> Tambah donatur</div>
                         <div class="form-group">
+                            <label for="nama_donatur">Nama Donatur</label>
+                            <input type="text" class="form-control" name="nama_donatur">
+                        </div>
+                        <!-- <div class="form-group">
                             <label for="user_id">No. Rekening</label> <small style="color:red">*Contoh: BSI 12345678 an Firmansyah (opsional)</small>
                             <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
                             @enderror" value="{{ old('no_rek') }}">
                         @error('no_rek')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
                             <select name="programdonasi_id" id="programdonasi_id" class="select2 form-control @error('programdonasi_id') is-invalid
@@ -67,10 +71,10 @@
                         </div>
                         <label for="">Keterangan <small style="color: red">*opsional</small></label>
                         <textarea class="form-control" id="editor" name="keterangan" id="" cols="30" rows="10"></textarea>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="">Uplode bukti Transfer</label>
                             <input type="file" name="buktiTf" class="form-control">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-3">Lanjutkan pembayaran</button>

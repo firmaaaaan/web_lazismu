@@ -31,6 +31,7 @@
                     </div>
                 @endif
                 @role('administrator')
+                <a href="{{ route('program.salurkan') }}" class="btn btn-success btn-sm mb-2 mr-2" style="float: left" title="Salurkan"><i class="bi bi-box2-heart-fill"></i> Salurkan Donasi</a>
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm mb-2" title="Cetak Pertanggal"><i class="bi bi-printer-fill"></i> Cetak Pertanggal</button>
                 @endrole
             <div class="table-responsive">

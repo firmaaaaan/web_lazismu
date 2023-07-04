@@ -93,6 +93,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/cetak-program-dan-akun-pertanggal/{programId}/{tglAwal}/{tglAkhir}', [DonasiController::class,'cetakProgramDanAkunPertanggal'])->name('cetak.program-akun-pertanggal');
     //Cetak invoice
     Route::get('/cetak-invoice/{id}',[DonasiController::class,'invoice'])->name('donasi.invoice');
+    Route::get('/cetak-faktur/{id}',[DonasiController::class,'faktur'])->name('donasi.faktur');
 
     // Export menggunakan datatables
     Route::get('/export-donasi',[ExportController::class,'exportDonasi'])->name('dropd.exportDonasi');
@@ -156,7 +157,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/tambah-donatur',[DonaturController::class,'tambah'])->name('donatur.tambah');
 
     // Invoice
-    Route::get('/invoice/{id}/{user_id}',[InvoiceController::class,'showInvoice'])->name('donatur.showInvoice');
+    Route::get('/invoice-zis/{id}',[InvoiceController::class,'invoice'])->name('invoice');
     // Route::get('/invoice-pdf/{id}/{user_id}',[InvoiceController::class,'cetakInvoice'])->name('donatur.cetakInvoice');
 
     // Penyaluran

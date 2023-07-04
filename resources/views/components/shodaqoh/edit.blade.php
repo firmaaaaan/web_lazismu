@@ -26,13 +26,17 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
-                            <select name="user_id" id="" class="form-control select2">
+                            <select name="id_donatur" id="" class="form-control select2">
                                 {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
                                 <option value="">--Cari Donatur--</option>
-                                @foreach ($user as $item)
-                                    <option value="{{ $item->id }}" @if(auth()->user()->name) selected @endif>{{ $item->name }}</option>
+                                @foreach ($donatur as $item)
+                                    <option value="{{ $item->id }}" @if($item->nama_donatur) selected @endif>{{ $item->nama_donatur }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_donatur">Nama Donatur</label>
+                            <input type="text" class="form-control" name="nama_donatur" value="{{ $donasi->nama_donatur }}">
                         </div>
                         <div class="form-group">
                             <label for="user_id">Program yang dipilih</label>
@@ -44,16 +48,16 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="user_id">No. Rekening</label>
                             <input type="text" value="{{ $donasi->no_rek }}" name="no_rek" class="form-control" value="" placeholder="Contoh: BSI 1745351819">
-                        </div>
+                        </div> --}}
                         <label>Keterangan</label>
                         <textarea class="form-control" id="editor" name="keterangan" id="" cols="30" rows="10">{{ $donasi->keterangan }}</textarea>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Uplode bukti Transfer</label>
                             <input type="file" name="buktiTf" class="form-control">
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-3 btn-sm">Lanjutkan pembayaran</button>

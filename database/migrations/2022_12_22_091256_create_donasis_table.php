@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('donasis', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            $table->integer('id_donatur')->nullable();
+            $table->string('nama_donatur')->nullable();
             $table->integer('programdonasi_id')->nullable();
             $table->integer('jml_donasi')->nullable();
             $table->string('no_rek')->nullable();

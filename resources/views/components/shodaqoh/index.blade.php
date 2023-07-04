@@ -52,8 +52,8 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>
-                                @if ($item->user_id)
-                                    {{ $item->user->name }}
+                                @if ($item->id_donatur)
+                                    {{ $item->donatur->nama_donatur }}
                                 @else
                                     {{ $item->nama_donatur }}
                                 @endif
@@ -62,7 +62,15 @@
                             <td>{{ number_format($item->jml_donasi, 0, ',', '.') }}</td>
                             <td>{{ $item->programDonasi->akun->nama_akun }} - {{ $item->programDonasi->nama_program }}</td>
                             <td>{!! $item->keterangan !!}</td>
-                            <td><a href="/buktitf/{{ $item->buktiTf }}" target="_blank"><img src="/buktitf/{{ $item->buktiTf }}" alt="Gambar Donasi"></td></a>
+                            <td>
+                            <a href="/buktitf/{{ $item->buktiTf }}" target="_blank">
+                                @if ($item->buktiTf)
+                                <img src="/buktitf/{{ $item->buktiTf }}" alt="Gambar Donasi">
+                                @else
+                                <span>-</span>
+                                @endif
+                            </a>
+                            </td>
                             <td>
                             @if ($item->status_id ==1)
                                 <div class="btn btn-outline-danger btn-sm">{{ $item->status->nama_status }}</div>
@@ -85,7 +93,7 @@
                                     <a href="{{ route('program.index', ['id' => $item->programDonasi->id, 'akun_id' => $item->programDonasi->akun->id]) }}" class="btn btn-info btn-sm" title="Detail"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('donasi.edit', $item->id) }} " class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
                                     <a href="{{ route('donasi.destroy',$item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>
-                                    <a href="{{ route('donasi.invoice',$item->id) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
+                                    <a href="{{ route('donasi.faktur',$item->id) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
                                 </td>
                             @endrole
                         </tr>

@@ -67,7 +67,7 @@
                         @foreach($cetakPertanggalTransaksi as $log)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $log->programdonasi->nama_program }}</td>
+                                <td>{{ $log->programdonasi_asal->nama_program }}</td>
                                 <td>{{ $log->programdonasi_tujuan->nama_program }}</td>
                                 <td>{{ number_format($log->nominal, 0, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($log->created_at)->format('d M Y') }}</td>

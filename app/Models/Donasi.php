@@ -16,8 +16,9 @@ class Donasi extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function statusPenyaluran(){
@@ -30,7 +31,11 @@ class Donasi extends Model
     public function akun(){
         return $this->belongsTo(Akun::class,'id_akun');
     }
-    public function donatur(){
-        return $this->hasMany(Donatur::class);
+    // public function donatur(){
+    //     return $this->hasMany(Donatur::class);
+    // }
+    public function donatur()
+    {
+        return $this->hasMany(Donatur::class, 'id_donatur');
     }
 }

@@ -56,7 +56,7 @@
                             @role('administrator')
                                 <td>
                                     <a href="{{ route('donatur.edit', $item->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="Edit"></i></a>
-                                    <a href="{{ route('donatur.showInvoice', ['id' => $item->id, 'user_id' => $item->user_id]) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
+                                    <a href="{{ route('invoice', ['id' => $item->id]) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
                                 </td>
                             @endrole
                         </tr>
