@@ -29,6 +29,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama </th>
+                            <th>No. Handphone</th>
                             <th>Email</th>
                             @role('administrator')
                                 <th>Opsi</th>
@@ -43,6 +44,7 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->phone_number }}</td>
                             <td>{{ $item->email }}</td>
                             @role('administrator')
                                 <td>

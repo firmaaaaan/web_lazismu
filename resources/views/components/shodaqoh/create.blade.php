@@ -77,7 +77,7 @@
                         </div> -->
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mt-3">Lanjutkan pembayaran</button>
+                <button type="submit" class="btn btn-primary btn-sm btn-block mt-3">Buat Donasi</button>
             </form>
             </div>
         </div>

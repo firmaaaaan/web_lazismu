@@ -29,17 +29,17 @@
 					</div>
                     <div class="my-2 mx-3">
                         <label class="form-label">No Handphone</label>
-                        <input id="no_hp" class="block mt-1 w-full form-control" value="{{ $donatur->no_hp }}" type="number" name="no_hp" :value="old('no_hp')" required autofocus />
+                        <input id="no_hp" class="block mt-1 w-full form-control" inputmode="numeric" pattern="[0-9]*" value="{{ $donatur->no_hp }}" type="number" name="no_hp" :value="old('no_hp')" required autofocus />
 
                     </div>
 					<div class="mb-3 mx-3">
                         <label class="form-label">Alamat</label>
-                        <textarea id="email" class="block mt-1 w-full form-control" type="text" name="alamat" :value="old('alamat')" required ></textarea>
+                        <textarea id="email" class="block mt-1 w-full form-control" type="text" name="alamat" :value="old('alamat')" required >{{ $donatur->alamat }}</textarea>
 
 					</div>
 					<div class="mb-3">
 					<div class="form-footer">
-					<button type="submit" class="btn btn-primary w-100">Simpan</button>
+					<button type="submit" class="btn btn-success btn-sm mr-3" style="float: right">Simpan</button>
 					</div>
 			</form>
             </div>

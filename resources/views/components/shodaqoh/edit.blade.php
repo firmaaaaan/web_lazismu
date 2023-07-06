@@ -60,7 +60,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mt-3 btn-sm">Lanjutkan pembayaran</button>
+                <button type="submit" class="btn btn-success btn-block mt-3 btn-sm">Simpan Donasi</button>
             </form>
             </div>
         </div>

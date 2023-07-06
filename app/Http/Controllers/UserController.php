@@ -28,11 +28,13 @@ class UserController extends Controller
     public function store(Request $request ){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phone_number'=>['required','max:12','unique:'.User::class],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed'],
         ]);
         $user = User::create([
             'name' => $request->name,
+            'phone_number' => $request->phone_number,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role'=>$request->role

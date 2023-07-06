@@ -25,8 +25,13 @@
                     <div class="card-body">
                         <div>
                             <label class="form-label">Nama</label>
-                            <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="name" :value="old('name')" required autofocus />
+                            <x-text-input id="name" class="block mt-1 mb-2 w-full form-control" type="text" name="name" :value="old('name')" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+                        <div>
+                            <label class="form-label">No Handphone</label>
+                            <x-text-input id="name" class="block mt- w-full form-control" type="number" name="phone_number" :value="old('phone_number')" required autofocus />
+                            <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                         </div>
                         <div class="mb-3 my-2">
                             <label class="form-label">Email</label>

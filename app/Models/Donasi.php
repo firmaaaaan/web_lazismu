@@ -36,6 +36,6 @@ class Donasi extends Model
     // }
     public function donatur()
     {
-        return $this->hasMany(Donatur::class, 'id_donatur');
+        return $this->belongsTo(Donatur::class, 'id_donatur');
     }
 }

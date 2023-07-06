@@ -32,7 +32,7 @@
 		<div class="page page-center">
 			<div class="container container-tight py-4">
 			<div class="text-center mb-4">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('dist/img/lazismu.png') }}" width="150" alt=""></a>
+				<a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('dist/img/lazismuu.png') }}" width="150" alt=""></a>
 			</div>
 			<form class="card card-md" method="POST" action="{{ route('donatur.store') }}">
                 @csrf
@@ -42,6 +42,11 @@
                         <label class="form-label">Nama Lengkap</label>
                         <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="name" :value="old('name')" required autofocus />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+					<div>
+                        <label class="form-label">No Handphone</label>
+                        <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="phone_number" :value="old('phone_number')" required autofocus />
+                        <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                     </div>
 					<div class="mb-3 my-2">
                         <label class="form-label">Email</label>

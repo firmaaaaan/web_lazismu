@@ -34,7 +34,7 @@
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
 					<div class="mb-3">
-					    <button type="submit" class="btn btn-primary my-3 mx-3">Simpan</button>
+					    <button type="submit" class="btn btn-primary btn-sm my-3 mx-3">Tambah</button>
 					</div>
 			    </form>
                 </div>
