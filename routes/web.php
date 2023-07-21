@@ -155,6 +155,7 @@ Route::middleware(['auth', 'admin.or.pimpinan'])->group(function () {
     Route::get('/donatur/edit/{id}',[DonaturController::class,'edit'])->name('donatur.edit');
     Route::post('/donatur/update/{id}',[DonaturController::class,'update'])->name('donatur.update');
     Route::get('/tambah-donatur',[DonaturController::class,'tambah'])->name('donatur.tambah');
+    Route::get('/delete-donatur/{id}',[DonaturController::class,'destroy'])->name('donatur.delete');
 
     // Invoice
     Route::get('/invoice-zis/{id}',[InvoiceController::class,'invoice'])->name('invoice');

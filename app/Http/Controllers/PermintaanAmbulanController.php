@@ -51,6 +51,7 @@ class PermintaanAmbulanController extends Controller
         $request->validate([
             'user_id'=>'required',
             'nama_pasien'=>'required',
+            'jk'=>'required',
             'tanggal'=>'required',
             'titik_jemput'=>'required',
             'rumahsakit_id'=>'required',
@@ -59,6 +60,7 @@ class PermintaanAmbulanController extends Controller
         PermintaanAmbulan::create([
             'user_id'=>$request->user_id,
             'nama_pasien'=>$request->nama_pasien,
+            'jk'=>$request->jk,
             'tanggal'=>$request->tanggal,
             'infaq'=>$request->infaq,
             'titik_jemput'=>$request->titik_jemput,

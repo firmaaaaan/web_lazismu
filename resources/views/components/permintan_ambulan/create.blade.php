@@ -41,6 +41,16 @@
                             @enderror
                             </div>
                         </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Nama Pasien</label>
+                                <input type="text" class="form-control @error('jk') is-invalid
+                                @enderror" value="{{ old('jk') }}" name="jk">
+                            @error('jk')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Tanggal</label>

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Donasi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use App\Models\Role;
+
 
 class DonaturController extends Controller
 {
@@ -57,7 +59,6 @@ class DonaturController extends Controller
 
         $user= new User;
         $user->name=$request->nama_donatur;
-        // $user->role_id='5';
         $user->email=$request->email;
         $user->email_verified_at=now();
         $user->password= bcrypt($request->password);
@@ -68,6 +69,7 @@ class DonaturController extends Controller
         $donatur=Donatur::create($request->all());
 
         $user->attachRole('customer');
+
         event(new Registered($user));
 
         // event(new Registered($user));
@@ -111,7 +113,7 @@ class DonaturController extends Controller
     {
         $donatur=Donatur::find($id);
         $donatur->update($request->all());
-        return redirect()->route('donatur.index');
+        return redirect()->route('donatur.index')->with('update','Donatur telah diubah');
     }
 
     /**
@@ -120,8 +122,10 @@ class DonaturController extends Controller
      * @param  \App\Models\Donatur  $donatur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donatur $donatur)
-    {
-        //
+    public function destroy($id){
+        $donatur=Donatur::find($id);
+        $donatur->delete();
+
+        return back()->with('delete','Donatur telah dihapus');
     }
 }

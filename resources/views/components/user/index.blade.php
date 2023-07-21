@@ -31,6 +31,7 @@
                             <th>Nama </th>
                             <th>No. Handphone</th>
                             <th>Email</th>
+                            <th>Role</th>
                             @role('administrator')
                                 <th>Opsi</th>
                             @endrole
@@ -46,6 +47,11 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->phone_number }}</td>
                             <td>{{ $item->email }}</td>
+                            <td>
+                                @foreach($item->roles as $role)
+                                    {{ $role->name }}<br>
+                                @endforeach
+                            </td>
                             @role('administrator')
                                 <td>
                                     <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-danger btn-sm" title="Hapus"><i class="bi bi-trash"></i></a>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Judul Buat User')
+@section('title', 'Buat User')
 @section('content')
 <div class="page-header d-print-none">
     <div class="container-xl">
@@ -20,6 +20,11 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p><i class="bi bi-check-circle-fill"></i><strong> Berhasil! </strong>{{ $message }}</p>
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('user.store') }}">
                     @csrf
                     <div class="card-body">
@@ -61,7 +66,7 @@
                                 <option value="pimpinan">Pimpinan</option>
                                 <option value="petugas">Petugas</option>
                                 <option value="driver">Driver</option>
-                                <option value="customer">Users</option>
+                                <option value="donatur">Donatur</option>
                             </select>
                             <x-input-error :messages="$errors->get('role_id')" class="mt-2 alert-danger" />
                         </div>

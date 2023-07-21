@@ -77,7 +77,6 @@
                             <th>Jumlah Donasi</th>
                             <th>Keterangan</th>
                             <th>Status Donasi</th>
-                            <th>Di Salurkan Kepada</th>
                             <th>Tanggal</th>
                         </tr>
                     </thead>
@@ -89,8 +88,8 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>
-                                @if ($item->user_id)
-                                    {{ $item->user->name }}
+                                @if ($item->id_donatur)
+                                    {{ $item->donatur->nama_donatur }}
                                 @else
                                     {{ $item->nama_donatur }}
                                 @endif
@@ -105,7 +104,6 @@
                                 <div class="btn btn-outline-success btn-sm">{{ $item->status->nama_status }}</div>
                             @endif
                             </td>
-                            <td>{{ $item->desk_penyaluran }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
                         </tr>
                         @endforeach

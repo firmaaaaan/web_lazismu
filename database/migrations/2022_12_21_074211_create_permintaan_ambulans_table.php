@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('nama_pasien');
+            $table->string('jk');
             $table->string('tanggal');
             $table->text('titik_jemput');
             $table->integer('rumahsakit_id');

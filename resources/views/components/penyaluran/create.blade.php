@@ -49,7 +49,7 @@
                                     <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->alamat }}</option>
                                 @endforeach
                             </select>
-                        <div class="bg-light rounded d-flex align items center p-3">
+                        <div class="bg-light rounded d-flex align items center p-3 mt-2">
                             <h1 class="font-weight-bold w-25">Rp.</h1>
                             <input type="number" class="form-control" name="nominal" id="id">
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Akun;
 use App\Models\User;
 use App\Models\Donasi;
+use App\Models\Donatur;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\ProgramDonasi;
@@ -65,10 +66,11 @@ class ProgramDonasiController extends Controller
     public function show(ProgramDonasi $programDonasi, $id_akun, $programdonasi_id)
         {
             $user = User::all();
+            $donatur = Donatur::all();
             $akun=Akun::all();
             $programDonasi = ProgramDonasi::find($programdonasi_id);
             $programDonasi = ProgramDonasi::where('id_akun', $id_akun)->where('id_akun', $id_akun)->firstOrFail();
-            return view('components.program_donasi.show', compact('programDonasi', 'user','id_akun','akun'));
+            return view('components.program_donasi.show', compact('programDonasi', 'donatur','id_akun','akun'));
         }
 
     /**

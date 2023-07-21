@@ -62,8 +62,8 @@ class DonasiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jml_donasi'=>'required',
-            'programdonasi_id'=>'required'
+            'jml_donasi' => 'required',
+            'programdonasi_id' => 'required'
         ]);
 
         // Join antara tabel akun dan program donasi
@@ -75,37 +75,34 @@ class DonasiController extends Controller
         // Menghitung nilai hak_amil
         $hak_amil = $request->jml_donasi * $programDonasi->persen_hak_amil / 100;
 
-        $donasi = Donasi::where('programdonasi_id', $request->programdonasi_id)->get();
-        $jumlah_donasi = $donasi->sum('jml_donasi');
-        ProgramDonasi::where('id_akun', $programDonasi->id_akun)->where('id', $request->programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
-
-
         // Mengupload gambar
-        if($image=$request->file('buktiTf')){
-            $destinationPath='buktitf/';
-            $programImage = date('YmdHis') .".". $image->getClientOriginalName();
+        if ($image = $request->file('buktiTf')) {
+            $destinationPath = 'buktitf/';
+            $programImage = date('YmdHis') . "." . $image->getClientOriginalName();
             $image->move($destinationPath, $programImage);
         }
+        $statusId = 1; // Mengatur status_id sebagai 1 secara default
+        $donasiData = [
+            'jml_donasi' => $request->jml_donasi,
+            'nama_donatur' => $request->nama_donatur,
+            'no_rek' => $request->no_rek,
+            'keterangan' => $request->keterangan,
+            'status_id' => $statusId,
+            'id_donatur' => $request->id_donatur,
+            'programdonasi_id' => $request->programdonasi_id,
+            'hak_amil' => $hak_amil,
+            'nama_donatur' => $request->nama_donatur,
+            // 'buktiTf' => $programImage
+        ];
 
-        $donasi=Donasi::create([
-            'jml_donasi'=>$request->jml_donasi,
-            'nama_donatur'=>$request->nama_donatur,
-            'no_rek'=>$request->no_rek,
-            'keterangan'=>$request->keterangan,
-            'status_id'=>'1',
-            'id_donatur'=>$request->id_donatur,
-            'programdonasi_id'=>$request->programdonasi_id,
-            'hak_amil'=>$hak_amil,
-            'nama_donatur'=>$request->nama_donatur,
-            // 'buktiTf'=>$programImage
-        ]);
+        $donasi = Donasi::create($donasiData);
 
-        $programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
-        $programDonasi->jumlah_donasi_program  = $programDonasi->jumlah_donasi_program  - $programDonasi->tersalurkan;
-        $programDonasi->save();
-
+            $donasi->programDonasi->jumlah_donasi_program += $request->input('jml_donasi');
+            $donasi->programDonasi->jumlah_donasi_program -= $donasi->programDonasi->tersalurkan;
+            $donasi->programDonasi->save();
         return back()->with('sukses', 'Terima kasih telah melakukan donasi');
     }
+
 
 
     /**
@@ -201,23 +198,22 @@ class DonasiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Donasi $donasi, $id)
-    {
-        $donasi = Donasi::find($id);
-        $programdonasi_id = $donasi->programdonasi_id;
+{
+    $donasi = Donasi::find($id);
+    $programdonasi_id = $donasi->programdonasi_id;
+    $jml_donasi = $donasi->jml_donasi; // Nilai donasi yang akan dikurangi
 
-        $donasi->delete();
+    $donasi->delete();
 
-        //update jumlah program donasi
-        $jumlah_donasi = Donasi::where('programdonasi_id', $programdonasi_id)->sum('jml_donasi');
-        ProgramDonasi::where('id', $programdonasi_id)->update(['jumlah_donasi_program' => $jumlah_donasi]);
+    // Update jumlah program donasi
+    $jumlah_donasi = Donasi::where('programdonasi_id', $programdonasi_id)->sum('jml_donasi');
+    $programDonasi = ProgramDonasi::find($programdonasi_id);
+    $programDonasi->jumlah_donasi_program = $jumlah_donasi - $jml_donasi; // Mengurangi nilai donasi yang dihapus
+    $programDonasi->save();
 
-        // Decrement jumlah_donasi_program by 1 if it is greater than 0
-    ProgramDonasi::where('id', $programdonasi_id)
-        ->where('jumlah_donasi_program', '>', 0)
-        ->decrement('jumlah_donasi_program', 0);
+    return redirect()->route('drop.donasi.index');
+}
 
-        return redirect()->route('drop.donasi.index');
-    }
 
     public function salurkan($id)
         {

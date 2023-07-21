@@ -37,7 +37,7 @@
                 @endif
             <div class="table-responsive">
                 @role('administrator')
-                    <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a>
+                    {{-- <a href="{{ route('permintaan.ambulan.create') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Permintaan</a> --}}
                     <a href="{{ route('permintaan.ambulan.Pdf') }}" type="button" class="btn btn-danger my-2 btn-sm"><i class="bi bi-file-earmark-pdf-fill"></i> PDF</a>
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm"><i class="bi bi-printer-fill"></i> Cetak Pertanggal</button>
                 @endrole
@@ -46,6 +46,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Pasien</th>
+                            <th>JK</th>
                             <th>Tanggal</th>
                             <th>Titik Jemput</th>
                             <th>Tujuan</th>
@@ -64,6 +65,7 @@
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td>{{ $item->nama_pasien}}</td>
+                            <td>{{ $item->jk}}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y')  }}</td>
                             <td>{{ $item->titik_jemput }}</td>
                             <td>{{ $item->rumahsakit->nama_rs }} </td>

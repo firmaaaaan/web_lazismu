@@ -37,6 +37,12 @@
                                 <input type="text" value="{{ $permintaanAmbulan->nama_pasien }}" class="form-control" name="nama_pasien">
                             </div>
                         </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Nama Pasien</label>
+                                <input type="text" value="{{ $permintaanAmbulan->jk }}" class="form-control" name="jk">
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Tanggal</label>

@@ -20,6 +20,21 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block mb-2">
+                        <p><i class="bi bi-check-circle-fill"></i><strong> Berhasil! </strong>{{ $message }}</p>
+                    </div>
+                @endif
+                @if ($message = Session::get('update'))
+                    <div class="alert alert-primary alert-block mb-2">
+                        <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                    </div>
+                @endif
+                @if ($message = Session::get('delete'))
+                    <div class="alert alert-primary alert-block mb-2">
+                        <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     @role('administrator')
                         <button data-bs-toggle="modal" data-bs-target="#modal-team" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Driver</button>
@@ -133,19 +148,19 @@
                     @csrf
                     <div>
                         <label class="form-label">Nama Driver</label>
-                        <input type="text" name="nama_driver" class="form-control">
+                        <input type="text" name="nama_driver" value="{{ $item->nama_driver }}" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control">
+                        <input type="email" name="email" value="{{ $item->email }}" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">No. Handphone</label>
-                        <input type="number" name="no_hp" class="form-control">
+                        <input type="number" name="no_hp" value="{{ $item->no_hp }}" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">No. Seri</label>
-                        <input type="text" name="no_seri" class="form-control">
+                        <input type="text" name="no_seri" value="{{ $item->no_seri }}" class="form-control">
                     </div>
                     <div>
                         <label class="form-label">Status</label>

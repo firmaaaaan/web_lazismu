@@ -20,6 +20,16 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body">
+                @if ($message = Session::get('update'))
+                <div class="alert alert-primary alert-block mb-2">
+                    <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                </div>
+            @endif
+            @if ($message = Session::get('delete'))
+                <div class="alert alert-primary alert-block mb-2">
+                    <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                </div>
+            @endif
             @role('administrator')
                     <a href="{{ route('donatur.tambah') }}" class="btn btn-primary my-2 btn-sm" style="float: right"><i class="bi bi-plus-square"></i> Tambah Donatur</a>
             @endrole
@@ -47,7 +57,7 @@
 
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->nama_donatur }}</td>
                             <td>{{ $item->tempat_lahir }}</td>
                             <td>{{ $item->tanggal_lahir }}</td>
                             <td>{{ $item->no_hp }}</td>
@@ -56,6 +66,7 @@
                             @role('administrator')
                                 <td>
                                     <a href="{{ route('donatur.edit', $item->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="Edit"></i></a>
+                                    <a href="{{ route('donatur.delete', $item->id) }}" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="Edit"></i></a>
                                     <a href="{{ route('invoice', ['id' => $item->id]) }}" class="btn btn-warning btn-sm" title="Cetak"><i class="bi bi-printer-fill"></i></a>
                                 </td>
                             @endrole

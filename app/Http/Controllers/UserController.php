@@ -44,7 +44,7 @@ class UserController extends Controller
         event(new Registered($user));
 
 
-        return redirect()->route('dashboard');
+        return back()->with('success','User baru telah ditambahkan');
     }
 
     public function destroy($id){

@@ -35,40 +35,18 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Donatur</label>
-                            <select name="user_id" id="" class="form-control select2">
+                            <select name="id_donatur" id="" class="form-control select2">
                                 {{-- <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option> --}}
                                 <option value="">--Cari Donatur--</option>
-                                @foreach ($user as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @foreach ($donatur as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_donatur }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#donaturModal"><i class="bi bi-person-add"></i> Tambah donatur</div>
                         <div class="form-group">
-                            <label for="user_id">No. Rekening</label> <small style="color:red">*Contoh: BSI 12345678 an Firmansyah (opsional)</small>
-                            <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
-                            @enderror" value="{{ old('no_rek') }}">
-                        @error('no_rek')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        {{-- <div class="row">
-                                <div class="col-md-3">
-                                    <label for="">Nama Bank</label>
-                                    <input type="text" class="form-control" name="nama_bank">
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="user_id">No. Rekening</label>
-                                    <input type="text" name="no_rek" class="form-control @error('no_rek') is-invalid
-                                    @enderror" value="{{ old('no_rek') }}" placeholder="Contoh: BSI 1745351819">
-                                @error('no_rek')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                </div>
-                                <div class="col-md-4">
-                                    <label for=""> Pemilik Rekening</label>
-                                    <input type="text" class="form-control" name="pemilik_rekening">
-                                </div>
-                            </div> --}}
+                            <label for="nama_donatur">Nama Donatur</label>
+                            <input type="text" class="form-control" name="nama_donatur">
                         </div>
                         <div class="form-group">
                             <label for="user_id">Akun yang dipilih</label>

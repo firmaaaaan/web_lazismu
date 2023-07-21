@@ -53,6 +53,7 @@ class DriverController extends Controller
         $user= new User;
         $user->name=$request->nama_driver;
         $user->email=$request->email;
+        $user->phone_number=$request->no_hp;
         $user->email_verified_at=now();
         $user->password= bcrypt('driver');
         $user->save();
@@ -61,9 +62,7 @@ class DriverController extends Controller
         $driver=Driver::create($request->all());
 
         $user->attachRole('driver');
-        // event(new Registered($user));
-        // Auth::login($user);
-        return back();
+        return back()->With('success','Driver telah ditambahkan');
     }
 
     /**
@@ -99,7 +98,7 @@ class DriverController extends Controller
     {
         $driver=Driver::find($id);
         $driver->update($request->all());
-        return back();
+        return back()->With('update','Driver telah diubah');
     }
 
     /**
@@ -112,6 +111,6 @@ class DriverController extends Controller
     {
         $driver=Driver::find($id);
         $driver->delete();
-        return back();
+        return back()->With('delete','Driver telah dihapus');
     }
 }

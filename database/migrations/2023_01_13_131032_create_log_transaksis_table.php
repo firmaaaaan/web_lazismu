@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('id_programdonasi_asal')->nullable();
             $table->unsignedBigInteger('id_programdonasi_tujuan')->nullable();
-            $table->double('nominal')->nullable();
+            $table->bigInteger('nominal')->nullable();
             $table->string('keterangan')->nullable();
             $table->foreign('id_programdonasi_asal')->references('id')->on('program_donasis');
             $table->foreign('id_programdonasi_tujuan')->references('id')->on('program_donasis');
