@@ -140,7 +140,7 @@ h2.name {
                     @endif
 
                 </h2>
-                <div class="address">{{ $donasi->donatur->no_hp }}</div>
+                {{-- <div class="address">{{ $donasi->donatur->no_hp }}</div> --}}
                 <div class="email">
                   <div class="address">-</div>
                     @if ($donasi->donatur)

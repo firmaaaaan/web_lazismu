@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-sm-6 col-md-3">
                             <div class="mb-3">
-                                <label class="form-label">Nama Pasien</label>
+                                <label class="form-label">Jenis Kelamin</label>
                                 <input type="text" class="form-control @error('jk') is-invalid
                                 @enderror" value="{{ old('jk') }}" name="jk">
                             @error('jk')
